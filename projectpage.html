@@ -107,14 +107,19 @@ window.addEventListener('load', triggerTextDrop);
 });
 
 </script> -->
-    <script>
+<script>
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
+    e.stopPropagation(); // Stop any parent event that triggers the animation
+
+    // Mark that we are closing popup (no exit animation)
+    window.skipExitTransition = true;
 
     const transition = document.getElementById("page-exit-transition");
     if (transition) {
-      transition.style.transition = "none"; // Disable animation
-      transition.style.display = "none";    // Hide the element
+      transition.style.display = "none";       // Hide it
+      transition.style.transition = "none";    // Remove transition effect
+      transition.style.opacity = "0";          // Make it invisible
     }
 
     if (window.history.length > 1) {
@@ -123,7 +128,16 @@ window.addEventListener('load', triggerTextDrop);
       window.location.href = "index.html";
     }
   });
+
+  // If you have a global exit animation trigger, modify it:
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (window.skipExitTransition) return; // Don't run animation
+      // ... your normal exit animation code here
+    });
+  });
 </script>
+
 
 <script>
 const popup = document.getElementById('popup-content');
@@ -164,4 +178,5 @@ if (popup) {
 
 </body>
 </html>
+
 
