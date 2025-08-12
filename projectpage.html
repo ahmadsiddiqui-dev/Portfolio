@@ -87,39 +87,19 @@ window.addEventListener('scroll', triggerTextDrop);
 window.addEventListener('load', triggerTextDrop);
 </script>
 
-<!-- <script>
-    document.getElementById("close-popup").addEventListener("click", function (e) {
-  e.preventDefault(); // stop link default
-  const transition = document.getElementById("page-exit-transition");
-  if (transition) {
-    transition.style.display = "none";
-    transition.style.opacity = "0"; // ensure it’s invisible
-  }
-
-  // Delay navigation slightly to allow hiding
-  setTimeout(() => {
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  }, 10);
-});
-
-</script> -->
 <script>
+  // Save skip state in sessionStorage so it persists across navigation
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
-    e.stopPropagation(); // Stop any parent event that triggers the animation
+    e.stopPropagation();
 
-    // Mark that we are closing popup (no exit animation)
-    window.skipExitTransition = true;
+    sessionStorage.setItem("skipExitTransition", "true");
 
     const transition = document.getElementById("page-exit-transition");
     if (transition) {
-      transition.style.display = "none";       // Hide it
-      transition.style.transition = "none";    // Remove transition effect
-      transition.style.opacity = "0";          // Make it invisible
+      transition.style.display = "none";
+      transition.style.transition = "none";
+      transition.style.opacity = "0";
     }
 
     if (window.history.length > 1) {
@@ -129,14 +109,16 @@ window.addEventListener('load', triggerTextDrop);
     }
   });
 
-  // If you have a global exit animation trigger, modify it:
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; // Don't run animation
-      // ... your normal exit animation code here
-    });
-  });
+  // In your global exit animation script:
+  if (sessionStorage.getItem("skipExitTransition") === "true") {
+    const transition = document.getElementById("page-exit-transition");
+    if (transition) {
+      transition.style.display = "none";
+    }
+    sessionStorage.removeItem("skipExitTransition");
+  }
 </script>
+
 
 
 <script>
@@ -178,5 +160,6 @@ if (popup) {
 
 </body>
 </html>
+
 
 
