@@ -97,7 +97,7 @@ window.addEventListener('load', triggerTextDrop);
       }
     });
 </script> -->
-<script>
+<!-- <script>
   document.getElementById("close-popup").addEventListener("click", function () {
     // Disable the page exit transition temporarily
     const transition = document.getElementById("page-exit-transition");
@@ -112,8 +112,27 @@ window.addEventListener('load', triggerTextDrop);
       window.location.href = "index.html";
     }
   });
-</script>
+</script> -->
+<script>
+    document.getElementById("close-popup").addEventListener("click", function (e) {
+  e.preventDefault(); // stop link default
+  const transition = document.getElementById("page-exit-transition");
+  if (transition) {
+    transition.style.display = "none";
+    transition.style.opacity = "0"; // ensure it’s invisible
+  }
 
+  // Delay navigation slightly to allow hiding
+  setTimeout(() => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  }, 10);
+});
+
+</script>
 <script>
 const popup = document.getElementById('popup-content');
 
@@ -132,12 +151,6 @@ if (popup) {
   const transition = document.getElementById('page-exit-transition');
 
   const pageName = window.location.pathname.split("/").pop();
-
-//   if (pageName === "projectpage.html") {
-//     transition.style.background = "white"; 
-//   } else {
-//     transition.style.background = "black"; 
-//   }
 
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
