@@ -88,20 +88,22 @@ window.addEventListener('load', triggerTextDrop);
 </script>
 
 <script>
-  // Save skip state in sessionStorage so it persists across navigation
+  // Close button handler
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
 
-    sessionStorage.setItem("skipExitTransition", "true");
+    // Tell the animation script to skip
+    window.skipExitTransition = true;
 
     const transition = document.getElementById("page-exit-transition");
     if (transition) {
-      transition.style.display = "none";
       transition.style.transition = "none";
+      transition.style.display = "none";
       transition.style.opacity = "0";
     }
 
+    // Navigate without triggering exit animation
     if (window.history.length > 1) {
       window.history.back();
     } else {
@@ -109,15 +111,15 @@ window.addEventListener('load', triggerTextDrop);
     }
   });
 
-  // In your global exit animation script:
-  if (sessionStorage.getItem("skipExitTransition") === "true") {
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.display = "none";
-    }
-    sessionStorage.removeItem("skipExitTransition");
-  }
+  // Modify your global exit animation code
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (window.skipExitTransition) return; // Skip animation for close
+      // Your original exit animation code here
+    });
+  });
 </script>
+
 
 
 
@@ -160,6 +162,7 @@ if (popup) {
 
 </body>
 </html>
+
 
 
 
