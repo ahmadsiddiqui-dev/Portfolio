@@ -419,7 +419,7 @@ span:nth-of-type(16){
 
 .portimage{
     height: 900px;
-    width: 900px;
+    width: 875px;
     padding-left:120px;
     padding-top: 30px;
     padding-right: 16px;
@@ -1327,4 +1327,5 @@ footer{
   display: block;
  
 }
+
 
