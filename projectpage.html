@@ -5,11 +5,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
 </head>
-<body style="background-color: #464c47; color: white;" >
+<body class="projectpage" style="background-color: #464c47; color: white;" >
     <div id="page-exit-transition"></div>
     <div id="popup-content">
         <span id="close-pop">&times;</span>
-        <button id="close-popup">Close</button>
+        <button class="waah" id="close-popup">Close</button>
         <div class="divpop">
             <div class="drop-wrap"><p class="drop-text">Case study</p></div>
             <div class="drop-wrap"><a class="visitclass" href="index.html" style="color: white;"><p class="drop-text">Visit live link</p></a></div>
@@ -17,23 +17,23 @@
         </div>
         <div class="mainpopdiv">
             <div class="mainpopdiv2"> 
-                <div style="padding: 0%; font-weight: bold;">
+                <div style="padding: 0%; font-weight: 500;">
                     <div class="mainpopdiv3">
                         <div class="divd1" style=" padding-left: 1px; flex-direction: column; padding-top: 120px;">
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">The site features interactive sections such as </p></div>
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">project galleries, a smooth scroll experience, </p></div>
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">and tab-based content transitions. </p></div>
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">JavaScript handles the dynamic behavior </p></div>
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">and enhances user experience, while </p></div>
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">CSS ensures modern styling and layout</p></div>
-                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 25px; padding-left: 0%;">consistency across devices.</p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">The site features interactive sections such as </p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">project galleries, a smooth scroll experience, </p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">and tab-based content transitions. </p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">JavaScript handles the dynamic behavior </p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">and enhances user experience, while </p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">CSS ensures modern styling and layout</p></div>
+                        <div class="drop-wrap"><p class="drop-text1" style="font-size: 30px; padding-left: 0%;">consistency across devices.</p></div>
                         </div>
                      </div>
                 </div>
                 <div class="projectinfodiv">
                     <p class="underdiv">PROJECT INFO</p>
-                    <pre class="underdiv">Role                              Design & Development</pre> 
-                    <pre class="underdiv">Year                                                             2025</pre>
+                    <pre class="underdiv">Role                                            Design & Development</pre> 
+                    <pre class="underdiv">Year                                                                                2025</pre>
                 </div>
             </div> 
             <div class="image-scroll-wrapper">
@@ -87,14 +87,13 @@ window.addEventListener('scroll', triggerTextDrop);
 window.addEventListener('load', triggerTextDrop);
 </script>
 
-<!--  <script>
+<!-- <script>
     document.getElementById("close-popup").addEventListener("click", function () {
-      // First try to go back in history
+      
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        // Fallback: go to a specific page
-        window.location.href = "index.html"; // change this to your main page
+        window.location.href = "index.html";
       }
     });
 </script> -->
@@ -114,6 +113,7 @@ window.addEventListener('load', triggerTextDrop);
     }
   });
 </script>
+
 <script>
 const popup = document.getElementById('popup-content');
 
@@ -133,11 +133,11 @@ if (popup) {
 
   const pageName = window.location.pathname.split("/").pop();
 
-  if (pageName === "projectpage.html") {
-    transition.style.background = "white"; 
-  } else {
-    transition.style.background = "black"; 
-  }
+//   if (pageName === "projectpage.html") {
+//     transition.style.background = "white"; 
+//   } else {
+//     transition.style.background = "black"; 
+//   }
 
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
@@ -156,5 +156,6 @@ if (popup) {
     });
   });
 </script>
+
 </body>
 </html>
