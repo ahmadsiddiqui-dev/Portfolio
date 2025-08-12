@@ -1,27 +1,43 @@
+@font-face {
+    font-family: "PP Neue Montreal";
+    src: url("pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-medium.woff") format("woff2"),
+         url("../fonts/PPNeueMontreal-Regular.woff") format("woff");
+}
+
+
 *{
     padding-left: 20px;
     margin: 0px;
     box-sizing: border-box;
-    font-family: PP Neue Montreal, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: "PP Neue Montreal", sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+
+
 body{
     background-color: #e1dfdd;
     padding: 0px;
+    font-family: "PP Neue Montreal", sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
+
+
+
 header{
     width: 100%;
     height: 30px;
     display: flex;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 20px;
+    padding-top: 10px;
+    font-weight: 600;
     align-items: center;
     z-index: 9999;
 }
+
 .navbw{
     display: flex;
     grid-column-gap: 150px;
-    padding-top: 95px;
+    padding-top: 70px;
     padding-left: 350px;
     animation:  SlideInDown 0.7s ease forwards;
     animation-delay: 1s;
@@ -33,6 +49,7 @@ header{
     animation:  SlideInDown 0.7s ease forwards;
     animation-delay: 1s;
     opacity: 0;
+    z-index: 9999;
 }
 a{
     text-decoration: none;
@@ -44,8 +61,9 @@ a{
     display: flex;
     flex-direction: row;
     position:fixed;
+    gap: 5px;
     right: 50px;
-    padding-top: 12px;
+    padding-top: 15px;
     top: 15px;
     animation:  SlideInDown 0.7s ease forwards;
     animation-delay: 1s;
@@ -62,11 +80,9 @@ main{
     padding: 0%;
     padding-left: 40px;
     width: 100%;
-    font-size: 110px;
-    font-weight: bold;
+    font-size: 125;
+    font-weight: 500;
     position: relative;
-    /* top: 160px; */
-    /* transform: translateY(-50%); */
 
 }
 
@@ -74,15 +90,8 @@ span{
     position: relative;
     line-height: 0.7;
     display: inline-block;
-    margin: 0;
-    /* transform: translateY(200px); */
-    padding: 0%;
     opacity: 0;
-    /* animation-name: appear;
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards; */
-
+    padding: 0%;
 }
 
 span.appear {
@@ -162,18 +171,21 @@ span:nth-of-type(16){
     }
 }
 .imganimation{
-     width: 600px;
+    width: 650px;
     padding-left: 0px;
-    /* padding-top: 300px; */
-    animation: slideIn 2s forwards;
-    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-
+    padding-top: 20px;
+    height: 400px;
+    overflow: hidden;
+    animation: slideIn 2s;
+    animation-timing-function: cubic-bezier(0.62,0.05,0.01,0.99);
+    z-index:0;
+    
 }
 
 @keyframes slideIn{
     from{
         opacity: 0;
-        transform: translateY(300px);
+        transform: translateY(1000px);
     }
     to{
         opacity: 1;
@@ -194,28 +206,25 @@ span:nth-of-type(16){
 
 .div3{
     display: flex;
-    gap: 38px;
     align-items: flex-end;
     padding-left: 20px ;
 }
 #arrow{
-    font-size: 100px;
-    font-weight: bolder;
-    padding-right: 80px;
-    padding-bottom: 25px;
+  font-size: 120px;
 
 }
 .sup{
-    font-size: 25px;
+    font-size: 22px;
     padding-left: 80px;
-    padding-right:150px;
+    padding-right:260px;
+    font-weight: 500;
 }
 
 .as{
-    font-size: 130px;
+    font-size: 140px;
+    font-weight: 500;
     text-align: right;
-    padding-left: 60px;
-    line-height: 1;
+    line-height: 0.9;
 }
 .asss{
     display: inline-block;
@@ -258,8 +267,9 @@ span:nth-of-type(16){
     padding-left: 0%;
 }
 #nosize{
-    font-size: 25px;
+    font-size: 22px;
     color: black;
+    font-weight: 500;
 }
 
 #textsize{
@@ -278,7 +288,8 @@ span:nth-of-type(16){
     display: flex;
     flex-direction: row;
     gap: 100px;
-    padding-left: 250px;
+    padding-left: 297px;
+    padding-top: 100px;
 }
 .diva,
 .divb,
@@ -298,13 +309,16 @@ span:nth-of-type(16){
 .divg1{
     padding-top: 100px;
     padding-left: 39px;
+    line-height: 5;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 30px; 
 }
 
 .drop-text1 {
-  transform: translateY(50px);
+  transform: translateY(100px);
   opacity: 0;
-  transition: transform 1.5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1s;
+  transition: transform 1.5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1.5s;
 }
 
 .drop-text1.in-view {
@@ -405,7 +419,7 @@ span:nth-of-type(16){
 
 .portimage{
     height: 900px;
-    width: 920px;
+    width: 855px;
     padding-left:120px;
     padding-top: 30px;
     padding-right: 16px;
@@ -479,11 +493,12 @@ span:nth-of-type(16){
 }
 .div9 {
   display: flex;
+  overflow: hidden;
   justify-content:left;
   align-items: flex-end;
-  font-size: 25px;
+  font-size: 22px;
   gap: 300px;
-  overflow: hidden;
+  font-weight: 500;
   padding-left: 40px;
   
 }
@@ -498,10 +513,7 @@ span:nth-of-type(16){
 }
 
 .div10{
-    /* text-decoration: underline; */
     padding-bottom: 100px;
-    
-
 }
 .textemail{
     position: relative;
@@ -510,19 +522,18 @@ span:nth-of-type(16){
     text-transform: capitalize;
     padding: 0%;
     padding-left:0;
-    width: 100%;
-    font-size: 120px;
-    font-weight: bold;
+    width: fit-content;
+    font-size: 125px;
+    font-weight: 500;
     
 }
 
 
 .spanemail{
       position: relative;
-    line-height: 1.3;
+    line-height: 1.1;
     display: inline-block;
     margin: 0;
-    /* transform: translateY(200px); */
     padding: 0%;
     opacity: 0;
 
@@ -551,13 +562,14 @@ span:nth-of-type(16){
 
 footer{
     height: 30px;
-    padding-top: 150px;
+    padding-top: 170px;
     padding-bottom: 80px;
     padding-right: 50px;
     margin: 0px;
     width: 100%;
     align-items: end;
     font-size: 22px;
+    font-weight: 600;
     padding-left: 5px;
     display: flex;
     font-weight: bold;
@@ -642,7 +654,7 @@ footer.in-view {
 
 .accordion-header .number{
   width: 50px;
-  font-weight: bold;
+  font-weight: 500;
 }
 .accordion-header .title {
   flex: 1;
@@ -659,10 +671,8 @@ footer.in-view {
 
 .accordion-body {
   display: none;
-  padding: 10px 0 20px 200px;
-  font-size: 25px;
-  line-height: 1.6;
-  color: #333;
+  padding: 10px 0 100px 200px;
+  font-size: 22px;
 }
 
 .accordion-item.active .accordion-body {
@@ -677,8 +687,6 @@ footer.in-view {
 .title {
   text-align: left;
   font-weight: 500;
-  letter-spacing: 1px;
-  /* margin-bottom: 30px; */
   padding-left: 170px;
 }
 
@@ -687,11 +695,11 @@ footer.in-view {
   flex-direction: row;
   justify-content: left;
   gap: 50px;
-  font-size: 116px;
-  padding-right: 30px;
-  font-weight: 600;
+  font-size: 113px;
+  font-weight: 500;
   margin-bottom: 40px;
   padding-left: 0%;
+  padding-top: 100px;
 }
 
 .tab {
@@ -734,7 +742,7 @@ footer.in-view {
 }
 
 .slide h3 {
-  font-size: 25px;
+  font-size: 22px;
   margin-bottom: 12px;
   font-weight: 500;
   padding-left: 0%;
@@ -743,7 +751,7 @@ footer.in-view {
 }
 
 .slide p {
-  font-size: 25px;
+  font-size: 22px;
   width: 500px;
   line-height: 1.5;
   padding-left: 0%;
@@ -752,10 +760,25 @@ footer.in-view {
 
 /* contact */
 
+.forcontactmain{
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+   text-align: center; 
+   padding-top: 40px;
+}
+
+.forcontactinsta{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #sm{
     font-size: 25px;
     text-align: center;
-    padding-top: 200px;
+    padding-top: 250px;
     animation: fadeInTop 2s;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -825,8 +848,9 @@ footer.in-view {
   opacity: 1;
 }
 .drop-text {
-  transform: translateY(50px);
+  transform: translateY(200px);
   opacity: 0;
+  overflow: hidden;
   transition: transform 1.5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1s;
   padding: 0%;
   margin: 0%;
@@ -847,7 +871,7 @@ footer.in-view {
   bottom: 0;
   height: 9px;
   width: 0;
-  background-color: #000; /* or #000 if dark bg */
+  background-color: #000; 
   transition: all 1s cubic-bezier(0.5, 0.1, 0, 1);
   transition-delay: 1.2s;
 }
@@ -866,9 +890,9 @@ footer.in-view {
   content: "";
   position: absolute;
   bottom: 0;
-  left: -100px; /* start from offscreen */
+  left: -100px;
   height: 9px;
-  width: 80px; /* about 1 inch */
+  width: 80px; 
   background-color: #e1dfdd;
   opacity: 0;
   transition: left 1s cubic-bezier(1, 0.2, 0.2, 1), opacity 1s cubic-bezier(1, 0.2, 0.2, 1);
@@ -877,7 +901,7 @@ footer.in-view {
 }
 
 .textemail:hover::before {
-  left: 100%; /* move all the way to the end */
+  left: 100%;
 }
 
 .contact-page .textemail::before {
@@ -899,7 +923,6 @@ footer.in-view {
   pointer-events: none;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   font-size: 12px;
   font-weight: bold;
   color: black;
@@ -907,7 +930,7 @@ footer.in-view {
   opacity: 0;
     transition:
     opacity 0.3s ease,
-    transform 1s cubic-bezier(0.22, 1, 0.36, 1); /* Slower, smooth */
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1); 
 
 }
 
@@ -916,26 +939,12 @@ footer.in-view {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  color: black; /* or your preferred color */
-}
-.waah::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 2px;
-  width: 0%;
-  height: 2px;
-  background-color: black; /* underline color */
-  transition: width 0.3s ease;
-}
-
-.waah:hover::after {
-  width: 100%;
+  color: black; 
 }
 
 .contact-page .waah::after {
   background-color: white;
-}
+}  
 
 /* slider css */
 
@@ -994,14 +1003,55 @@ footer.in-view {
     }
 @media (max-width: 768px) {
     
-   *{
-    display: grid;
-    padding:  0%;
-    margin: 0px; 
-    flex-wrap: wrap;
-    box-sizing: border-box;
+   .laptopnavbar{
+    display: none;
    }
 
+.mblnavbar{
+  display: initial;
+}
+
+  .div9{
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+    gap: 20px;
+  }
+ .textemail{
+  font-size: 40px;
+  text-align: left;
+ }
+
+ #sm{
+text-align: left;
+padding-left: 0%;
+}
+.forcontactmain{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+}
+.forcontactinsta{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+}
+a{
+  padding-left: 5px;
+}
+
+footer{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+
+}
+#page-exit-transition{
+  display: none;
+  z-index: 9999;
+}
 
 
    /* for preloader */
@@ -1013,16 +1063,16 @@ footer.in-view {
 
   .percentage {
     font-size: 30px;
-  }
+  } */
 
-  h1 {
+ h1 {
     font-size: 30px;
   }
 
   p {
     font-size: 30px;
   }
-}
+} 
 
     /* for delay page load */
 
@@ -1042,10 +1092,10 @@ footer.in-view {
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 999999;
   background-color:#000;
   transform: translateY(100%);
   transition: transform 0.8s ease-in-out;
-  z-index: 9999;
   pointer-events: none;
 }
 
@@ -1098,7 +1148,7 @@ footer.in-view {
     font-size: 25px;
     gap: 220px;
     padding-top: 40px;
-    font-weight: bold;
+    font-weight: 500;
     position: fixed;
     z-index: 9999;
 
@@ -1124,7 +1174,7 @@ footer.in-view {
     padding-left: 20px;
     font-size: 25px;
     padding-top: 10px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .underdiv{
@@ -1136,7 +1186,7 @@ footer.in-view {
 
 .maindiv333{
     padding-top: 125px;
-    padding-left: 690px;
+    padding-left: 670px;
     padding-bottom: 20px;
     height: 650px;
     width: auto;
@@ -1154,21 +1204,126 @@ footer.in-view {
   position: absolute;
   top: 40px; 
   right: 60px;
+  padding: 0%;
   background: transparent;
   color: white; 
   border: none;
   font-size: 25px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
   position: fixed;
   z-index: 9999;
 }
 
-#close-popup:hover {
-  text-decoration: underline; 
-  color: white
+
+.waah {
+  position: relative;
+  text-decoration: none;
+  color: #000;
 }
-.visitclass:hover{
-    text-decoration: underline;
-    color: white;
+
+.waah::after {
+  content: "";
+  position: absolute;
+  bottom: -5.5;
+  left: 0;
+  height: 0.5px;
+  width: 0%;
+  background-color: black;
+}
+
+
+.waah:hover::after {
+  animation: underline-in 0.8s forwards;
+}
+
+
+.waah:not(:hover)::after {
+  animation: underline-out 0.8s forwards;
+}
+
+@keyframes underline-in {
+  from {
+    width: 0%;
+    left: 0;
+  }
+  to {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@keyframes underline-out {
+  from {
+    width: 100%;
+    left: 0;
+  }
+  to {
+    width: 0%;
+    left: 100%;
+  }
+}
+.projectpage .waah::after {
+  background-color: white;
+}
+
+
+
+.visitclass {
+  position: relative;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.visitclass::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background-color: white
+}
+
+.visitclass:hover::after {
+  animation: underline-in 0.8s forwards;
+}
+
+.visitclass:not(:hover)::after {
+  animation: underline-out 0.8s forwards;
+}
+
+
+@keyframes underline-in {
+  from {
+    width: 0%;
+    left: 0;
+  }
+  to {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@keyframes underline-out {
+  from {
+    width: 100%;
+    left: 0;
+  }
+  to {
+    width: 0%;
+    left: 100%;
+  }
+}
+
+.left {
+  position: sticky;
+  top: 0px; /* how far from the top it sticks */
+  align-self: flex-start;
+  padding: 0%;
+}
+
+.portimage {
+  display: block;
+ 
 }
