@@ -88,32 +88,6 @@ window.addEventListener('load', triggerTextDrop);
 </script>
 
 <!-- <script>
-    document.getElementById("close-popup").addEventListener("click", function () {
-      
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = "index.html";
-      }
-    });
-</script> -->
-<!-- <script>
-  document.getElementById("close-popup").addEventListener("click", function () {
-    // Disable the page exit transition temporarily
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.display = "none";
-    }
-
-    // Go back if possible, else go to index
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-</script> -->
-<script>
     document.getElementById("close-popup").addEventListener("click", function (e) {
   e.preventDefault(); // stop link default
   const transition = document.getElementById("page-exit-transition");
@@ -132,7 +106,25 @@ window.addEventListener('load', triggerTextDrop);
   }, 10);
 });
 
+</script> -->
+    <script>
+  document.getElementById("close-popup").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const transition = document.getElementById("page-exit-transition");
+    if (transition) {
+      transition.style.transition = "none"; // Disable animation
+      transition.style.display = "none";    // Hide the element
+    }
+
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  });
 </script>
+
 <script>
 const popup = document.getElementById('popup-content');
 
@@ -172,3 +164,4 @@ if (popup) {
 
 </body>
 </html>
+
