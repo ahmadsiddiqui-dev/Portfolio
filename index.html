@@ -416,34 +416,38 @@ window.addEventListener('load', triggerTextDrop);
 <script>
   const transition = document.getElementById('page-exit-transition');
 
+  // Set background color for the current page on load
+  const currentPage = window.location.pathname.split("/").pop();
+  transition.style.backgroundColor = (currentPage === "projectpage.html") ? "#464c47" : "black";
+
   document.querySelectorAll('a[href]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
 
-    // Skip if external
-    if (this.target === "_blank" || this.hasAttribute("target")) return;
+      if (this.target === "_blank" || this.hasAttribute("target")) return;
 
-    // Skip internal anchors and JS links
-    if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+      // Skip internal anchors and JS links
+      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
 
-    e.preventDefault();
-    transition.classList.add('active');
+      e.preventDefault();
 
-    setTimeout(() => {
-      window.location.href = href;
-    }, 1000);
+      // Detect if the link is going TO projectpage.html
+      if (href.includes("projectpage.html")) {
+        transition.style.backgroundColor = "#464c47";
+      } else {
+        transition.style.backgroundColor = "black";
+      }
+
+      transition.classList.add('active');
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1000);
+    });
   });
-});
 </script>
-<script>
-  window.addEventListener('pageshow', function(event) {
-  const exit = document.getElementById('page-exit-transition');
 
-  if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
-    if (exit) exit.style.display = 'none';
-  }
-});
- </script>
 </body>
 </html>
+
 
