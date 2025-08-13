@@ -176,7 +176,7 @@ if (popup) {
   });
 </script> -->
 
-<script>
+<!-- <script>
   // Close button
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
@@ -220,11 +220,66 @@ if (popup) {
       }, 800);
     });
   });
+</script> -->
+
+<script>
+  // Close button
+  document.getElementById("close-popup").addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Save flag so the *next* page load skips the animation
+    sessionStorage.setItem("skipExitTransition", "true");
+
+    const transition = document.getElementById("page-exit-transition");
+    if (transition) {
+      transition.style.transition = "none";
+      transition.style.display = "none";
+      transition.style.opacity = "0";
+    }
+
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  });
+
+  // Global link handler
+  const transition = document.getElementById('page-exit-transition');
+
+  // Check skip flag on load
+  if (sessionStorage.getItem("skipExitTransition") === "true") {
+    if (transition) {
+      transition.style.display = "none";
+      transition.style.opacity = "0";
+    }
+    sessionStorage.removeItem("skipExitTransition"); // Clear flag
+  }
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (sessionStorage.getItem("skipExitTransition") === "true") return;
+
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+
+      e.preventDefault();
+
+      transition.classList.add('active');
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 800);
+    });
+  });
 </script>
+
 
 
 </body>
 </html>
+
 
 
 
