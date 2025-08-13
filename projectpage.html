@@ -119,7 +119,7 @@ window.addEventListener('load', triggerTextDrop);
     });
   });
 </script> -->
-<script>
+<!-- <script>
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -137,11 +137,7 @@ window.addEventListener('load', triggerTextDrop);
       window.location.href = "index.html";
     }
   });
-</script>
-
-
-
-
+</script> -->
 
 <script>
 const popup = document.getElementById('popup-content');
@@ -157,7 +153,7 @@ if (popup) {
 }
 </script>
 
-<script>
+<!-- <script>
   const transition = document.getElementById('page-exit-transition');
 
   const pageName = window.location.pathname.split("/").pop();
@@ -178,10 +174,58 @@ if (popup) {
       }, 800);
     });
   });
+</script> -->
+
+<script>
+  // Close button
+  document.getElementById("close-popup").addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Tell the exit animation to skip
+    window.skipExitTransition = true;
+
+    const transition = document.getElementById("page-exit-transition");
+    if (transition) {
+      transition.style.transition = "none";
+      transition.style.display = "none";
+      transition.style.opacity = "0";
+    }
+
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  });
+
+  // Exit animation for normal links
+  const transition = document.getElementById('page-exit-transition');
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (window.skipExitTransition) return; // Skip if close button was clicked
+
+      const href = this.getAttribute('href');
+
+      // Skip same-page or JS links
+      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+
+      e.preventDefault();
+
+      transition.classList.add('active');
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 800);
+    });
+  });
 </script>
+
 
 </body>
 </html>
+
 
 
 
