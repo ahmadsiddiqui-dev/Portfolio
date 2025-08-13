@@ -255,7 +255,7 @@ span:nth-of-type(16){
     display: grid;
     gap: 50px;
     overflow: visible; 
-    padding-top: 400px;
+    padding-top: 300px;
     padding-left: 0%;
     padding-bottom: 300px;
 }
@@ -1330,6 +1330,7 @@ footer{
   display: block;
  
 }
+
 
 
 
