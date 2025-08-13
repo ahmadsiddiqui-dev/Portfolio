@@ -153,36 +153,12 @@ if (popup) {
 }
 </script>
 
-<!-- <script>
-  const transition = document.getElementById('page-exit-transition');
-
-  const pageName = window.location.pathname.split("/").pop();
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-
-      // Skip same-page or JS links
-      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
-
-      e.preventDefault();
-
-      transition.classList.add('active');
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 800);
-    });
-  });
-</script> -->
-
-<!-- <script>
-  // Close button
+<script>
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
 
-    // Tell the exit animation to skip
+    // Tell the animation script to skip
     window.skipExitTransition = true;
 
     const transition = document.getElementById("page-exit-transition");
@@ -192,6 +168,7 @@ if (popup) {
       transition.style.opacity = "0";
     }
 
+    // Navigate without triggering exit animation
     if (window.history.length > 1) {
       window.history.back();
     } else {
@@ -199,78 +176,11 @@ if (popup) {
     }
   });
 
-  // Exit animation for normal links
-  const transition = document.getElementById('page-exit-transition');
-
+  // Modify your global exit animation code
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; // Skip if close button was clicked
-
-      const href = this.getAttribute('href');
-
-      // Skip same-page or JS links
-      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
-
-      e.preventDefault();
-
-      transition.classList.add('active');
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 800);
-    });
-  });
-</script> -->
-
-<script>
-  // Close button
-  document.getElementById("close-popup").addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Save flag so the *next* page load skips the animation
-    sessionStorage.setItem("skipExitTransition", "true");
-
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.transition = "none";
-      transition.style.display = "none";
-      transition.style.opacity = "0";
-    }
-
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-
-  // Global link handler
-  const transition = document.getElementById('page-exit-transition');
-
-  // Check skip flag on load
-  if (sessionStorage.getItem("skipExitTransition") === "true") {
-    if (transition) {
-      transition.style.display = "none";
-      transition.style.opacity = "0";
-    }
-    sessionStorage.removeItem("skipExitTransition"); // Clear flag
-  }
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (sessionStorage.getItem("skipExitTransition") === "true") return;
-
-      const href = this.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
-
-      e.preventDefault();
-
-      transition.classList.add('active');
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 800);
+      if (window.skipExitTransition) return; // Skip animation for close
+      // Your original exit animation code here
     });
   });
 </script>
@@ -279,6 +189,7 @@ if (popup) {
 
 </body>
 </html>
+
 
 
 
