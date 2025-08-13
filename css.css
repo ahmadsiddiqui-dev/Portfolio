@@ -1184,11 +1184,14 @@ footer{
     width: 530px;
 }
 
+.image-scroll-wrapper{
+  overflow: hidden;
+}
+
 .maindiv333{
     padding-top: 125px;
     padding-left: 670px;
-    padding-bottom: 20px;
-    height: 650px;
+    height: 670px;
     width: auto;
     gap: 30px;
     display: flex;
@@ -1327,6 +1330,7 @@ footer{
   display: block;
  
 }
+
 
 
 
