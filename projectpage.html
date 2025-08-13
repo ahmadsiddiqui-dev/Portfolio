@@ -87,7 +87,7 @@ window.addEventListener('scroll', triggerTextDrop);
 window.addEventListener('load', triggerTextDrop);
 </script>
 
-<script>
+<!-- <script>
   // Close button handler
   document.getElementById("close-popup").addEventListener("click", function (e) {
     e.preventDefault();
@@ -118,7 +118,27 @@ window.addEventListener('load', triggerTextDrop);
       // Your original exit animation code here
     });
   });
+</script> -->
+<script>
+  document.getElementById("close-popup").addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const transition = document.getElementById("page-exit-transition");
+    if (transition) {
+      transition.style.display = "none";
+      transition.style.opacity = "0";
+      transition.style.transition = "none"; // Remove fade animation
+    }
+
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  });
 </script>
+
 
 
 
@@ -162,6 +182,7 @@ if (popup) {
 
 </body>
 </html>
+
 
 
 
