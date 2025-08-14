@@ -497,7 +497,7 @@ span:nth-of-type(16){
   justify-content:left;
   align-items: flex-end;
   font-size: 22px;
-  gap: 300px;
+  gap: 370px;
   font-weight: 500;
   padding-left: 40px;
   
@@ -1368,6 +1368,7 @@ footer{
   display: block;
  
 }
+
 
 
 
