@@ -27,7 +27,7 @@ header{
     width: 100%;
     height: 30px;
     display: flex;
-    font-size: 20px;
+    font-size: 22px;
     padding-top: 10px;
     font-weight: 600;
     align-items: center;
@@ -36,7 +36,7 @@ header{
 
 .navbw{
     display: flex;
-    grid-column-gap: 150px;
+    gap: 230px;
     padding-top: 70px;
     padding-left: 350px;
     animation:  SlideInDown 0.7s ease forwards;
@@ -1368,6 +1368,7 @@ footer{
   display: block;
  
 }
+
 
 
 
