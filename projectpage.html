@@ -87,58 +87,6 @@ window.addEventListener('scroll', triggerTextDrop);
 window.addEventListener('load', triggerTextDrop);
 </script>
 
-<!-- <script>
-  // Close button handler
-  document.getElementById("close-popup").addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Tell the animation script to skip
-    window.skipExitTransition = true;
-
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.transition = "none";
-      transition.style.display = "none";
-      transition.style.opacity = "0";
-    }
-
-    // Navigate without triggering exit animation
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-
-  // Modify your global exit animation code
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; // Skip animation for close
-      // Your original exit animation code here
-    });
-  });
-</script> -->
-<!-- <script>
-  document.getElementById("close-popup").addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.display = "none";
-      transition.style.opacity = "0";
-      transition.style.transition = "none"; // Remove fade animation
-    }
-
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-</script> -->
-
 <script>
 const popup = document.getElementById('popup-content');
 
@@ -153,37 +101,6 @@ if (popup) {
 }
 </script>
 
-<!-- <script>
-  document.getElementById("close-popup").addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Tell the animation script to skip
-    window.skipExitTransition = true;
-
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.transition = "none";
-      transition.style.display = "none";
-      transition.style.opacity = "0";
-    }
-
-    // Navigate without triggering exit animation
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-
-  // Modify your global exit animation code
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; // Skip animation for close
-      // Your original exit animation code here
-    });
-  });
-</script> -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -254,8 +171,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 </script>
 
+<script>
+  window.addEventListener('pageshow', function(event) {
+  // 'persisted' is true if the page is loaded from the back-forward cache
+  const entry = document.getElementById('page-entry-transition');
+  const exit = document.getElementById('page-exit-transition');
+
+  if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
+    // Hide transition screens
+    if (entry) entry.style.display = 'none';
+    if (exit) exit.style.display = 'none';
+  }
+});
+</script>
+
 </body>
 </html>
+
 
 
 
