@@ -970,15 +970,13 @@ footer.in-view {
 }
 
 .percentage {
-      display: flex;
       padding: 0%;
       overflow: hidden;
       position: absolute;
-      right: 70px;
+      right: 100px;
       font-weight: bold;
-      font-size: 80px;
-      transform: translateY(0);
-      transition: top 1s ease-in-out;
+      font-size: 120px;
+      line-height: 0.8;
 }
 
 .percent-text {
@@ -1344,6 +1342,7 @@ footer{
   display: block;
  
 }
+
 
 
 
