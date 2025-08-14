@@ -961,10 +961,25 @@ footer.in-view {
     transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-.branding {
+#branding {
+      padding: 0%;
       position: absolute;
       top: 70px;
       left: 70px;
+      width: fit-content;
+      height: fit-content;
+      overflow: hidden;
+      font-size: 40px;
+      font-weight: bold;
+}
+#branding1 {
+      padding: 0%;
+      position: absolute;
+      top: 120px;
+      left: 68px;
+      width: fit-content;
+      height: fit-content;
+      overflow: hidden;
       font-size: 40px;
       font-weight: bold;
 }
@@ -1342,6 +1357,7 @@ footer{
   display: block;
  
 }
+
 
 
 
