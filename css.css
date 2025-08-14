@@ -177,7 +177,7 @@ span:nth-of-type(16){
     height: 400px;
     overflow: hidden;
     animation: slideIn 2s;
-    animation-timing-function: cubic-bezier(0.62,0.05,0.01,0.99);
+    animation-timing-function: cubic-bezier(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
     z-index:0;
     
 }
@@ -1219,16 +1219,27 @@ footer{
     padding-top: 125px;
     padding-left: 670px;
     height: 630px;
+    padding-right: 60px;
     width: auto;
     gap: 30px;
     display: flex;
-    overflow: hidden;
-    animation-name: appear;
-    animation-duration: 1s;
-    animation-timing-function: ease;
+    animation-name: imgappear;
+    animation-duration: 0.8s;
+    animation-timing-function:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
     animation-fill-mode: forwards;
 }
 
+
+@keyframes imgappear{
+    from{
+        opacity: 0;
+        transform: translateY(1000px);
+    }
+    to {
+        opacity: 1;
+       transform: translateY(0);
+    } 
+}
 
 #close-popup {
   position: absolute;
@@ -1357,6 +1368,7 @@ footer{
   display: block;
  
 }
+
 
 
 
