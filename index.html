@@ -312,37 +312,42 @@
     <div>
         <p>Development Ahmad Siddiqui</p>
     </div>
-</footer>
-
-
+ </footer>
+  
 <script>
-    const percentage = document.getElementById('percentage');
-    const percentText = document.getElementById('percentText');
-    const preloader = document.getElementById('preloader');
-    const mainContent = document.getElementById('main-content');
+const percentage = document.getElementById('percentage');
+const percentText = document.getElementById('percentText');
+const preloader = document.getElementById('preloader');
+const mainContent = document.getElementById('main-content');
 
-    const sequence = [
-      { value: 0, position: 'calc(95vh - 100px)' },
-      { value: 35, position: '65vh' },
-      { value: 70, position: '30vh' },
-      { value: 100, position: '10vh' },
-    ];
+const sequence = [
+  { value: 0, position: 'calc(95vh - 100px)' },
+  { value: 35, position: '65vh' },
+  { value: 70, position: '30vh' },
+  { value: 100, position: '10vh' },
+];
 
-    let i = 0;
+let i = 0;
 
-    function moveAndChange() {
+function moveAndChange() {
   if (i < sequence.length) {
     const { value, position } = sequence[i];
 
-    percentage.style.top = position;
+    if (percentText.firstChild) {
+      percentText.firstChild.classList.remove('slide-up');
+      percentText.firstChild.classList.add('fade-up');
 
-    const newText = document.createElement('p');
-    newText.className = 'percent-text slide-up';
-    newText.textContent = `${value}%`;
-
-    // Clear previous and add new
-    percentText.innerHTML = '';
-    percentText.appendChild(newText);
+      // Wait for fade-up to finish
+      setTimeout(() => {
+        // Now move container and add new text
+        percentage.style.top = position;
+        addNewText(value);
+      }, 500); // match fade-up duration
+    } else {
+      // First time: no fade, just add
+      percentage.style.top = position;
+      addNewText(value);
+    }
 
     i++;
     setTimeout(moveAndChange, 1500);
@@ -352,12 +357,19 @@
       preloader.style.display = 'none';
       mainContent.style.display = 'block';
       document.body.style.overflow = 'auto';
-
     }, 1000);
   }
 }
 
-    moveAndChange(); 
+function addNewText(value) {
+  const newText = document.createElement('p');
+  newText.className = 'percent-text slide-up';
+  newText.textContent = `${value}%`;
+  percentText.innerHTML = '';
+  percentText.appendChild(newText);
+}
+
+moveAndChange();
 </script>
 
 <script>
@@ -449,6 +461,7 @@ window.addEventListener('load', triggerTextDrop);
 
 </body>
 </html>
+
 
 
 
