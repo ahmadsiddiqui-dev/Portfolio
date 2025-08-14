@@ -974,8 +974,8 @@ footer.in-view {
       overflow: hidden;
       position: absolute;
       right: 100px;
-      font-weight: bold;
-      font-size: 120px;
+      font-weight: 500;
+      font-size: 130px;
       line-height: 0.8;
 }
 
@@ -1342,6 +1342,7 @@ footer{
   display: block;
  
 }
+
 
 
 
