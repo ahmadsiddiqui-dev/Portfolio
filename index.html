@@ -364,7 +364,7 @@ function moveAndChange() {
 function addNewText(value) {
   const newText = document.createElement('p');
   newText.className = 'percent-text slide-up';
-  newText.textContent = `${value}%`;
+  newText.textContent = `${value}`;
   percentText.innerHTML = '';
   percentText.appendChild(newText);
 }
@@ -461,6 +461,7 @@ window.addEventListener('load', triggerTextDrop);
 
 </body>
 </html>
+
 
 
 
