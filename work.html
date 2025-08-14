@@ -296,9 +296,15 @@ window.addEventListener('load', triggerTextDrop);
 
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
-
-      // ✅ Skip animation if close popup or back navigation triggered it
-      if (window.skipExitTransition) return;
+      // ✅ Skip transition if closing popup or going back
+      if (window.skipExitTransition) {
+        if (transition) {
+          transition.style.transition = "none";
+          transition.style.opacity = "0";
+          transition.style.display = "none";
+        }
+        return; // stop here
+      }
 
       const href = this.getAttribute('href');
 
@@ -327,6 +333,7 @@ window.addEventListener('load', triggerTextDrop);
 
 </body>
 </html>
+
 
 
 
