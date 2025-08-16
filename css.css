@@ -1229,7 +1229,7 @@ footer{
     display: flex;
     animation-name: imgappear;
     animation-duration: 0.8s;
-    animation-timing-function:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    animation-timing-function:cubic-bezier(1, 0.2, 0.2, 1);
     animation-fill-mode: forwards;
 }
 
@@ -1237,7 +1237,7 @@ footer{
 @keyframes imgappear{
     from{
         opacity: 0;
-        transform: translateY(1000px);
+        transform: translateY(500px);
     }
     to {
         opacity: 1;
@@ -1372,6 +1372,7 @@ footer{
   display: block;
  
 }
+
 
 
 
