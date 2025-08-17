@@ -132,44 +132,6 @@ if (popup) {
 }
 </script>
 
-<!-- <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const closeBtn = document.getElementById("close-popup");
-  const transition = document.getElementById("page-exit-transition");
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.skipExitTransition = true;
-
-      if (transition) {
-        transition.classList.remove("active");
-        transition.style.transition = "none";
-        transition.style.display = "none";
-        transition.style.opacity = "0";
-        transition.style.background = "transparent"; 
-      }
-
-      // Navigate back or fallback
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = "index.html";
-      }
-    });
-  }
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return;
-    });
-  });
-});
-</script>
- -->
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.getElementById("close-popup");
@@ -265,19 +227,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 </script>
 
-<script>
-  window.addEventListener('pageshow', function(event) {
-  const entry = document.getElementById('page-entry-transition');
-  const exit = document.getElementById('page-exit-transition');
-
-  if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
-    if (entry) entry.style.display = 'none';
-    if (exit) exit.style.display = 'none';
-  }
-});
-</script>
 
 </body>
 </html>
+
 
 
