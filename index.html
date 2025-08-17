@@ -8,7 +8,7 @@
 <body>
     <div id="page-exit-transition"></div>
     <div id="preloader">
-     <div  id="branding">
+    <div  id="branding">
       <p class="drop-text1" style="padding: 0%;">Ahmad Siddiqui</p>
     </div>
     <div  id="branding1">
@@ -19,8 +19,8 @@
     </div>
     </div>
 
-<div id="content" style="padding: 0%;">
-    <header class="laptopnavbar" style="padding-left: 20px">
+<div id="content" style="padding: 0%; color: white;">
+    <header class="headeranimation" style="padding-left: 20px">
         <div class="navbar">
              <a href="index.html" id="nav">Ahmad Siddiqui</a>
         </div>
@@ -41,8 +41,9 @@
             <a href="contact.html">Contact</a></div>
         </div>
     </header>
-    <div class="letstart" style="padding-left: 0%; padding-bottom: 50px; padding-top: 140px;">
-        <div class="text " style="padding: 10px; padding-left: 35px;">
+    
+    <div class="letstart" style="padding:140px 0px 50px 40px; color: black;">
+        <div class="text " style="padding: 10px 0px 10px 0px;  margin-left: -8px;">
        <span>C</span>
         <span>R</span>
         <span>E</span>
@@ -52,7 +53,7 @@
         <span>V</span>
         <span>E</span>
         </div>
-        <div class="text" style="padding: 10px; padding-left: 35px;">
+        <div class="text" style="padding: 10px 0px 20px 0px;  margin-left: -8px;">
       <span>D</span>
       <span>E</span>
       <span>V</span>
@@ -63,9 +64,13 @@
       <span>E</span>
       <span>R</span>
    </div> 
-    <div class="text" style="height: 300px; width: auto; padding-top: 20px;">
+    <div class="text1" style="height: 250px; width: 565px;">
         <img src="newme.jpg" alt="" class="imganimation">
+        <div class="imganimations" style="height: 250px;"></div>
     </div>
+  
+</div>
+
 </div>
 
     </div>
@@ -87,7 +92,7 @@
         </div>
     </div>
 
-    <div class="containermain" style="padding-left: 20px;">
+    <div class="containermain" style="padding-left: 40px;">
 <div class="masterdiv" style="font-weight: 500;">
   <div class="maindiv1">
   <div class="drop-wrap"><p class="drop-text1" id="nosize" style="width: 100px; font-weight: 500;">01/</p></div>
@@ -105,7 +110,7 @@
   <div class="div71">
       <div class="drop-wrap"><p class="drop-text1" id="textsize">memorable web experiences.</p></div>
   </div>
-  <br><br>
+  <br><br><br>
   <div class="div71">
       <div class="drop-wrap"><p class="drop-text1" id="textsize">When I'm not building or exploring new</p></div>
   </div>
@@ -173,7 +178,7 @@
   <div class="drop-wrap"><p class="drop-text">RECENT<br>PROJECT</p></div>
   <div class="drop-wrap"><p class="drop-text" style="padding-left: 100px;">CREATIVE<br>DEVELOPMENT</p></div>
 </div>
- 
+
 <div style="display: flex; flex-direction: row; padding: 0%; padding-bottom: 200px;">
     <div class="left" style="flex: 1; position: sticky; top: 0px; ">
         <div class="div10" style="padding-bottom: 20px; padding-top: 50px; padding-left: 40px;">
@@ -197,10 +202,10 @@
                 </div>
             </a>
         </div>
-        <div class="divd1" style="font-size: 40px; padding-left: 120px; padding-top: 15px;">
+        <div class="divd1" style="font-size: 40px; padding-left: 160px; padding-top: 15px;">
             <div class="drop-wrap"><p class="drop-text1">PORTFOLIO &#169;2025</p></div>
         </div>
-        <div class="divd1" style="padding-left: 120px; flex-direction: column; padding-top: 30px; text-transform: uppercase;">
+        <div class="divd1" style="padding-left: 160px; flex-direction: column; padding-top: 30px; text-transform: uppercase;">
             <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px;">A personal portfolio website</p></div>
             <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px;">designed and developed using </p></div>
             <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px;">HTML, CSS, and JavaScript.</p></div>
@@ -317,16 +322,16 @@
     <div>
         <p>Development Ahmad Siddiqui</p>
     </div>
- </footer>
-  
+</footer>
+
 <script>
 const percentage = document.getElementById('percentage');
 const percentText = document.getElementById('percentText');
 const preloader = document.getElementById('preloader');
-const mainContent = document.getElementById('main-content');
+const mainContent = document.getElementById('content');
 
 const sequence = [
- { value: 0, position: 'calc(92vh - 100px)' },
+  { value: 0, position: 'calc(92vh - 100px)' },
   { value: 33, position: '63vh' },
   { value: 80, position: '27vh' },
   { value: 100, position: '10vh' },
@@ -342,14 +347,11 @@ function moveAndChange() {
       percentText.firstChild.classList.remove('slide-up');
       percentText.firstChild.classList.add('fade-up');
 
-      // Wait for fade-up to finish
       setTimeout(() => {
-        // Now move container and add new text
         percentage.style.top = position;
         addNewText(value);
-      }, 500); // match fade-up duration
+      }, 500);
     } else {
-      // First time: no fade, just add
       percentage.style.top = position;
       addNewText(value);
     }
@@ -362,7 +364,10 @@ function moveAndChange() {
       preloader.style.display = 'none';
       mainContent.style.display = 'block';
       document.body.style.overflow = 'auto';
-    }, 1000);
+
+    initLenis();
+
+    }, 500);
   }
 }
 
@@ -376,6 +381,23 @@ function addNewText(value) {
 
 moveAndChange();
 </script>
+
+<script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script> 
+<script>
+function initLenis() {
+  const lenis = new Lenis({
+    duration: 1.2,
+    smooth: true
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+</script>
+<script src="newscript.js"></script>
 
 <script>
 function isInViewport(el) {
@@ -398,7 +420,6 @@ window.addEventListener('scroll', triggerAnimations);
 window.addEventListener('load', triggerAnimations);
 </script>
 
-<script src="newscript.js"></script>
 <script src="underline.js"></script>
 
 <script>
@@ -466,13 +487,3 @@ window.addEventListener('load', triggerTextDrop);
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
