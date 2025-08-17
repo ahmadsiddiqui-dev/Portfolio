@@ -145,49 +145,11 @@ document.addEventListener("DOMContentLoaded", function () {
       window.skipExitTransition = true;
 
       if (transition) {
-        transition.style.transition = "none";
-        transition.style.display = "none";
-        transition.style.opacity = "0";
-      }
-
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = "index.html";
-      }
-    });
-  }
-
-  // Modify global exit animation for all links
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; 
-      // Your original exit animation code here
-    });
-  });
-});
-</script> -->
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const closeBtn = document.getElementById("close-popup");
-  const transition = document.getElementById("page-exit-transition");
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // Tell the global handler to skip exit animation
-      window.skipExitTransition = true;
-
-      // Make sure the overlay is fully hidden
-      if (transition) {
         transition.classList.remove("active");
         transition.style.transition = "none";
         transition.style.display = "none";
         transition.style.opacity = "0";
-        transition.style.background = "transparent"; // prevent green flash
+        transition.style.background = "transparent"; 
       }
 
       // Navigate back or fallback
@@ -199,11 +161,73 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Modify global exit animation for all links
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; // <-- block animation after close
-      // your normal exit animation runs here
+      if (window.skipExitTransition) return;
+    });
+  });
+});
+</script>
+ -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const closeBtn = document.getElementById("close-popup");
+  const transition = document.getElementById("page-exit-transition");
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Flag to skip exit transitions
+      window.skipExitTransition = true;
+
+      // Kill transition overlay completely
+      if (transition) {
+        transition.classList.remove("active");
+        transition.style.transition = "none";
+        transition.style.opacity = "0";
+        transition.style.background = "transparent";
+        transition.style.display = "none";
+      }
+
+      // Now go back or redirect
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  }
+
+  // Global exit animation for links
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      // Skip if close button was clicked
+      if (window.skipExitTransition) {
+        e.stopPropagation();
+        return;
+      }
+
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('javascript:') || this.target === "_blank") {
+        return;
+      }
+
+      e.preventDefault();
+
+      if (href.includes("projectpage.html")) {
+        transition.style.backgroundColor = "#464c47";
+      } else {
+        transition.style.backgroundColor = "black";
+      }
+
+      transition.classList.add('active');
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1000);
     });
   });
 });
@@ -212,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
   const transition = document.getElementById('page-exit-transition');
 
-  // Set background color for the current page on load
   const currentPage = window.location.pathname.split("/").pop();
   transition.style.backgroundColor = (currentPage === "projectpage.html") ? "#464c47" : "black";
 
@@ -222,12 +245,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (this.target === "_blank" || this.hasAttribute("target")) return;
 
-      // Skip internal anchors and JS links
+     
       if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
 
       e.preventDefault();
 
-      // Detect if the link is going TO projectpage.html
       if (href.includes("projectpage.html")) {
         transition.style.backgroundColor = "#464c47";
       } else {
@@ -245,12 +267,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script>
   window.addEventListener('pageshow', function(event) {
-  // 'persisted' is true if the page is loaded from the back-forward cache
   const entry = document.getElementById('page-entry-transition');
   const exit = document.getElementById('page-exit-transition');
 
   if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
-    // Hide transition screens
     if (entry) entry.style.display = 'none';
     if (exit) exit.style.display = 'none';
   }
@@ -259,4 +279,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
