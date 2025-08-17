@@ -485,5 +485,76 @@ window.addEventListener('load', triggerTextDrop);
   });
 </script>
 
+<script>
+  (function() {
+  const EXIT_DURATION = 900;
+  const exit = document.getElementById('page-exit-transition');
+  const entry = document.getElementById('page-entry-transition');
+
+  let popupClosing = false; // flag to block pageshow logic
+
+  function disableOverlayTemp() {
+    if (!exit) return;
+    exit.classList.add('bfcache-hidden');
+    exit.classList.remove('active');
+    exit.style.removeProperty('background-color');
+  }
+
+  function enableOverlayReady() {
+    if (!exit) return;
+    if (popupClosing) return; // do not reset overlay while closing popup
+    exit.classList.remove('bfcache-hidden');
+    exit.style.opacity = '0';
+    exit.style.visibility = 'hidden';
+    exit.style.pointerEvents = '';
+    setTimeout(() => {
+      exit.style.removeProperty('opacity');
+      exit.style.removeProperty('visibility');
+    }, 20);
+  }
+
+  // pageshow: hide instantly on bfcache restore, then re-enable
+  window.addEventListener('pageshow', function(event) {
+    if (!exit) return;
+    if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
+      if (!popupClosing) { // only run if popup is NOT closing
+        disableOverlayTemp();
+        window.skipExitTransition = false;
+        requestAnimationFrame(() => setTimeout(enableOverlayReady, 50));
+      }
+    } else {
+      if (!popupClosing) enableOverlayReady();
+      window.skipExitTransition = false;
+    }
+  });
+
+  // Close button: hide popup and overlay, stay on same page
+  const closeBtn = document.getElementById('close-popup');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.skipExitTransition = true;
+      popupClosing = true; // block pageshow logic
+
+      disableOverlayTemp();
+
+      const popup = document.getElementById('popup-content');
+      if (popup) {
+        popup.style.transition = 'opacity 180ms ease';
+        popup.style.opacity = '0';
+        setTimeout(() => {
+          popup.style.display = 'none';
+          popupClosing = false; // reset flag
+        }, 200);
+      } else {
+        popupClosing = false; // reset flag
+      }
+    }, true);
+  }
+})();
+</script>
+
 </body>
 </html>
+
