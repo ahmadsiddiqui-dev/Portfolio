@@ -133,38 +133,6 @@ if (popup) {
 </script>
 
 <!-- <script>
-  document.getElementById("close-popup").addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Tell the animation script to skip
-    window.skipExitTransition = true;
-
-    const transition = document.getElementById("page-exit-transition");
-    if (transition) {
-      transition.style.transition = "none";
-      transition.style.display = "none";
-      transition.style.opacity = "0";
-    }
-
-    // Navigate without triggering exit animation
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-
-  // Modify your global exit animation code
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (window.skipExitTransition) return; // Skip animation for close
-      // Your original exit animation code here
-    });
-  });
-</script> -->
-
-<script>
 document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.getElementById("close-popup");
   const transition = document.getElementById("page-exit-transition");
@@ -198,7 +166,49 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+</script> -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const closeBtn = document.getElementById("close-popup");
+  const transition = document.getElementById("page-exit-transition");
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Tell the global handler to skip exit animation
+      window.skipExitTransition = true;
+
+      // Make sure the overlay is fully hidden
+      if (transition) {
+        transition.classList.remove("active");
+        transition.style.transition = "none";
+        transition.style.display = "none";
+        transition.style.opacity = "0";
+        transition.style.background = "transparent"; // prevent green flash
+      }
+
+      // Navigate back or fallback
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  }
+
+  // Modify global exit animation for all links
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (window.skipExitTransition) return; // <-- block animation after close
+      // your normal exit animation runs here
+    });
+  });
+});
 </script>
+
 <script>
   const transition = document.getElementById('page-exit-transition');
 
@@ -249,3 +259,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
