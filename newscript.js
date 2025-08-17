@@ -1,7 +1,8 @@
 
+
 function isInViewport(el) {
    const rect = el.getBoundingClientRect();
-   return rect.top < window.innerHeight; // triggers as soon as visible
+   return rect.top < window.innerHeight; 
 }
 
 
@@ -19,7 +20,7 @@ window.addEventListener('load', triggerTextDrop);
 
 function isInViewport(el) {
    const rect = el.getBoundingClientRect();
-   return rect.top < window.innerHeight; // triggers as soon as visible
+   return rect.top < window.innerHeight; 
 }
 
   function triggerSpanAppear() {
@@ -34,11 +35,10 @@ function isInViewport(el) {
   window.addEventListener('load', triggerSpanAppear);
 
 
-  //animation for email 
-
+  
 function isInViewport(el) {
    const rect = el.getBoundingClientRect();
-   return rect.top < window.innerHeight; // triggers as soon as visible
+   return rect.top < window.innerHeight; 
 }
 
 
@@ -68,4 +68,68 @@ function handleFooterFadeIn() {
 
 window.addEventListener('scroll', handleFooterFadeIn);
 window.addEventListener('load', handleFooterFadeIn);
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const targets = document.querySelectorAll(".text1");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target.querySelector(".imganimation");
+        const cover = entry.target.querySelector(".imganimations");
+
+       
+        img.style.animation = "scaleImg 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
+        cover.style.animation = "slideIn 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
+
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, { threshold: 0.2 });
+
+  targets.forEach(target => observer.observe(target));
+});
+
+
+
+
+
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".text1").forEach(container => {
+    const img = container.querySelector(".imganimation");
+    const rect = container.getBoundingClientRect();
+
+   
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const progress = rect.top / window.innerHeight;
+
+     
+      const move = progress * -100; 
+
+      img.style.transform = `translateY(${move}px)`;
+    }
+  });
+});
+
+// Initialize Lenis
+const lenis = new Lenis();
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+
+
+
+
+
+
+
+
+
 
