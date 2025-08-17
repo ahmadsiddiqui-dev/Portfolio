@@ -5,7 +5,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
 </head>
-<body class="projectpage" style="background-color: #464c47; color: white;" >
+<body class="projectpage" style="background-color: #464c47; color: white;">
+
     <div id="page-exit-transition"></div>
     <div id="popup-content">
         <span id="close-pop">&times;</span>
@@ -36,18 +37,47 @@
                     <pre class="underdiv">Year                                                                                2025</pre>
                 </div>
             </div> 
-            <div class="image-scroll-wrapper">
+            <div class="image-scroll-wrapper text1">
+                <div class="maindiv333" style="padding: 0%;">
+                <img src="img2.png" alt="" class="imganimationsss" style="padding: 0%;" >
+                <div class="imganimations" style="height: 505.5px; width: 1107px; z-index: 9999999; background-color: #464c47;position: absolute; top:125px; left:710px; padding: 125px 60px 0px 670px;"></div>
+                </div>
                 <div class="maindiv333">
                 <img src="img1.png" alt="">
-                <img src="img2.png" alt="">
+                <div class="maindiv333">
                 <img src="img3.png" alt="">
+                </div>
+                <div class="maindiv333">
                 <img src="img4.png" alt="">
+                </div>
+                <div class="maindiv333">
                 <img src="img5.png" alt="">
+                </div>
+                <div class="maindiv333">
                 <img src="img6.png" alt="">
                 </div>  
             </div> 
         </div>
     </div>
+<script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script> 
+<script src="newscript.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const targets = document.querySelectorAll(".text1");
+
+    targets.forEach(target => {
+      const img = target.querySelector(".imganimationsss");
+      const cover = target.querySelector(".imganimations");
+
+      if (img) {
+        img.style.animation = "scaleImg 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
+      }
+      if (cover) {
+        cover.style.animation = "slideIn 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
+      }
+    });
+  });
+</script>
 
 <script>
 function isInViewport(el) {
@@ -87,20 +117,52 @@ window.addEventListener('scroll', triggerTextDrop);
 window.addEventListener('load', triggerTextDrop);
 </script>
 
+
 <script>
 const popup = document.getElementById('popup-content');
 
 if (popup) {
   window.addEventListener('wheel', function(e) {
-    e.preventDefault(); // Stop default vertical scroll
+    e.preventDefault(); 
     window.scrollBy({
-      left: e.deltaY, // Scroll horizontally based on vertical scroll
+      left: e.deltaY,
       behavior: 'auto'
     });
   }, { passive: false });
 }
 </script>
 
+<!-- <script>
+  document.getElementById("close-popup").addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Tell the animation script to skip
+    window.skipExitTransition = true;
+
+    const transition = document.getElementById("page-exit-transition");
+    if (transition) {
+      transition.style.transition = "none";
+      transition.style.display = "none";
+      transition.style.opacity = "0";
+    }
+
+    // Navigate without triggering exit animation
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  });
+
+  // Modify your global exit animation code
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (window.skipExitTransition) return; // Skip animation for close
+      // Your original exit animation code here
+    });
+  });
+</script> -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -137,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
- <script>
+<script>
   const transition = document.getElementById('page-exit-transition');
 
   // Set background color for the current page on load
@@ -187,14 +249,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
