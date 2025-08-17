@@ -132,7 +132,7 @@ if (popup) {
 }
 </script>
 
-<script>
+<!-- <script>
 document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.getElementById("close-popup");
   const transition = document.getElementById("page-exit-transition");
@@ -193,6 +193,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+</script> -->
+
+<script>
+const closeBtn = document.getElementById('close-popup');
+if (closeBtn) {
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // skip global exit animation
+    window.skipExitTransition = true;
+
+    // hide overlay immediately
+    const exit = document.getElementById('page-exit-transition');
+    if (exit) {
+      exit.classList.remove('active');
+      exit.classList.add('bfcache-hidden'); // keeps it hidden without flashing
+    }
+
+    // fade popup quickly
+    const popup = document.getElementById('popup-content');
+    if (popup) {
+      popup.style.transition = 'opacity 180ms ease';
+      popup.style.opacity = '0';
+      setTimeout(() => {
+        popup.style.display = 'none'; // completely hide after fade
+      }, 200);
+    }
+  }, true);
+}
+
 </script>
 
 <script>
@@ -230,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
