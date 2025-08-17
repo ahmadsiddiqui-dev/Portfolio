@@ -52,50 +52,6 @@
     </div>
     <br><br>
 
-<!-- <div style="display: flex; flex-direction: row; padding: 0%;">
-    <div style="flex: 1;">
-        <div class="div10" style="padding: 0%; padding-bottom: 20px; padding-top: 100px">
-          <a href="projectpage.html">
-            <div class="textemail"  style="display: flex; font-size: 125px; font-weight: 500; ">
-                <span class="spanemail" style="line-height: 1;">a</span>
-                <span class="spanemail" style="line-height: 1;">h</span>
-                <span class="spanemail" style="line-height: 1;">m</span>
-                <span class="spanemail" style="line-height: 1;">a</span>
-                <span class="spanemail" style="line-height: 1;">d</span>
-            </div>
-             <div class="textemail" style="display: flex; font-size: 125px; font-weight: 500;">
-                <span class="spanemail" style="line-height: 1;">s</span>
-                <span class="spanemail" style="line-height: 1;">i</span>
-                <span class="spanemail" style="line-height: 1;">d</span>
-                <span class="spanemail" style="line-height: 1;">d</span>
-                <span class="spanemail" style="line-height: 1;">i</span>
-                <span class="spanemail" style="line-height: 1;">q</span>
-                <span class="spanemail" style="line-height: 1;">u</span>
-                <span class="spanemail" style="line-height: 1;">i</span>
-            </div> 
-            </a>
-        </div>
-        <div class="divd1" style=" font-size: 40px; padding-left: 150px; padding-top: 15px;">
-      <div class="drop-wrap"><p class="drop-text1">PORTFOLIO &#169;2025</p></div>
-  </div>
-        <div class="divd1" style=" padding-left: 1px; flex-direction: column; padding-top: 150px; padding-bottom: 400px;">
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">A personal portfolio website designed and </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">developed using HTML, CSS, and JavaScript.</p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">It showcases my work, skills, and interests</p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">through a clean, responsive interface. The  </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">site features interactive sections such as </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">project galleries, a smooth scroll experience, </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">and tab-based content transitions. </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">JavaScript handles the dynamic behavior </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">and enhances user experience, while </p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">CSS ensures modern styling and layout</p></div>
-              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">consistency across devices.</p></div>
-        </div>
-    </div>
-    <div style="flex: 1; padding-top: 106px; padding-right: 30px;">
-        <img src="port2.jpg" alt="" class="portimage">
-    </div>
-</div> -->
 <div style="display: flex; flex-direction: row; padding: 0%; padding-bottom: 200px; padding-left: 20px;">
     <div class="left" style="flex: 1; position: sticky; top: 0px; ">
         <div class="div10" style="padding-bottom: 20px; padding-top: 50px;">
@@ -194,7 +150,7 @@
 
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
-  return rect.top < window.innerHeight; // triggers as soon as visible
+  return rect.top < window.innerHeight; 
 }
 
   function triggerAnimations() {
@@ -219,7 +175,7 @@ window.addEventListener('load', triggerAnimations);
 
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
-  return rect.top < window.innerHeight; // triggers as soon as visible
+  return rect.top < window.innerHeight;
 }
 
   // Add class when visible
@@ -231,7 +187,6 @@ function isInViewport(el) {
     });
 }
 
-  // Run on scroll and page load
 window.addEventListener('scroll', triggerTextDrop);
 window.addEventListener('load', triggerTextDrop);
 
@@ -254,69 +209,32 @@ window.addEventListener('load', triggerTextDrop);
   });
 </script>
 
-
-<!-- <script>
-  const transition = document.getElementById('page-exit-transition');
-
-  // Set background color for the current page on load
-  const currentPage = window.location.pathname.split("/").pop();
-  transition.style.backgroundColor = (currentPage === "projectpage.html") ? "#464c47" : "black";
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-
-      if (this.target === "_blank" || this.hasAttribute("target")) return;
-
-      // Skip internal anchors and JS links
-      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
-
-      e.preventDefault();
-
-      // Detect if the link is going TO projectpage.html
-      if (href.includes("projectpage.html")) {
-        transition.style.backgroundColor = "#464c47";
-      } else {
-        transition.style.backgroundColor = "black";
-      }
-
-      transition.classList.add('active');
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 1000);
-    });
-  });
-</script> -->
 <script>
   const transition = document.getElementById('page-exit-transition');
 
-  // Set background color for the current page on load
   const currentPage = window.location.pathname.split("/").pop();
   transition.style.backgroundColor = (currentPage === "projectpage.html") ? "#464c47" : "black";
 
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
-      // ✅ Skip transition if closing popup or going back
+      
       if (window.skipExitTransition) {
         if (transition) {
           transition.style.transition = "none";
           transition.style.opacity = "0";
           transition.style.display = "none";
         }
-        return; // stop here
+        return; 
       }
 
       const href = this.getAttribute('href');
 
       if (this.target === "_blank" || this.hasAttribute("target")) return;
 
-      // Skip internal anchors and JS links
       if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
 
       e.preventDefault();
 
-      // Detect if the link is going TO projectpage.html
       if (href.includes("projectpage.html")) {
         transition.style.backgroundColor = "#464c47";
       } else {
@@ -331,7 +249,18 @@ window.addEventListener('load', triggerTextDrop);
     });
   });
 </script>
+<script>
+  window.addEventListener('pageshow', function(event) {
+  const entry = document.getElementById('page-entry-transition');
+  const exit = document.getElementById('page-exit-transition');
 
+  if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
+    if (entry) entry.style.display = 'none';
+    if (exit) exit.style.display = 'none';
+  }
+});
+</script>
 
 </body>
 </html>
+
