@@ -461,12 +461,11 @@ span:nth-of-type(16){
 
 }
 
-.portimage{
-    height: 900px;
-    width: 875px;
-    padding-left:120px;
-    padding-top: 30px;
-    padding-right: 16px;
+.portimage {
+  height: 900px;
+  width: 860px;
+  padding-left: 170px;
+  padding-top: 30px;
 }
 #portdetails{
     font-size: 20px;
@@ -1425,5 +1424,6 @@ footer{
 p{
   padding: 0%;
 }
+
 
 
