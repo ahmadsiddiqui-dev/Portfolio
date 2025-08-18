@@ -314,7 +314,7 @@ span:nth-of-type(16){
     display: grid;
     gap: 50px;
     overflow: visible; 
-    padding-top: 300px;
+    padding-top: 400px;
     padding-left: 0%;
     padding-bottom: 300px;
 }
@@ -1033,7 +1033,7 @@ footer.in-view {
       padding: 0%;
       overflow: hidden;
       position: absolute;
-      right: 100px;
+      right: 90px;
       font-weight: 500;
       font-size: 130px;
       line-height: 0.8;
@@ -1425,4 +1425,5 @@ footer{
 p{
   padding: 0%;
 }
+
 
