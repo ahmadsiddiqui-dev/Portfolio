@@ -325,6 +325,9 @@
 </footer>
 
 <script>
+
+document.body.style.overflow = "hidden";
+
 const percentage = document.getElementById('percentage');
 const percentText = document.getElementById('percentText');
 const preloader = document.getElementById('preloader');
@@ -363,10 +366,10 @@ function moveAndChange() {
     setTimeout(() => {
       preloader.style.display = 'none';
       mainContent.style.display = 'block';
+
       document.body.style.overflow = 'auto';
 
-    initLenis();
-
+      // initLenis();
     }, 500);
   }
 }
@@ -380,6 +383,7 @@ function addNewText(value) {
 }
 
 moveAndChange();
+
 </script>
 
 <script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script> 
@@ -557,4 +561,5 @@ window.addEventListener('load', triggerTextDrop);
 
 </body>
 </html>
+
 
