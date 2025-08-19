@@ -341,11 +341,11 @@ const sequence = [
   { value: 100, position: '10vh' },
 ];
 
-let i = 0;
+let j = 0;
 
 function moveAndChange() {
-  if (i < sequence.length) {
-    const { value, position } = sequence[i];
+  if (j < sequence.length) {
+    const { value, position } = sequence[j];
 
     if (percentText.firstChild) {
       percentText.firstChild.classList.remove('slide-up');
@@ -360,7 +360,7 @@ function moveAndChange() {
       addNewText(value);
     }
 
-    i++;
+    j++;
     setTimeout(moveAndChange, 1500);
   } else {
     preloader.style.transform = 'translateY(-100%)';
@@ -474,6 +474,10 @@ window.addEventListener('load', triggerTextDrop);
 
       if (href.split("/").pop() === currentPage) {
         e.preventDefault();
+          lenis.scrollTo(0, {
+            duration: 1.8,
+            easing: (t) => -(Math.cos(Math.PI * t) - 1) / 2
+          });
         return;
       }
 
@@ -568,6 +572,7 @@ window.addEventListener('load', triggerTextDrop);
 
 </body>
 </html>
+
 
 
 
