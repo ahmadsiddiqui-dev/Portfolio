@@ -393,6 +393,12 @@ function isInViewport(el) {
       
       if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
 
+        if (href.split("/").pop() === currentPage) {
+        e.preventDefault();
+        return;
+      }
+
+
       e.preventDefault();
 
       if (href.includes("projectpage.html")) {
@@ -482,6 +488,7 @@ function isInViewport(el) {
 
 </body>
 </html>
+
 
 
 
