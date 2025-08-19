@@ -538,8 +538,7 @@ span:nth-of-type(16) {
 .div9 {
   display: flex;
   overflow: hidden;
-  justify-content: left;
-  align-items: flex-end;
+  align-items: flex-start;
   font-size: 22px;
   gap: 370px;
   font-weight: 500;
@@ -1395,4 +1394,5 @@ footer.in-view {
 p {
   padding: 0%;
 }
+
 
