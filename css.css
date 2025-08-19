@@ -467,7 +467,6 @@ span:nth-of-type(16) {
   height: 900px;
   width: 860px;
   padding-left: 170px;
-  padding-top: 30px;
 }
 #portdetails {
   font-size: 20px;
@@ -1396,3 +1395,4 @@ footer.in-view {
 p {
   padding: 0%;
 }
+
