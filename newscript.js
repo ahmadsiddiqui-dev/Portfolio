@@ -1,8 +1,8 @@
 
 
 function isInViewport(el) {
-   const rect = el.getBoundingClientRect();
-   return rect.top < window.innerHeight; 
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight;
 }
 
 
@@ -19,26 +19,26 @@ window.addEventListener('load', triggerTextDrop);
 
 
 function isInViewport(el) {
-   const rect = el.getBoundingClientRect();
-   return rect.top < window.innerHeight; 
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight;
 }
 
-  function triggerSpanAppear() {
-    document.querySelectorAll('.text span').forEach(span => {
-      if (isInViewport(span) && !span.classList.contains('appear')) {
-        span.classList.add('appear');
-      }
-    });
-  }
+function triggerSpanAppear() {
+  document.querySelectorAll('.text span').forEach(span => {
+    if (isInViewport(span) && !span.classList.contains('appear')) {
+      span.classList.add('appear');
+    }
+  });
+}
 
-  window.addEventListener('scroll', triggerSpanAppear);
-  window.addEventListener('load', triggerSpanAppear);
+window.addEventListener('scroll', triggerSpanAppear);
+window.addEventListener('load', triggerSpanAppear);
 
 
-  
+
 function isInViewport(el) {
-   const rect = el.getBoundingClientRect();
-   return rect.top < window.innerHeight; 
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight;
 }
 
 
@@ -80,11 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = entry.target.querySelector(".imganimation");
         const cover = entry.target.querySelector(".imganimations");
 
-       
-        img.style.animation = "scaleImg 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
+
+        // img.style.animation = "scaleImg 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
         cover.style.animation = "slideIn 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
 
-        observer.unobserve(entry.target); 
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
@@ -94,42 +94,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".text1").forEach(container => {
-    const img = container.querySelector(".imganimation");
-    const rect = container.getBoundingClientRect();
-
-   
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      const progress = rect.top / window.innerHeight;
-
-     
-      const move = progress * -100; 
-
-      img.style.transform = `translateY(${move}px)`;
-    }
-  });
-});
-
-// Initialize Lenis
+// ✅ Initialize Lenis
 const lenis = new Lenis();
+window.lenis = lenis;
 
 function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
-
 requestAnimationFrame(raf);
 
 
 
 
+window.addEventListener("scroll", function () {
+  document.querySelectorAll(".text1").forEach(section => {
+    let img = section.querySelector(".imganimation");
+    let rect = section.getBoundingClientRect();
+
+    let progress = rect.top / window.innerHeight;
+
+    img.style.transform = `translateY(${progress * -100}px)`;
+  });
+});
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const targets = document.querySelectorAll(".text1");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target.querySelector(".imganimationhome");
 
 
+        img.style.animation = "scaleImg 1.5s cubic-bezier(1, 0.2, 0.2, 1) forwards";
 
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
 
+  targets.forEach(target => observer.observe(target));
+});
