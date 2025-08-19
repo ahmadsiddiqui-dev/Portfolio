@@ -195,6 +195,10 @@ function isInViewport(el) {
 
        if (href.split("/").pop() === currentPage) {
         e.preventDefault();
+           lenis.scrollTo(0, {
+            duration: 1.8,
+            easing: (t) => -(Math.cos(Math.PI * t) - 1) / 2
+          });
         return;
       }
 
@@ -231,4 +235,5 @@ function isInViewport(el) {
 </script>
 </body>
 </html>
+
 
