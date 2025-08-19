@@ -118,6 +118,16 @@ window.addEventListener("scroll", function () {
   });
 });
 
+window.addEventListener("scroll", function () {
+  document.querySelectorAll(".img-container").forEach(section => {
+    let img = section.querySelector(".portimage");
+    let rect = section.getBoundingClientRect();
+
+    let progress = rect.top / window.innerHeight;
+
+    img.style.transform = `translateY(${progress * -200}px)`;
+  });
+});
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -138,3 +148,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   targets.forEach(target => observer.observe(target));
 });
+
