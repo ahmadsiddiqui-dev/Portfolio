@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Ahmad Siddiqui</title>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
@@ -52,6 +52,50 @@
     </div>
     <br><br>
 
+<!-- <div style="display: flex; flex-direction: row; padding: 0%;">
+    <div style="flex: 1;">
+        <div class="div10" style="padding: 0%; padding-bottom: 20px; padding-top: 100px">
+          <a href="projectpage.html">
+            <div class="textemail"  style="display: flex; font-size: 125px; font-weight: 500; ">
+                <span class="spanemail" style="line-height: 1;">a</span>
+                <span class="spanemail" style="line-height: 1;">h</span>
+                <span class="spanemail" style="line-height: 1;">m</span>
+                <span class="spanemail" style="line-height: 1;">a</span>
+                <span class="spanemail" style="line-height: 1;">d</span>
+            </div>
+             <div class="textemail" style="display: flex; font-size: 125px; font-weight: 500;">
+                <span class="spanemail" style="line-height: 1;">s</span>
+                <span class="spanemail" style="line-height: 1;">i</span>
+                <span class="spanemail" style="line-height: 1;">d</span>
+                <span class="spanemail" style="line-height: 1;">d</span>
+                <span class="spanemail" style="line-height: 1;">i</span>
+                <span class="spanemail" style="line-height: 1;">q</span>
+                <span class="spanemail" style="line-height: 1;">u</span>
+                <span class="spanemail" style="line-height: 1;">i</span>
+            </div> 
+            </a>
+        </div>
+        <div class="divd1" style=" font-size: 40px; padding-left: 150px; padding-top: 15px;">
+      <div class="drop-wrap"><p class="drop-text1">PORTFOLIO &#169;2025</p></div>
+  </div>
+        <div class="divd1" style=" padding-left: 1px; flex-direction: column; padding-top: 150px; padding-bottom: 400px;">
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">A personal portfolio website designed and </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">developed using HTML, CSS, and JavaScript.</p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">It showcases my work, skills, and interests</p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">through a clean, responsive interface. The  </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">site features interactive sections such as </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">project galleries, a smooth scroll experience, </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">and tab-based content transitions. </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">JavaScript handles the dynamic behavior </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">and enhances user experience, while </p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">CSS ensures modern styling and layout</p></div>
+              <div class="drop-wrap"><p class="drop-text1" style="font-size: 22px; padding-left: 0%;">consistency across devices.</p></div>
+        </div>
+    </div>
+    <div style="flex: 1; padding-top: 106px; padding-right: 30px;">
+        <img src="port2.jpg" alt="" class="portimage">
+    </div>
+</div> -->
 <div style="display: flex; flex-direction: row; padding: 0%; padding-bottom: 200px; padding-left: 20px;">
     <div class="left" style="flex: 1; position: sticky; top: 0px; ">
         <div class="div10" style="padding-bottom: 20px; padding-top: 50px;">
@@ -144,13 +188,13 @@
         <p>Development Ahmad Siddiqui</p>
     </div>
 </footer>
-<script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script> 
+<script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script>
 
 <script>
 
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
-  return rect.top < window.innerHeight; 
+  return rect.top < window.innerHeight; // triggers as soon as visible
 }
 
   function triggerAnimations() {
@@ -175,7 +219,7 @@ window.addEventListener('load', triggerAnimations);
 
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
-  return rect.top < window.innerHeight;
+  return rect.top < window.innerHeight; // triggers as soon as visible
 }
 
   // Add class when visible
@@ -217,7 +261,7 @@ window.addEventListener('load', triggerTextDrop);
 
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
-      
+
       if (window.skipExitTransition) {
         if (transition) {
           transition.style.transition = "none";
@@ -233,15 +277,14 @@ window.addEventListener('load', triggerTextDrop);
 
       if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
 
-      if (href.split("/").pop() === currentPage) {
+       if (href.split("/").pop() === currentPage) {
         e.preventDefault();
-          lenis.scrollTo(0, {
+        lenis.scrollTo(0, {
             duration: 1.8,
             easing: (t) => -(Math.cos(Math.PI * t) - 1) / 2
           });
         return;
       }
-
 
       e.preventDefault();
 
@@ -259,107 +302,21 @@ window.addEventListener('load', triggerTextDrop);
     });
   });
 </script>
-<!-- 
-<script>
-(function() {
-  const EXIT_DURATION = 900; 
-  const exit = document.getElementById('page-exit-transition');
-  const entry = document.getElementById('page-entry-transition');
 
-  function disableOverlayTemp() {
-    if (!exit) return;
-    exit.classList.add('bfcache-hidden');
-    exit.classList.remove('active');
-    exit.style.removeProperty('background-color');
-  }
-
-  function enableOverlayReady() {
-    if (!exit) return;
-    exit.classList.remove('bfcache-hidden');
-
-    exit.style.opacity = '0';
-    exit.style.visibility = 'hidden';
-    exit.style.pointerEvents = '';
-   
-    setTimeout(() => {
-      exit.style.removeProperty('opacity');
-      exit.style.removeProperty('visibility');
-    }, 20);
-  }
-
+<!-- <script>
   window.addEventListener('pageshow', function(event) {
-    if (!exit) return;
-    if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
-      disableOverlayTemp();
-      window.skipExitTransition = false; 
-      requestAnimationFrame(() => setTimeout(enableOverlayReady, 50));
-    } else {
-      // normal load
-      enableOverlayReady();
-      window.skipExitTransition = false;
-    }
-  });
+  // 'persisted' is true if the page is loaded from the back-forward cache
+  const entry = document.getElementById('page-entry-transition');
+  const exit = document.getElementById('page-exit-transition');
 
-  document.addEventListener('click', function(e) {
-    const a = e.target.closest('a[href]');
-    if (!a) return;
-
-    
-    const href = a.getAttribute('href') || '';
-    if (a.target === '_blank' || a.hasAttribute('download') || href.startsWith('#') || href.startsWith('javascript:')) return;
-    if (window.skipExitTransition) return;
-
-    e.preventDefault();
-
- 
-    const bg = href.includes('projectpage.html') ? '#464c47' : 'black';
-    if (exit) {
-      exit.style.setProperty('--exit-bg', bg);
-      exit.style.backgroundColor = bg;
-      exit.classList.remove('bfcache-hidden');
-    
-      void exit.offsetWidth;
-      exit.classList.add('active');
-    }
-
-    setTimeout(() => {
-      window.location.href = href;
-    }, EXIT_DURATION);
-  }, true);
-
-  const closeBtn = document.getElementById('close-popup');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.skipExitTransition = true;   
-        
-      disableOverlayTemp();
-
-      const popup = document.getElementById('popup-content');
-      if (popup) {
-        popup.style.transition = 'opacity 180ms ease';
-        popup.style.opacity = '0';
-        setTimeout(() => {
-          if (window.history.length > 1) window.history.back();
-          else window.location.href = 'index.html';
-        }, 220);
-      } else {
-        if (window.history.length > 1) window.history.back();
-        else window.location.href = 'index.html';
-      }
-    }, true);
+  if (event.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward') {
+    // Hide transition screens
+    if (entry) entry.style.display = 'none';
+    if (exit) exit.style.display = 'none';
   }
-
-  document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible' && exit) {
-      exit.classList.remove('active');
-      exit.classList.remove('bfcache-hidden');
-      setTimeout(() => exit.style.removeProperty('display'), 50);
-    }
-  });
-})();
+});
 </script> -->
+
 <script>
   (function() {
   const EXIT_DURATION = 900;
@@ -430,12 +387,5 @@ window.addEventListener('load', triggerTextDrop);
 })();
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
