@@ -1,2 +1,2 @@
 # Portfolio
-My Portfolio using HTML  / CSS  / JAVASCRIPT
+My Portfolio developed using HTML  / CSS  / JAVASCRIPT
