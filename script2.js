@@ -1,5 +1,5 @@
 const track = document.getElementById("headTrack");
-const headings = ["GYM","TRAVELLING","MUSIC"];
+const headings = ["GYM","MUSIC","TRAVELLING"];
 
 const REPEATS = 10; // more repeats for infinite feel
 let tabs;
@@ -105,3 +105,4 @@ const observer = new IntersectionObserver((entries, obs)=>{
 },{threshold:0.3});
 
 observer.observe(headingSection);
+
