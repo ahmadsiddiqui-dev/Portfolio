@@ -61,7 +61,7 @@
     }
     .text-content {
       position:absolute;
-      top:300; left:0;
+      top:350; left:0;
       width:100%;
       opacity:0;
       transition:opacity .5s ease;
@@ -85,4 +85,5 @@
     .imageaboutab img.active {
       opacity:1;
       transform:scale(1);
+
     }
