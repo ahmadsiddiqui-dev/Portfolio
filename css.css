@@ -284,7 +284,7 @@ span:nth-of-type(16) { animation-delay: 0.56s; }
   display: grid;
   gap: 50px;
   overflow: visible;
-  padding-top: 400px;
+  padding-top: 450px;
   padding-left: 0%;
   padding-bottom: 300px;
 }
@@ -1377,6 +1377,7 @@ footer.in-view {
 p {
   padding: 0%;
 }
+
 
 
 
