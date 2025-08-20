@@ -10,7 +10,7 @@
     .head-item {
       font-size:125px;
       font-weight:500;
-      padding: 0px 150px 5px 0px;
+      padding: 0px 120px 5px 0px;
       color:#bbb;
       cursor:pointer;
       white-space:nowrap;
@@ -87,4 +87,5 @@
       transform:scale(1);
 
     }
+
 
