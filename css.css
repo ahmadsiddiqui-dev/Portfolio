@@ -1096,7 +1096,7 @@ footer.in-view {
 }
 
 .underdiv {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.449);
   padding: 20px;
   padding-left: 0%;
   width: 530px;
@@ -1290,4 +1290,5 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
