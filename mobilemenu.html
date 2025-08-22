@@ -1,0 +1,308 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 0%;
+            letter-spacing: -5px;
+            
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+       .text {
+  position: relative;
+}
+span.appear {
+  animation-name: appear;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.62,0.05,0.01,0.99);;
+  animation-fill-mode: forwards;
+}
+@keyframes appear {
+  from {
+
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text a {
+  position: relative;
+  display: inline-block;
+  color: white;
+}
+
+.text a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 0;
+  background: rgb(255, 255, 255);
+  transition: all 1s cubic-bezier(0.5, 0.1, 0, 1);
+  transition-delay: 1.2s;
+}
+
+.text a.active::after {
+  width: 105%;
+}
+    </style>
+</head>
+
+<body style="background-color: #464c47; padding: 0%; color: white;">
+    <div id="page-exit-transition"></div>
+    <header style="color: white; opacity: 1; animation: fadeIn 1s ease-in-out forwards;">
+        <div  style="color: white; opacity: 1;">
+            <a href="index.html" style="letter-spacing: 0; color: white; position: fixed; left: 20px; top: 30px; opacity: 1;">Ahmad Siddiqui</a>
+        </div>
+        <span id="close-pop">&times;</span>
+        <button class="" id="close-popup" style="right: 20px; top: 30px; font-size: 22px;">Close</button>
+    </header>
+    <div style="padding: 0%; display: flex; flex-direction: column; position: absolute; bottom: 30px; gap: 50px;">
+        <div style="padding: 0%;">
+            <div class="text letterspace" style="padding: 0; font-size: 55px;">
+                <a href="index.html" s>
+                    <span>H</span>
+                    <span>0</span>
+                    <span>M</span>
+                    <span>E</span>
+                </a>
+            </div>
+            <div class="text" style="padding: 0; font-size: 55px;">
+                <a href="work.html">
+                    <span>W</span>
+                    <span>O</span>
+                    <span>R</span>
+                    <span>K</span>
+                </a>
+            </div>
+            <div class="text" style="padding: 0; font-size: 55px;">
+                <a href="about.html">
+                    <span>A</span>
+                    <span>B</span>
+                    <span>O</span>
+                    <span>U</span>
+                    <span>T</span>
+                </a>
+            </div>
+            <div class="text" style="padding:0; font-size: 55px;">
+                <a href="contact.html">
+                    <span>C</span>
+                    <span>O</span>
+                    <span>N</span>
+                    <span>T</span>
+                    <span>A</span>
+                    <span>C</span>
+                    <span>T</span>
+                </a>
+            </div>
+        </div>
+        <div
+            style="padding: 0%; display: flex; flex-direction: column; gap: 20px; font-size: 22px; font-weight: 500; animation: fadeIn 1.5s ease-in-out forwards;">
+            <div style="padding-top: 40px; padding: 0%">
+                <p style="padding: 0%;">UI/UX <br> Designer </p>
+            </div>
+            <div style=" padding: 0%;">
+                <p style="padding: 0%;">Based in <br> Rampur India</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function isInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight;
+        }
+
+        function triggerSpanAppear() {
+            document.querySelectorAll('.text span').forEach(span => {
+                if (isInViewport(span) && !span.classList.contains('appear')) {
+                    span.classList.add('appear');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', triggerSpanAppear);
+        window.addEventListener('load', triggerSpanAppear);
+    </script>
+    <script>
+        const transition = document.getElementById('page-exit-transition');
+
+        const currentPage = window.location.pathname.split("/").pop();
+        transition.style.backgroundColor = (currentPage === "projectpage.html") ? "#464c47" : "black";
+
+        document.querySelectorAll('a[href]').forEach(link => {
+            link.addEventListener('click', function (e) {
+
+                if (window.skipExitTransition) {
+                    if (transition) {
+                        transition.style.transition = "none";
+                        transition.style.opacity = "0";
+                        transition.style.display = "none";
+                    }
+                    return;
+                }
+
+                const href = this.getAttribute('href');
+
+                if (this.target === "_blank" || this.hasAttribute("target")) return;
+
+                if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+
+                if (href.split("/").pop() === currentPage) {
+                    e.preventDefault();
+                    lenis.scrollTo(0, {
+                        duration: 1.8,
+                        easing: (t) => -(Math.cos(Math.PI * t) - 1) / 2
+                    });
+                    return;
+                }
+
+                e.preventDefault();
+
+                if (href.includes("projectpage.html")) {
+                    transition.style.backgroundColor = "#464c47";
+                } else {
+                    transition.style.backgroundColor = "black";
+                }
+
+                transition.classList.add('active');
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 1000);
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const closeBtn = document.getElementById("close-popup");
+            const transition = document.getElementById("page-exit-transition");
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Tell the global handler to skip exit animation
+                    window.skipExitTransition = true;
+
+                    // Make sure the overlay is fully hidden
+                    if (transition) {
+                        transition.classList.remove("active");
+                        transition.style.transition = "none";
+                        transition.style.display = "none";
+                        transition.style.opacity = "0";
+                        transition.style.background = "transparent"; // prevent green flash
+                    }
+
+                    // Navigate back or fallback
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = "index.html";
+                    }
+                });
+            }
+
+            // Modify global exit animation for all links
+            document.querySelectorAll('a[href]').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    if (window.skipExitTransition) return; // <-- block animation after close
+                    // your normal exit animation runs here
+                });
+            });
+        });
+    </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const links = Array.from(document.querySelectorAll(".text a"));
+  if (!links.length) return;
+
+  // Reset state
+  links.forEach(a => a.classList.remove("active"));
+
+  // 1) sessionStorage
+  let from = sessionStorage.getItem("fromPage");
+
+  // 2) URL query param
+  if (!from) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("from")) from = params.get("from");
+  }
+
+  // 3) Referrer fallback
+  if (!from && document.referrer) {
+    try {
+      const ref = new URL(document.referrer);
+      const file = ref.pathname.split("/").pop() || "index.html";
+      from = file.replace(/\.html$/i, "").toLowerCase();
+    } catch (e) {}
+  }
+
+  // 4) If still no "from", use current page filename
+  if (!from) {
+    let cur = (location.pathname.split("/").pop() || "index.html");
+    from = cur.replace(/\.html$/i, "").toLowerCase();
+  }
+
+  // Normalize
+  from = from.toLowerCase();
+  if (from.endsWith(".html")) from = from.replace(/\.html$/i, "");
+
+  // Map
+  const map = {
+    index: "index.html",
+    work:  "work.html",
+    about: "about.html",
+    contact: "contact.html"
+  };
+
+  const target = map[from];
+  if (!target) return;
+
+  // Find matching link
+  const link = links.find(a => {
+    const h = (a.getAttribute("href") || "").toLowerCase();
+    return h.endsWith(target) || h.includes(target);
+  });
+
+  if (link) {
+    // --- Restart underline animation (your original underline logic) ---
+    links.forEach(a => a.classList.remove("active"));
+    void link.offsetWidth; // force reflow
+    setTimeout(() => link.classList.add("active"), 300);
+
+    // --- Disable link click (your disable logic for all pages) ---
+    if (from === "index" || from === "work" || from === "about" || from === "contact") {
+      link.style.pointerEvents = "none";
+      link.style.cursor = "default";
+    }
+  }
+});
+</script>
+
+
+</body>
+
+</html>
