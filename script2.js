@@ -1,3 +1,4 @@
+
 const track = document.getElementById("headTrack");
 const headings = ["GYM","MUSIC","TRAVELLING"];
 
@@ -6,7 +7,9 @@ let tabs;
 
 function buildTrack() {
   const frag = document.createDocumentFragment();
-  for (let r = 0; r < REPEATS; r++) {
+  const repeats = window.innerWidth <= 768 ? 1 : REPEATS; // 👈 mobile = 1 repeat
+
+  for (let r = 0; r < repeats; r++) {
     headings.forEach((txt, idx) => {
       const div = document.createElement("div");
       div.className = "head-item";
@@ -88,8 +91,12 @@ track.addEventListener("transitionend", ()=>{
   }
 });
 
-// Init
-activate(activeIdx);
+// ==== Init (desktop vs mobile) ====
+if (window.innerWidth <= 768) {
+  activate(0); // mobile
+} else {
+  activate(activeIdx); // desktop
+}
 
 // ==== Animate letters ONCE when in viewport ====
 const headingSection = document.getElementById("headingSection");
@@ -105,4 +112,3 @@ const observer = new IntersectionObserver((entries, obs)=>{
 },{threshold:0.3});
 
 observer.observe(headingSection);
-
