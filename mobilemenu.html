@@ -193,7 +193,7 @@ span.appear {
         });
     </script>
 
-    <script>
+<!--     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const closeBtn = document.getElementById("close-popup");
             const transition = document.getElementById("page-exit-transition");
@@ -232,7 +232,53 @@ span.appear {
                 });
             });
         });
-    </script>
+    </script> -->
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const closeBtn = document.getElementById("close-popup");
+    const transition = document.getElementById("page-exit-transition");
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Skip exit transition globally
+            window.skipExitTransition = true;
+
+            // Fully kill transition overlay
+            if (transition) {
+                transition.classList.remove("active");
+                transition.style.cssText = `
+                    transition: none !important;
+                    display: none !important;
+                    opacity: 0 !important;
+                    background: transparent !important;
+                `;
+            }
+
+            // Delay navigation slightly to guarantee overlay is gone
+            setTimeout(() => {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = "index.html";
+                }
+            }, 50);
+        });
+    }
+
+    // Apply global exit animation for all links
+    document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', function (e) {
+            if (window.skipExitTransition) return; // block animation after close
+            // your normal exit animation logic goes here
+        });
+    });
+});
+</script>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -304,5 +350,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </body>
+
 
 </html>
