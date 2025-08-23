@@ -137,6 +137,7 @@
     flex-direction: column;
     justify-content: left;
     text-align: left;
+    padding-top: 0;
   }
   .forcontactinsta {
     display: flex;
@@ -159,7 +160,7 @@
     font-weight: 100 !important;
     height: auto;
     padding-bottom: 20px;
-    padding-top: 230px;
+    padding-top: 170px;
   }
 
   #page-exit-transition {
@@ -641,3 +642,4 @@
  margin-left: 5px;
 
 }
+
