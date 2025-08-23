@@ -360,9 +360,15 @@
         }, 500); // after fade completes (0.2s + buffer)
       });
     </script>
-    <script>
-      sessionStorage.setItem("fromPage", "contact");
-    </script>
+   <script>
+  window.skipExitTransition = false;
+  if (sessionStorage.getItem("skipOnce") === "true") {
+    window.skipExitTransition = true;
+    sessionStorage.removeItem("skipOnce");
+  }
+</script>
+
   </body>
 </html>
+
 
