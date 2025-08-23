@@ -608,6 +608,21 @@ span:nth-of-type(16) {
 .spanemail:nth-of-type(13) {
   animation-delay: 0.96s;
 }
+.spanemail:nth-of-type(14) {
+  animation-delay: 1.04s;
+}
+.spanemail:nth-of-type(15) {
+  animation-delay: 1.12s;
+}
+.spanemail:nth-of-type(16) {
+  animation-delay: 1.20s;
+}
+.spanemail:nth-of-type(17) {
+  animation-delay: 1.28s;
+}
+.spanemail:nth-of-type(18) {
+  animation-delay: 1.36s;
+}
 
 footer {
   height: 30px;
@@ -794,7 +809,7 @@ footer.in-view {
   width: 0;
   background-color: #000;
   transition: all 1s cubic-bezier(0.5, 0.1, 0, 1);
-  transition-delay: 1.2s;
+  transition-delay: 1.5s;
 }
 
 .textemail.underline-in::after {
@@ -1290,5 +1305,6 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
