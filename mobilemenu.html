@@ -212,39 +212,45 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const closeBtn = document.getElementById("close-popup");
-    const transition = document.getElementById("page-exit-transition");
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const closeBtn = document.getElementById("close-popup");
+        const transition = document.getElementById("page-exit-transition");
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-        // Tell other scripts not to run exit animation on next navigation
-        window.skipExitTransition = true;
-        sessionStorage.setItem("skipOnce", "true");
+            // Tell the global handler to skip exit animation
+            window.skipExitTransition = true;
 
-        // Kill any active transition styles
-        if (transition) {
-          transition.classList.remove("active");
-          transition.style.transition = "none";
-          transition.style.display = "none";
-          transition.style.opacity = "0";
-          transition.style.background = "transparent";
+            // Make sure the overlay is fully hidden
+            if (transition) {
+              transition.classList.remove("active");
+              transition.style.transition = "none";
+              transition.style.display = "none";
+              transition.style.opacity = "0";
+              transition.style.background = "transparent";
+            }
+
+            // Navigate back or fallback
+            if (window.history.length > 1) {
+              window.history.back();
+            } else {
+              window.location.href = "index.html";
+            }
+          });
         }
 
-        // Navigate back or fallback
-        if (window.history.length > 1) {
-          window.history.back();
-        } else {
-          window.location.href = "index.html";
-        }
+        // Modify global exit animation for all links
+        document.querySelectorAll('a[href]').forEach(link => {
+          link.addEventListener('click', function (e) {
+            if (window.skipExitTransition) return; 
+          });
+        });
       });
-    }
-  });
-</script>
+    </script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -319,6 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
