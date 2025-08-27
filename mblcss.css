@@ -160,7 +160,11 @@
     font-weight: 100 !important;
     height: auto;
     padding-bottom: 20px;
-    padding-top: 170px;
+    padding-top: 150px;
+  }
+
+   .footercontact{
+    padding-top: 200px;
   }
 
   #page-exit-transition {
@@ -642,4 +646,5 @@
  margin-left: 5px;
 
 }
+
 
