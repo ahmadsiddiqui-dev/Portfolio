@@ -626,7 +626,7 @@ span:nth-of-type(16) {
 
 footer {
   height: 30px;
-  padding-top: 170px;
+  padding-top: 200px;
   padding-bottom: 80px;
   padding-right: 55px;
   margin: 0px;
@@ -727,7 +727,7 @@ footer.in-view {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 40px;
+  padding-top: 80px;
 }
 
 .forcontactinsta {
@@ -1305,6 +1305,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
