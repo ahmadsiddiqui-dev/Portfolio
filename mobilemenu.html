@@ -227,12 +227,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
            
            if (transition) {
-              transition.classList.remove("active");
-              transition.style.transition = "none";
-              transition.style.opacity = "0";
+  transition.classList.remove("active");
+  transition.style.transition = "none";
+  transition.style.opacity = "0";
 
-              transition.parentNode.removeChild(transition);
-            }
+  // ✅ Make sure it has a solid background instead of transparent
+  transition.style.background = "#000";
+
+  // ✅ Hide it safely after a frame
+  requestAnimationFrame(() => {
+    transition.style.display = "none";
+  });
+}
 
             if (window.history.length > 1) {
               window.history.back();
@@ -318,6 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
