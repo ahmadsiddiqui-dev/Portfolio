@@ -168,7 +168,7 @@
   }
 
   #page-exit-transition {
-    display: block;
+/*     display: block; */
     z-index: 999999;
     padding: 0% !important;
     margin: 0% !important;
@@ -646,5 +646,6 @@
  margin-left: 5px;
 
 }
+
 
 
