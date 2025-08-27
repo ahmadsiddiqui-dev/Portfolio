@@ -366,7 +366,7 @@ span:nth-of-type(16) {
   display: grid;
   gap: 50px;
   overflow: visible;
-  padding-top: 450px;
+  padding-top: 350px;
   padding-left: 0%;
   padding-bottom: 300px;
 }
@@ -1304,6 +1304,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
