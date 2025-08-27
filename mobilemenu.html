@@ -222,19 +222,20 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
             e.stopPropagation();
 
-            // Tell the global handler to skip exit animation
+            
             window.skipExitTransition = true;
 
-            // Make sure the overlay is fully hidden
-            if (transition) {
-              transition.classList.remove("active");
-              transition.style.transition = "none";
-              transition.style.display = "none";
-              transition.style.opacity = "0";
-              transition.style.background = "transparent";
-            }
+           
+           if (transition) {
+  transition.classList.remove("active");
+  transition.style.transition = "none";
+  transition.style.display = "none";
+  transition.style.opacity = "0";
+  transition.style.background = ""; 
+}
 
-            // Navigate back or fallback
+
+            
             if (window.history.length > 1) {
               window.history.back();
             } else {
@@ -243,7 +244,6 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         }
 
-        // Modify global exit animation for all links
         document.querySelectorAll('a[href]').forEach(link => {
           link.addEventListener('click', function (e) {
             if (window.skipExitTransition) return; 
@@ -257,19 +257,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const links = Array.from(document.querySelectorAll(".text a"));
   if (!links.length) return;
 
-  // Reset state
+  
   links.forEach(a => a.classList.remove("active"));
 
-  // 1) sessionStorage
+  
   let from = sessionStorage.getItem("fromPage");
 
-  // 2) URL query param
+  
   if (!from) {
     const params = new URLSearchParams(window.location.search);
     if (params.get("from")) from = params.get("from");
   }
-
-  // 3) Referrer fallback
+    
   if (!from && document.referrer) {
     try {
       const ref = new URL(document.referrer);
@@ -278,17 +277,14 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (e) {}
   }
 
-  // 4) If still no "from", use current page filename
   if (!from) {
     let cur = (location.pathname.split("/").pop() || "index.html");
     from = cur.replace(/\.html$/i, "").toLowerCase();
   }
 
-  // Normalize
   from = from.toLowerCase();
   if (from.endsWith(".html")) from = from.replace(/\.html$/i, "");
 
-  // Map
   const map = {
     index: "index.html",
     work:  "work.html",
@@ -299,7 +295,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const target = map[from];
   if (!target) return;
 
-  // Find matching link
   const link = links.find(a => {
     const h = (a.getAttribute("href") || "").toLowerCase();
     return h.endsWith(target) || h.includes(target);
@@ -325,6 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
