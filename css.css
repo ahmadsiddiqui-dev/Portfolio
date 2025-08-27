@@ -414,7 +414,6 @@ span:nth-of-type(16) {
 
 .divg1 {
   padding-top: 100px;
-  padding-left: 39px;
   line-height: 5;
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -1305,6 +1304,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
