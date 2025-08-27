@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const transition = document.getElementById("page-exit-transition");
   const currentPage = window.location.pathname.split("/").pop();
 
-  // Set initial background
+ 
   if (transition) {
     transition.style.backgroundColor =
       currentPage === "projectpage.html" || currentPage === "mobilemenu.html"
@@ -156,10 +156,10 @@ document.addEventListener("DOMContentLoaded", function () {
         : "black";
   }
 
-  // Global exit transition
+  
   document.querySelectorAll("a[href]").forEach((link) => {
     link.addEventListener("click", function (e) {
-      // 🛑 Ignore close button
+      
       if (this.id === "close-popup") return;
 
       // Skip if close button already set flag
@@ -227,15 +227,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
            
            if (transition) {
-  transition.classList.remove("active");
-  transition.style.transition = "none";
-  transition.style.display = "none";
-  transition.style.opacity = "0";
-  transition.style.background = ""; 
-}
+              transition.classList.remove("active");
+              transition.style.transition = "none";
+              transition.style.opacity = "0";
 
+              transition.parentNode.removeChild(transition);
+            }
 
-            
             if (window.history.length > 1) {
               window.history.back();
             } else {
@@ -320,6 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
