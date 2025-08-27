@@ -226,20 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
             window.skipExitTransition = true;
 
            
-           if (transition) {
-  transition.classList.remove("active");
-  transition.style.transition = "none";
-  transition.style.opacity = "0";
-
-  // ✅ Make sure it has a solid background instead of transparent
-  transition.style.background = "#000";
-
-  // ✅ Hide it safely after a frame
-  requestAnimationFrame(() => {
-    transition.style.display = "none";
-  });
-}
-
+          if (transition) {
+              transition.remove();
+            }
             if (window.history.length > 1) {
               window.history.back();
             } else {
@@ -324,6 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
