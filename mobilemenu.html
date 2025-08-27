@@ -224,12 +224,19 @@ document.addEventListener("DOMContentLoaded", function () {
             e.stopPropagation();
 
             
-            window.skipExitTransition = true;
+          //   window.skipExitTransition = true;
 
            
-          if (transition) {
-              transition.remove();
-            }
+          // if (transition) {
+          //     transition.remove();
+          //   }
+    //           if (window.skipExitTransition) {
+    //   // ✅ Completely cancel transition for close button
+    //   if (transition) {
+    //     transition.style.display = "none";
+    //   }
+    //   return;
+    // }
             if (window.history.length > 1) {
               window.history.back();
             } else {
@@ -314,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
