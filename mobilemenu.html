@@ -230,13 +230,17 @@ document.addEventListener("DOMContentLoaded", function () {
           // if (transition) {
           //     transition.remove();
           //   }
-    //           if (window.skipExitTransition) {
-    //   // ✅ Completely cancel transition for close button
-    //   if (transition) {
-    //     transition.style.display = "none";
-    //   }
-    //   return;
-    // }
+              if (window.skipExitTransition) {
+      // ✅ Completely cancel transition for close button
+      if (transition) {
+        transition.classList.remove("active");
+             transition.style.transition = "none";
+              transition.style.display = "none";
+              transition.style.opacity = "0";
+              transition.style.background = "";
+      }
+      return;
+    }
             if (window.history.length > 1) {
               window.history.back();
             } else {
@@ -321,6 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
 
