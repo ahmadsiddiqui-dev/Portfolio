@@ -231,8 +231,8 @@ span:nth-of-type(16) {
   height: 120%;
   padding-left: 0%;
   object-fit: cover;
+  object-position: center;
   will-change: transform;
-
 }
 
 .imganimationhome {
@@ -1304,6 +1304,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
