@@ -1190,7 +1190,7 @@ footer.in-view {
   animation: underline-in 0.8s forwards;
 }
 
-.waah:not(:hover)::after {
+.waah.hover-out::after {
   animation: underline-out 0.8s forwards;
 }
 
@@ -1313,6 +1313,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
