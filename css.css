@@ -422,7 +422,7 @@ span:nth-of-type(16) {
 
 .drop-text2 {
   opacity: 0;
-  animation: fadeInproject 0.5s ease-in forwards;
+  animation: fadeInproject 0.8s ease-in forwards;
 }
 
 @keyframes fadeInproject {
@@ -1313,6 +1313,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
