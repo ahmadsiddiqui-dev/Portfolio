@@ -1226,6 +1226,7 @@ footer.in-view {
   position: relative;
   text-decoration: none;
   color: #ffffff;
+  line-height: 1.6;
 }
 
 .visitclass::after {
@@ -1313,6 +1314,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
