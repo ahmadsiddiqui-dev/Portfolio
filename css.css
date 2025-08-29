@@ -420,6 +420,16 @@ span:nth-of-type(16) {
   text-underline-offset: 30px;
 }
 
+.drop-text2 {
+  opacity: 0;
+  animation: fadeInproject 0.5s ease-in forwards;
+}
+
+@keyframes fadeInproject {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .drop-text1 {
   opacity: 0;
 }
@@ -1232,10 +1242,9 @@ footer.in-view {
   animation: underline-in 0.8s forwards;
 }
 
-.visitclass:not(:hover)::after {
+.visitclass.hover-out::after {
   animation: underline-out 0.8s forwards;
 }
-
 @keyframes underline-in {
   from {
     width: 0%;
@@ -1304,6 +1313,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
