@@ -184,3 +184,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   targets.forEach((target) => observer.observe(target));
 });
+
+document.querySelectorAll('.visitclass').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    el.classList.remove('hover-out'); // reset
+  });
+  el.addEventListener('mouseleave', () => {
+    el.classList.add('hover-out'); // trigger underline-out only after hover
+  });
+});
+
+document.querySelectorAll('.waah').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    el.classList.remove('hover-out'); // reset
+  });
+  el.addEventListener('mouseleave', () => {
+    el.classList.add('hover-out'); // trigger underline-out only after hover
+  });
+});
+
