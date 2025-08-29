@@ -1119,11 +1119,38 @@ footer.in-view {
   font-weight: 500;
 }
 
+.projectinfodiv {
+  padding-left: 20px;
+  font-size: 25px;
+  padding-top: 10px;
+  font-weight: 500;
+}
+
 .underdiv {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.449);
   padding: 20px;
+   position: relative;
   padding-left: 0%;
-  width: 530px;
+  width: 590px;
+}
+
+.underdiv::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 50%; 
+  background: rgba(255, 255, 255, 0.282);
+  animation: slide-border 1s forwards;
+}
+
+@keyframes slide-border {
+  from {
+    width: 50%;
+  }
+  to {
+    width: 100%; 
+  }
 }
 
 .image-scroll-wrapper {
@@ -1314,6 +1341,7 @@ p {
   font-size: 40px;
   padding-right: 100px !important;
 }
+
 
 
 
