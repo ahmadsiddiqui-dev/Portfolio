@@ -4,9 +4,12 @@
     margin: 0px;
     /* outline: 1px solid red; */
   }
-  body {
-    margin: 20px;
+   body {
+    margin: 20px !important;
   }
+  .pad{
+    margin-right: 0px !important;
+ }
   header {
     padding: 0 !important;
     padding-left: 0 !important;
@@ -646,6 +649,7 @@
  margin-left: 5px;
 
 }
+
 
 
 
