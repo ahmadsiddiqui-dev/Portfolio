@@ -1342,9 +1342,9 @@ p {
   padding-right: 100px !important;
 }
 
-
-
-
+a, button{
+  -webkit-tap-highlight-color: transparent;
+}
 
 
 
