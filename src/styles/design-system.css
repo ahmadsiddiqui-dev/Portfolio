@@ -1,0 +1,781 @@
+/*
+ * Portfolio design system — T1 Korium headings + JetBrains Mono paragraphs on
+ * sand (#e5e5dd) background. Scoped by `.design-system` so it applies to any
+ * page whose root element has that class. MobileMenu and ProjectPage opt out
+ * (they keep the dark #464c47 theme).
+ *
+ * Rules mirror the per-scope styles inside src/pages/About.jsx. About has its
+ * own `.about-page-scope` overrides that fine-tune hobby-slider, 3D models,
+ * section 5 wrapper, etc.; those still win because they sit in the component
+ * <style> block and share equal specificity.
+ */
+
+/* ========== paragraph / small text ==================================== */
+/* All paragraph text inside .design-system uses JetBrains Mono. Big display
+ * headings (.text/.head-item/.textemail) live on <div>/<span>, so this <p>
+ * + h4 + accordion-title catch-all doesn't touch them. <a.drop-text> covers
+ * paragraph-style links like Home's "More about me and services" CTA. */
+.design-system p,
+.design-system a.drop-text,
+.design-system .text-content h4,
+.design-system .accordion .title,
+.design-system .masterdiv,
+.design-system .inforow,
+.design-system .inforow span {
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-weight: 300 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.03ch !important;
+  text-transform: uppercase !important;
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+}
+
+/* Heavier weight (500) for paragraph "headings" — accordion titles, service
+ * h4s, section number labels, and the connect-with-me / send-me-a-message
+ * captions on Contact. */
+.design-system .accordion .title,
+.design-system .text-content h4,
+.design-system .div9 .drop-text,
+.design-system .drop-text.point,
+.design-system .drop-text.formbl01,
+.design-system .drop-text.formbl02,
+.design-system #sm,
+.design-system .contactsocialme .drop-text {
+  font-weight: 500 !important;
+}
+
+/* Paragraph font-size ladder — mirrors About's responsive sizing so all pages
+ * (Home / Work / Contact / About) have the same small-text scale. Targets the
+ * descriptive paragraph blocks; explicit-size paragraphs (#sm, .point, etc.)
+ * keep their own sizes. Includes Home's .maindiv3 "Software Engineer
+ * developing AI driven … Flutter / React Native …" body block. */
+.design-system .diva1 .drop-text,
+.design-system .accordion-body p,
+.design-system .text-content p,
+.design-system .divd1.divd1mbl .drop-text,
+.design-system .maindiv3 .drop-text,
+.design-system .maindiv3 .drop-text1,
+.design-system .projectinfotext,
+.design-system .drop-text2,
+.design-system .fontproject,
+.design-system .underdiv {
+  font-size: 14px !important;
+}
+@media (min-width: 769px) and (max-width: 1166px) {
+  .design-system .diva1 .drop-text,
+  .design-system .accordion-body p,
+  .design-system .text-content p,
+  .design-system .divd1.divd1mbl .drop-text,
+  .design-system .maindiv3 .drop-text,
+  .design-system .maindiv3 .drop-text1,
+  .design-system .projectinfotext,
+  .design-system .drop-text2,
+  .design-system .fontproject,
+  .design-system .underdiv {
+    font-size: 15px !important;
+  }
+}
+@media (min-width: 1167px) {
+  .design-system .diva1 .drop-text,
+  .design-system .accordion-body p,
+  .design-system .text-content p,
+  .design-system .divd1.divd1mbl .drop-text,
+  .design-system .maindiv3 .drop-text,
+  .design-system .maindiv3 .drop-text1,
+  .design-system .projectinfotext,
+  .design-system .drop-text2,
+  .design-system .fontproject,
+  .design-system .underdiv {
+    font-size: 17px !important;
+  }
+  /* ProjectPage gets a slightly larger desktop body size — its paragraphs
+   * are the page's main content rather than supporting text, so they sit a
+   * step above the rest of the design-system ladder. */
+  .design-system #popup-content .projectinfotext,
+  .design-system #popup-content .drop-text2,
+  .design-system #popup-content .fontproject,
+  .design-system #popup-content .underdiv {
+    font-size: 22px !important;
+  }
+  /* Push the PROJECT INFO block down a bit so it doesn't crowd against the
+   * top edge / nav on desktop. */
+  .design-system #popup-content .projectinfodiv {
+    padding-top: 80px !important;
+  }
+  /* Same for the main info paragraph block on desktop — bump its top
+   * padding above the inline 120px so it sits a little lower. */
+  .design-system #popup-content .projectdivda {
+    padding-top: 150px !important;
+  }
+}
+
+/* Home's "Passionate about software …" body block (.drop-text1) — 20px on
+ * mobile per user, 40px on desktop to match the #textsize used by the last
+ * two lines ("web experiences, I'm probably" / "at gym or travelling") which
+ * sit on plain .drop-text. */
+.design-system .drop-text1,
+.design-system .masterdiv .drop-text1 {
+  font-size: 20px !important;
+}
+@media (min-width: 1167px) {
+  .design-system .drop-text1,
+  .design-system .masterdiv .drop-text1 {
+    font-size: 40px !important;
+  }
+}
+
+/* Match "OR CONNECT WITH / ME ON SOCIALS" to #sm's font-size across all
+ * viewports — 25px desktop, 18px mobile. (Without this, the inner <p> keeps
+ * its base 20px / #nos 18px rules which don't align with #sm.) */
+@media (min-width: 769px) {
+  .design-system .contactsocialme .drop-text {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .design-system .contactsocialme .drop-text {
+    font-size: 18px !important;
+  }
+}
+
+
+/* iOS paragraph stroke opt-out — global body stroke is tuned for PP Neue
+ * Montreal; JetBrains Mono already rasterizes heavier on iOS so the stroke
+ * makes it look bold vs Android. See memory ios_android_font_parity.md. */
+/* iOS opt-out: the global 0.8px body text-stroke makes JetBrains Mono look
+ * bold vs Android. Drop it on every <p> + the few non-<p> paragraph carriers
+ * (h4, accordion title, masterdiv, paragraph-style <a>) inside .design-system. */
+html.is-ios .design-system p,
+html.is-ios .design-system a.drop-text,
+html.is-ios .design-system .text-content h4,
+html.is-ios .design-system .accordion .title,
+html.is-ios .design-system .accordion-body,
+html.is-ios .design-system .masterdiv,
+html.is-ios .design-system .masterdiv *,
+html.is-ios .design-system footer,
+html.is-ios .design-system footer * {
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Qoreeb-style proportions on CREATIVE / DEVELOPER (Home, mobile only) —
+ * Korium 2Kg via weight 200, tight line-height + letter-spacing for the
+ * lengthy/thinner look. Size stays at the design-system mobile 80px so we
+ * can compare in context. */
+/* Qoreeb-style Korium headings — mobile only. Catches every big .text and
+ * .textemail block across Home / Work / About / Contact (PASSIONATE /
+ * CREATIVE / DEVELOPER on About, PROJECTS on Work, GYM/TRAVELLING/MUSIC on
+ * Home, project-name links, email blocks, AHMAD SIDDIQUI). The .arrowdiv
+ * .text down-arrow keeps PP Neue Montreal because its rule has higher
+ * specificity (.design-system .arrowdiv .text span). */
+/* Qoreeb-style headings (mobile only). Explicit selector list so it only
+ * touches the page headings the user wants — not every .text element.
+ *   - Home CREATIVE/DEVELOPER (.letstart .text)
+ *   - Home GYM/TRAVELLING/MUSIC (.veryem .text)
+ *   - Work PROJECTS (.text.mbltext)
+ *   - About PASSIONATE/CREATIVE/DEVELOPER/BASED-IN/RAMPUR/SERVICES
+ *     (.about-page-scope .text — already scoped to About)
+ *   - All project-name links + email blocks (.textemail / .spanemail)
+ *   - AHMAD SIDDIQUI (h1.as) */
+@media (max-width: 768px) {
+  .design-system .letstart .text,
+  .design-system .letstart .text span,
+  .design-system .veryem .text,
+  .design-system .veryem .text span,
+  .design-system .text.mbltext,
+  .design-system .text.mbltext span,
+  .design-system.about-page-scope .text,
+  .design-system.about-page-scope .text span,
+  .design-system.about-page-scope .head-item,
+  .design-system.about-page-scope .head-item span,
+  .design-system h1.as {
+    font-size: 110px !important;
+    font-weight: 200 !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.03ch !important;
+  }
+
+  /* Home-only override: project name + email block at smaller 85px / 1.1
+   * with explicit weight 200 + Korium font so it definitely matches the
+   * thin look of CREATIVE / DEVELOPER. */
+  #content .textemail,
+  #content .textemail .spanemail {
+    font-family: "T1 Korium", "Big Shoulders Display", "Anton", "PP Neue Montreal", sans-serif !important;
+    font-size: 85px !important;
+    font-weight: 200 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03ch !important;
+  }
+
+  /* Work + About pages: project name + email block at the same Home
+   * thin-Korium styling. .mblportfolioname covers Work's project name
+   * (Home shielded by #content). main:not(.forcontactmain) .div10 catches
+   * Work's email blocks (no <main> on Home, Contact excluded via class).
+   * About's .textemail needs .design-system prefix to beat About.jsx's
+   * own inline .about-page-scope rule (same 2-class specificity, but mine
+   * is 3 classes → wins). */
+  .design-system .mblportfolioname .textemail,
+  .design-system .mblportfolioname .textemail .spanemail,
+  .design-system main:not(.forcontactmain) .div10 .textemail,
+  .design-system main:not(.forcontactmain) .div10 .textemail .spanemail,
+  .design-system.about-page-scope .textemail,
+  .design-system.about-page-scope .textemail .spanemail,
+  .design-system .forcontactmain .textemail,
+  .design-system .forcontactmain .textemail .spanemail {
+    font-family: "T1 Korium", "Big Shoulders Display", "Anton", "PP Neue Montreal", sans-serif !important;
+    font-size: 85px !important;
+    font-weight: 200 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03ch !important;
+  }
+
+  /* iPhone-only: bump letter-spacing on Home #content .textemail to 0.02em. */
+  html.is-ios #content .textemail,
+  html.is-ios #content .textemail .spanemail {
+    letter-spacing: 0.02em !important;
+  }
+
+  /* iPhone gets a slightly taller line-height on big headings (iOS line-box
+   * renders tighter than Android, so 0.9 was clipping). */
+  html.is-ios .design-system .letstart .text,
+  html.is-ios .design-system .letstart .text span,
+  html.is-ios .design-system .veryem .text,
+  html.is-ios .design-system .veryem .text span,
+  html.is-ios .design-system .text.mbltext,
+  html.is-ios .design-system .text.mbltext span,
+  html.is-ios .design-system.about-page-scope .text,
+  html.is-ios .design-system.about-page-scope .text span,
+  html.is-ios .design-system.about-page-scope .head-item,
+  html.is-ios .design-system.about-page-scope .head-item span,
+  html.is-ios .design-system .textemail,
+  html.is-ios .design-system .textemail .spanemail,
+  html.is-ios .design-system h1.as {
+    line-height: 0.95 !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  /* About hobby slider — only TRAVELLING (data-idx="2") needs extra bottom
+   * padding on iPhone; GYM and MUSIC stay as-is. HeadingSlider sets the
+   * dataset idx on each .head-item when it builds the track. */
+  html.is-ios .design-system.about-page-scope .head-item[data-idx="2"] {
+    line-height: 1.1 !important;
+    padding-bottom: 8px;
+  }
+
+  /* About + iOS only: bump line-height on the email block + project name so
+   * stacked .textemail lines feel less cramped on iPhone. Android stays at
+   * the shared 1.1 value. */
+  html.is-ios .design-system.about-page-scope .textemail,
+  html.is-ios .design-system.about-page-scope .textemail .spanemail {
+    line-height: 1.15 !important;
+  }
+
+  /* Contact + iOS only: bump line-height on the email block + social links
+   * (instagram/github/whatsapp/linkedin) so stacked lines don't feel
+   * cramped on iPhone. Android stays at the shared 1.1. */
+  html.is-ios .design-system .forcontactmain .textemail,
+  html.is-ios .design-system .forcontactmain .textemail .spanemail {
+    line-height: 1.15 !important;
+  }
+
+  /* Tighten the gap between AHMAD and SIDDIQUI below the first photo on
+   * Home mobile. Zero the default h1 margin + tight line-height + pull
+   * the SIDDIQUI line up with a small negative margin. */
+  #content h1.as {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 0.85 !important;
+  }
+  #content #ass > div:nth-of-type(2) h1.as {
+    margin-top: -10px !important;
+  }
+}
+
+/* Preloader brand text (Ahmad / Siddiqui / Portfolio / ©2026) and the
+ * percent counter (.percent-text) — Korium. Not scoped by .design-system
+ * because the preloader renders outside the #content div that carries that
+ * class. */
+.fontpreloader,
+.percent-text {
+  font-family: "T1 Korium", "Big Shoulders Display", "Anton", "PP Neue Montreal", sans-serif !important;
+}
+
+/* Same blur reveal from CREATIVE/DEVELOPER applied to each preloader word.
+ * Alternating order: wave 1 fires Ahmad + Portfolio (positions 1 & 3),
+ * wave 2 fires Siddiqui + ©2026 (positions 2 & 4). Parent brand containers
+ * also get overflow: hidden so the blur can't bleed beyond their box. */
+#branding,
+#branding4,
+#branding1,
+#branding5 {
+  overflow: hidden !important;
+}
+.fontpreloader {
+  display: inline-block;
+  overflow: hidden;
+  contain: paint;
+  opacity: 0;
+  filter: blur(70px);
+  animation: qoreebZoomBlur 1.6s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+}
+/* Wave 1: Ahmad → Portfolio */
+#branding  .fontpreloader { animation-delay: 0s   !important; }
+#branding1 .fontpreloader { animation-delay: 0.1s !important; }
+/* Wave 2: Siddiqui → ©2026 */
+#branding4 .fontpreloader { animation-delay: 0.35s !important; }
+#branding5 .fontpreloader { animation-delay: 0.45s !important; }
+.percent-text {
+  line-height: 1.15 !important;
+}
+@media (max-width: 768px) {
+  .percent-text {
+    font-size: 65px !important;
+  }
+}
+@media (min-width: 1167px) {
+  .percent-text {
+    font-weight: 200 !important;
+  }
+}
+@media (max-width: 768px) {
+  .fontpreloader {
+    line-height: 1.8 !important;
+    font-weight: 200 !important;
+    font-size: 50px !important;
+  }
+  html.is-ios .fontpreloader {
+    letter-spacing: 0.02em !important;
+  }
+}
+@media (min-width: 1167px) {
+  .fontpreloader {
+    font-size: 70px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.05 !important;
+  }
+  /* The 4 brand elements are absolutely positioned for 30px text; bump the
+   * row offsets for the second row and pull the right-of-Ahmad/Portfolio
+   * elements closer in so the word-pairs sit tight at 70px Korium. */
+  #branding4 {
+    left: 225px !important;
+  }
+  #branding1 {
+    top: 145px !important;
+  }
+  #branding5 {
+    top: 145px !important;
+    left: 300px !important;
+  }
+  /* Tiny right-padding on the © character so it doesn't sit flush against
+   * the "2026" digits. ::first-letter targets just the © glyph. */
+  #branding5 .fontpreloader::first-letter {
+    padding-right: 0.1em;
+  }
+}
+
+/* AHMAD SIDDIQUI (h1.as) on Home — Korium on every viewport. */
+.design-system h1.as {
+  font-family: "T1 Korium", "Big Shoulders Display", "Anton", "PP Neue Montreal", sans-serif !important;
+}
+
+/* Desktop: lay out .div3 (arrow + #sup + #ass) with space-between so the
+ * arrow hugs the left, AHMAD SIDDIQUI hugs the right (with 55px padding to
+ * line up with the menu's "Contact"), and the I SUPPORT DESIGNERS block
+ * sits centered between them. Both AHMAD/SIDDIQUI h1 wrappers are stretched
+ * to the same width so the two lines right-align cleanly. */
+@media (min-width: 1167px) {
+  .design-system h1.as {
+    text-align: right !important;
+  }
+  .design-system .div3.arrowdiv {
+    justify-content: space-between !important;
+  }
+  .design-system .div3 #ass {
+    padding-right: 55px !important;
+    align-self: stretch;
+    align-items: stretch;
+  }
+  .design-system .div3 #ass > div {
+    width: 100%;
+  }
+}
+
+
+/* iOS Home: small positive margin-top on .memain (the photo below DEVELOPER)
+ * and .homeobbyimage (the gym photo below GYM) so the image cover doesn't
+ * clip the bottom of the heading above. iOS-only text-stroke makes those
+ * glyphs extend further down than the line-box. */
+@media (max-width: 768px) {
+  .design-system .memain {
+    margin-top: 15px !important;
+  }
+  html.is-ios .design-system .memain {
+    margin-top: 17px !important;
+  }
+  /* Mobile only: less top padding on .letstart so CREATIVE sits nearer the
+   * top of the page. Desktop keeps the inline 140px. */
+  .design-system .letstart {
+    padding-top: 0 !important;
+  }
+  .design-system .letstart > .text:first-child {
+    margin-top: 0 !important;
+  }
+  /* Home-only: reduce the huge 200px margin-bottom on header (set in
+   * mblcss.css) so CREATIVE sits close to the header. Other pages keep 200px. */
+  #content > header {
+    margin-bottom: 80px !important;
+  }
+  /* Center the "I SUPPORT DESIGNERS" block between DEVELOPER and image.
+   * Image has margin-top 15px (Android) / 17px (iOS) added to the gap
+   * below, so compensate with a smaller margin-bottom on the block. */
+  .design-system .letstart > .divd1.divd1mbl.laptophide {
+    margin-top: 30px !important;
+    margin-bottom: 15px !important;
+    padding-top: 20px !important;
+  }
+  html.is-ios .design-system .letstart > .divd1.divd1mbl.laptophide {
+    margin-bottom: 13px !important;
+    padding-top: 30px !important;
+  }
+  /* iOS Home section 03: 25px gap above + below the gym image so the GYM
+   * heading and TRAVELLING heading sit at equal visual distance from it.
+   * Zero the inline marginTop/paddingTop on the surrounding .text.textpadi
+   * lines so the 25px on the image alone defines the spacing. */
+  html.is-ios .design-system .homeobbyimage {
+    margin-top: 25px !important;
+    margin-bottom: 10px !important;
+  }
+  html.is-ios .design-system .text.textpadi {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* Down-arrow ↓ on Home desktop. The .div3.arrowdiv .text span inherits the
+ * design-system Korium font which doesn't ship the ↓ glyph, so the character
+ * silently renders as a missing-glyph box. Force a fallback that has ↓ and
+ * clear the .text crop margins/overflow so it isn't clipped. */
+.design-system .arrowdiv .text {
+  overflow: visible !important;
+  align-items: flex-end !important;
+}
+.design-system .arrowdiv .text span {
+  font-family: "PP Neue Montreal", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 90px !important;
+  line-height: 0.9 !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+}
+
+
+/* "01/" section number on Home (.masterdiv > .maindiv1 .drop-text1) — match
+ * the .drop-text.point size used by 01/ 02/ … on other pages. */
+.design-system .masterdiv > .maindiv1 .drop-text1 {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+@media (min-width: 769px) and (max-width: 1166px) {
+  .design-system .masterdiv > .maindiv1 .drop-text1 {
+    font-size: 15px !important;
+  }
+}
+@media (min-width: 1167px) {
+  .design-system .masterdiv > .maindiv1 .drop-text1 {
+    font-size: 17px !important;
+  }
+}
+
+/* Qoreeb-style reveal for CREATIVE / DEVELOPER (Home). Two-wave order:
+ *   wave 1: positions 2,3,6,7,8 in each word (R,E / I,V,E in CREATIVE;
+ *           E,V / O,P,E in DEVELOPER)
+ *   wave 2: the remaining letters (C,A,T in CREATIVE; D,E,L,R in DEVELOPER)
+ *   DEVELOPER finishes before CREATIVE's second wave so the two words fully
+ *   land in sequence: partial creative → partial developer → full developer
+ *   → full creative. Dense blur (30px) + slow 3s cubic-bezier for a heavy
+ *   whoosh feel. */
+.design-system .letstart .text {
+  overflow: hidden !important;
+}
+.design-system .letstart .text span {
+  display: inline-block;
+  overflow: hidden;
+  contain: paint;
+  opacity: 0;
+  filter: blur(70px);
+  animation: qoreebZoomBlur 1.6s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+  animation-play-state: paused !important;
+}
+.design-system .letstart .text span.appear {
+  animation-play-state: running !important;
+}
+
+/* Tighter stagger + more overlap between waves (30ms between letters). */
+/* Wave 1 — CREATIVE: R(2), E(3), I(6), V(7), E(8) */
+.design-system .letstart .text:first-of-type span:nth-child(2) { animation-delay: 0s !important; }
+.design-system .letstart .text:first-of-type span:nth-child(3) { animation-delay: 0.03s !important; }
+.design-system .letstart .text:first-of-type span:nth-child(6) { animation-delay: 0.06s !important; }
+.design-system .letstart .text:first-of-type span:nth-child(7) { animation-delay: 0.09s !important; }
+.design-system .letstart .text:first-of-type span:nth-child(8) { animation-delay: 0.12s !important; }
+/* Wave 1 — DEVELOPER: starts before CREATIVE's wave 1 finishes */
+.design-system .letstart .text.homedevel span:nth-child(2) { animation-delay: 0.1s !important; }
+.design-system .letstart .text.homedevel span:nth-child(3) { animation-delay: 0.13s !important; }
+.design-system .letstart .text.homedevel span:nth-child(6) { animation-delay: 0.16s !important; }
+.design-system .letstart .text.homedevel span:nth-child(7) { animation-delay: 0.19s !important; }
+.design-system .letstart .text.homedevel span:nth-child(8) { animation-delay: 0.22s !important; }
+/* Wave 2 — DEVELOPER remainder: overlaps with wave 1 */
+.design-system .letstart .text.homedevel span:nth-child(1) { animation-delay: 0.22s !important; }
+.design-system .letstart .text.homedevel span:nth-child(4) { animation-delay: 0.25s !important; }
+.design-system .letstart .text.homedevel span:nth-child(5) { animation-delay: 0.28s !important; }
+.design-system .letstart .text.homedevel span:nth-child(9) { animation-delay: 0.31s !important; }
+/* Wave 2 — CREATIVE remainder: overlaps with DEVELOPER wave 2 */
+.design-system .letstart .text:first-of-type span:nth-child(1) { animation-delay: 0.32s !important; }
+.design-system .letstart .text:first-of-type span:nth-child(4) { animation-delay: 0.35s !important; }
+.design-system .letstart .text:first-of-type span:nth-child(5) { animation-delay: 0.38s !important; }
+
+@keyframes qoreebZoomBlur {
+  0% {
+    filter: blur(70px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+
+
+/* ========== big display headings ====================================== */
+.design-system .text,
+.design-system .text span,
+.design-system .textemail,
+.design-system .textemail .spanemail {
+  font-family: "T1 Korium", "Big Shoulders Display", "Anton", "PP Neue Montreal", sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 0.98 !important;
+}
+
+.design-system .text,
+.design-system .textemail,
+.design-system .textemail .spanemail {
+  font-size: clamp(62px, 20vw, 180px) !important;
+}
+
+@media (max-width: 768px) {
+  .design-system .text,
+  .design-system .textemail,
+  .design-system .textemail .spanemail {
+    font-size: 80px !important;
+  }
+}
+
+
+/* Crop-fix: kill the top leading on desktop, bottom on mobile so letters sit
+ * flush with the container edges. Mobile tightening is on `.text` itself (not
+ * on the span) because `.text { overflow: hidden }` clips Korium's descender
+ * region on iOS WebKit when the span has a negative bottom margin. */
+.design-system .text span {
+  margin-top: -0.22em !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .design-system .text span {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .design-system .text {
+    margin-bottom: -0.15em !important;
+  }
+  .design-system .head-item {
+    margin-top: 0 !important;
+    margin-bottom: -0.15em !important;
+  }
+}
+
+.design-system .textemail .spanemail {
+  line-height: 1.1 !important;
+}
+
+/* Tighten the vertical gap between consecutive .textemail lines:
+ *   - email block (stacked divs inside one <a>): .textemail + .textemail
+ *   - socials block (each link wrapped in its own <a>): a + a > .textemail
+ * Applies on all platforms so iOS, Android, and desktop look identical. */
+.design-system .textemail + .textemail,
+.design-system a + a > .textemail {
+  margin-top: -0.25em !important;
+}
+
+/* Trim the bottom padding under the Contact socials block on mobile — the
+ * inline 50px paddingBottom leaves too much empty space under "linkedin". */
+@media (max-width: 768px) {
+  .design-system .forcontactinsta {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Mobile Android computes a taller line-box for Korium than iOS WebKit does,
+ * so the underline bar sat too far below the text on Android phones. Pull it
+ * up only on non-iOS mobile — desktop was already perfect so leave it alone. */
+@media (max-width: 768px) {
+  html:not(.is-ios) .design-system .textemail::after {
+    bottom: 16px !important;
+  }
+}
+
+/* ========== header logo + nav ========================================= */
+.design-system #nav {
+  font-family: "T1 Korium", "Big Shoulders Display", "PP Neue Montreal", sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+}
+
+@media (max-width: 768px) {
+  /* Mobile: header AHMAD SIDDIQUI matches h1.as body weight 200 (thin). */
+  .design-system #nav {
+    font-weight: 200 !important;
+  }
+}
+
+@media (min-width: 1167px) {
+  .design-system #nav {
+    font-size: 32px !important;
+    font-weight: 200 !important;
+    letter-spacing: 0.05em !important;
+  }
+}
+
+.design-system .navbw,
+.design-system .navbw p,
+.design-system .menu,
+.design-system .menu a {
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.03ch !important;
+  text-transform: uppercase !important;
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+}
+
+/* ========== image cover + parallax boxes ============================== */
+/* Override the base .imganimations white cover so it matches the page bg. */
+.design-system .imganimations,
+.design-system .imganimationss,
+.design-system .imganimationhome {
+  background-color: #e5e5dd !important;
+}
+
+/* ProjectPage uses a dark #464c47 background instead of the sand bg, so its
+ * image covers should match the dark bg, not the sand sand color above. */
+.design-system #popup-content .imganimations,
+.design-system #popup-content .imganimationss,
+.design-system #popup-content .imganimationhome {
+  background-color: #464c47 !important;
+}
+
+/* PROJECT INFO Role / Year rows — left label, right value, on every viewport.
+ * Force span visibility/color in case design-system inheritance leaves them
+ * invisible against the dark project bg. */
+.design-system #popup-content .projectinfodiv .inforow {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline;
+  width: 100%;
+  color: #fff;
+  opacity: 1 !important;
+}
+.design-system #popup-content .projectinfodiv .inforow span {
+  display: inline-block;
+  color: #fff;
+  opacity: 1 !important;
+}
+
+/* ========== footer ==================================================== */
+/* Mirrors the About page footer — every element inside <footer> gets
+ * JetBrains Mono 500, -0.03ch, uppercase. The [LET'S CONNECT] block stacks
+ * its label above its IG/GH/WA/LI row. */
+.design-system footer,
+.design-system footer * {
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.03ch !important;
+  text-transform: uppercase !important;
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+}
+
+@media (max-width: 768px) {
+  .design-system footer,
+  .design-system footer * {
+    font-size: 17px !important;
+  }
+}
+
+.design-system .footer-connect {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.design-system .footer-connect-links {
+  display: flex;
+  gap: 12px;
+}
+
+.design-system .footer-connect-links a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* "My hobbies …" body block on Home (.drop-text.fonth) — mobile only,
+ * shrink the inline 22px down to About's normal paragraph size. */
+@media (max-width: 768px) {
+  .design-system .drop-text.fonth {
+    font-size: 14px !important;
+  }
+}
+
+/* "More about me" CTA in the hobby block — switch to JetBrains Mono and
+ * give it a visible underline (the inline 30px text-underline-offset pushed
+ * the line off-screen for the smaller font). Using border-bottom for the
+ * same reason as the "More about me and services" link below. */
+.design-system .moream a {
+  display: inline-block;
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.03ch !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  color: #000 !important;
+  line-height: 1.2 !important;
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+}
+@media (max-width: 768px) {
+  .design-system .moream a {
+    font-size: 14px !important;
+  }
+}
+
+/* "More about me and services" CTA on Home. Using border-bottom (not
+ * text-decoration) because .divg1 has line-height:5 which makes
+ * text-decoration positioning unpredictable, and the global `a { text-
+ * decoration: none }` was killing the inherited underline. inline-block +
+ * tight line-height makes the element wrap the text snugly. */
+.design-system .divg1 .drop-wrap {
+  overflow: visible !important;
+  display: inline-block;
+}
+.design-system .divg1 a {
+  display: inline-block;
+  color: #000 !important;
+  line-height: 1.2 !important;
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+}
