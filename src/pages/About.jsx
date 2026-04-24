@@ -328,7 +328,7 @@ export default function About() {
               <span>P</span><span>E</span><span>R</span>
             </div>
             <div className="text1 mblfirst parallax-y" style={{ paddingLeft: '40px' }}>
-              <img src="/about-cover.jpg" alt="" className="imganimation" />
+              <img src={`${import.meta.env.BASE_URL}about-cover.jpg`} alt="" className="imganimation" />
               <div className="imganimations"></div>
             </div>
             <div className="text" style={{ padding: 0, paddingTop: '20px' }}>
@@ -359,7 +359,7 @@ export default function About() {
               <div className="drop-wrap"><p className="drop-text" id="nosize">across domains including AI,</p></div>
               <div className="drop-wrap formar" style={{ marginBottom: '70px' }}><p className="drop-text" id="nosize">mobile development, and systems design.</p></div>
               <div className="text1 mblme" style={{ padding: 0, height: '550px', width: '360px' }}>
-                <img src="/meabout.jpg" alt="" className="imganimation mblme" style={{ height: '550px', width: '355px' }} />
+                <img src={`${import.meta.env.BASE_URL}meabout.jpg`} alt="" className="imganimation mblme" style={{ height: '550px', width: '355px' }} />
                 <div className="imganimations mblme" style={{ height: '550px' }}></div>
               </div>
             </div>
@@ -432,9 +432,9 @@ export default function About() {
         <div className="imageaboutab">
           {isMobile ? (
             <>
-              <img src="/gym2.png" className={'gymheight' + (activeTab === 0 ? ' active' : '')} data-idx="0" alt="gym" style={{ height: '700px' }} />
-              <img src="/music.jpg" className={activeTab === 1 ? 'active' : ''} data-idx="1" alt="music" />
-              <img src="/music.jpg" className={activeTab === 2 ? 'active' : ''} data-idx="2" alt="travelling" />
+              <img src={`${import.meta.env.BASE_URL}gym2.png`} className={'gymheight' + (activeTab === 0 ? ' active' : '')} data-idx="0" alt="gym" style={{ height: '700px' }} />
+              <img src={`${import.meta.env.BASE_URL}music.jpg`} className={activeTab === 1 ? 'active' : ''} data-idx="1" alt="music" />
+              <img src={`${import.meta.env.BASE_URL}music.jpg`} className={activeTab === 2 ? 'active' : ''} data-idx="2" alt="travelling" />
             </>
           ) : (
             <>
@@ -487,7 +487,7 @@ export default function About() {
         </div>
 
         <div className="img-container" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-          <img src="/projectimg.jpg" alt="" className="portimage" style={{ objectFit: 'cover' }} />
+          <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'cover' }} />
           <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
             <TLink to="/projectpage">
               <p style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>

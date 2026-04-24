@@ -105,15 +105,15 @@ export default function ProjectPage() {
 
           <div className="image-scroll-wrapper text1 hideme">
             <div className="maindiv333" style={{ padding: 0 }}>
-              <img src="/img1.png" alt="" className="imganimationsss" style={{ padding: 0 }} />
+              <img src={`${import.meta.env.BASE_URL}img1.png`} alt="" className="imganimationsss" style={{ padding: 0 }} />
             </div>
             <div className="maindiv333">
-              <img src="/img2.png" alt="" />
-              <div className="maindiv333"><img src="/img3.png" alt="" /></div>
-              <div className="maindiv333"><img src="/img4.png" alt="" /></div>
-              <div className="maindiv333"><img src="/img5.png" alt="" /></div>
-              <div className="maindiv333"><img src="/img6.png" alt="" /></div>
-              <div className="maindiv333"><img src="/img7.png" alt="" /></div>
+              <img src={`${import.meta.env.BASE_URL}img2.png`} alt="" />
+              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}img3.png`} alt="" /></div>
+              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}img4.png`} alt="" /></div>
+              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}img5.png`} alt="" /></div>
+              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}img6.png`} alt="" /></div>
+              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}img7.png`} alt="" /></div>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function ProjectPage() {
         <div className="laptophide projectphotos">
           {['img1','img2','img3','img4','img5','img6','img7'].map((n) => (
             <div key={n} className="photodiv">
-              <img className="imgproj" src={`/${n}.png`} alt="" />
+              <img className="imgproj" src={`${import.meta.env.BASE_URL}${n}.png`} alt="" />
             </div>
           ))}
         </div>

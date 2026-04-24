@@ -57,7 +57,7 @@ export default function Work() {
           </div>
 
           <div className="img-container" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-            <img src="/projectimg.jpg" alt="" className="portimage" style={{ objectFit: 'fill' }} />
+            <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
             <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
               <TLink to="/projectpage">
                 <p style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>

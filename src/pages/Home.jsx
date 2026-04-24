@@ -81,8 +81,8 @@ export default function Home() {
             </div>
           </div>
           <div className="text1 memain" style={{ width: '565px' }}>
-            <img src="/finalmehome.jpg" alt="" className="imganimationhome memain laptophide" />
-            <img src="/newme.jpg" alt="" className="imganimationhome memain hideme" />
+            <img src={`${import.meta.env.BASE_URL}finalmehome.jpg`} alt="" className="imganimationhome memain laptophide" />
+            <img src={`${import.meta.env.BASE_URL}newme.jpg`} alt="" className="imganimationhome memain hideme" />
             <div className="imganimationss" style={{ height: '250px' }}></div>
           </div>
 
@@ -228,7 +228,7 @@ export default function Home() {
           </div>
 
           <div className="img-container" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-            <img src="/projectimg.jpg" alt="" className="portimage" style={{ objectFit: 'fill' }} />
+            <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
             <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
               <TLink to="/projectpage">
                 <p style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
@@ -254,7 +254,7 @@ export default function Home() {
               <span>G</span><span>Y</span><span>M</span><span>,</span>
             </div>
             <div className="text1 homeobbyimage" style={{ height: '300px', width: '600px', left: 152 }}>
-              <img src="/gymtry.jpg" alt="" className="imganimation homeobbyimage2" />
+              <img src={`${import.meta.env.BASE_URL}gymtry.jpg`} alt="" className="imganimation homeobbyimage2" />
               <div className="imganimations"></div>
             </div>
             <div className="text textpadi" style={{ display: 'flex', paddingBottom: '10px', marginTop: '20px', paddingLeft: '150px' }}>

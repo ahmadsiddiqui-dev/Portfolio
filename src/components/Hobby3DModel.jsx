@@ -26,13 +26,14 @@ function GLBModel({ path, rotation = [0, 0, 0], fit = 1.3 }) {
   return <primitive object={prepared} />;
 }
 
+const BASE = import.meta.env.BASE_URL;
 const MODELS = {
-  dumbbell: { path: '/models/dumble.glb', rotation: [0, 0, 0] },
-  headphones: { path: '/models/headphones.glb', rotation: [0, Math.PI / 2, 0] }
+  dumbbell: { path: `${BASE}models/dumble.glb`, rotation: [0, 0, 0] },
+  headphones: { path: `${BASE}models/headphones.glb`, rotation: [0, Math.PI / 2, 0] }
 };
 
-useGLTF.preload('/models/dumble.glb');
-useGLTF.preload('/models/headphones.glb');
+useGLTF.preload(`${BASE}models/dumble.glb`);
+useGLTF.preload(`${BASE}models/headphones.glb`);
 
 export default function Hobby3DModel({ type }) {
   const cfg = MODELS[type] || MODELS.dumbbell;
