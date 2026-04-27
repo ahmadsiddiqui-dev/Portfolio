@@ -63,7 +63,15 @@
       "Bash(grep -n \"\\\\.text \\\\|\\\\.text$\\\\|\\\\.text,\\\\|\\\\.text{\\\\|overflow\\\\|drop-wrap\\\\|\\\\.text span\\\\|animation\" /Users/rnf-user/Documents/myproject/Portfolio/src/styles/css.css)",
       "Bash(curl -sL --max-time 10 \"https://qoreeb.com/\" -A \"Mozilla/5.0\")",
       "Bash(curl -sL --max-time 10 \"https://qoreeb.com/assets/barba-BIL4vanz.css\" -A \"Mozilla/5.0\")",
-      "Bash(grep -oE \"\\(wrap-letters|split|inner-line|title|creative|designer\\)[^<>]{0,200}\" -i)"
+      "Bash(grep -oE \"\\(wrap-letters|split|inner-line|title|creative|designer\\)[^<>]{0,200}\" -i)",
+      "Bash(npx -y @gltf-transform/cli@latest draco public/models/dumble.original.glb public/models/dumble.glb)",
+      "Bash(npx -y @gltf-transform/cli@latest draco public/models/headphones.original.glb public/models/headphones.glb)",
+      "Bash(git checkout *)",
+      "Bash(cp public/models/dumble.glb /tmp/dumble.glb)",
+      "Bash(cp public/models/headphones.glb /tmp/headphones.glb)",
+      "Bash(npx -y @gltf-transform/cli@latest meshopt /tmp/dumble.glb public/models/dumble.glb)",
+      "Bash(npx -y @gltf-transform/cli@latest meshopt /tmp/headphones.glb public/models/headphones.glb)",
+      "Bash(sort -k5 -h)"
     ]
   }
 }

@@ -11,6 +11,29 @@ export default function Accordion({ items }) {
   return (
     <div className="accordion">
       <style>{`
+        /* Android tap-highlight + focus ring + selection: kill every blue
+         * overlay/glow Android Chrome paints on tap. Scoped to the
+         * accordion header tree only. pointer-events:none on inner children
+         * forces the tap target to be the header itself (one element to
+         * style instead of three). */
+        .accordion .accordion-header,
+        .accordion .accordion-header * {
+          -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+          -webkit-user-select: none !important;
+          user-select: none !important;
+          touch-action: manipulation;
+          outline: none !important;
+        }
+        .accordion .accordion-header > * {
+          pointer-events: none;
+        }
+        .accordion .accordion-header:focus,
+        .accordion .accordion-header:focus-visible,
+        .accordion .accordion-header:active {
+          outline: none !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
         @media (max-width: 768px) {
           .accordion .toggle {
             font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
@@ -31,9 +54,13 @@ export default function Accordion({ items }) {
         const maxHeight = isActive && body ? body.scrollHeight + 'px' : '0px';
         return (
           <div key={idx} className={isActive ? 'accordion-item active' : 'accordion-item'}>
-            <div className="accordion-header" onClick={() => toggle(idx)}>
-              <p className="number hideme" style={{ fontSize: '22px' }}>{String(idx + 1).padStart(2, '0')}</p>
-              <div className="title">{item.title}</div>
+            <div
+              className="accordion-header"
+              onClick={() => toggle(idx)}
+              style={{ WebkitTapHighlightColor: 'transparent', userSelect: 'none' }}
+            >
+              <p className="number hideme" style={{ fontSize: '22px', WebkitTapHighlightColor: 'transparent' }}>{String(idx + 1).padStart(2, '0')}</p>
+              <div className="title" style={{ WebkitTapHighlightColor: 'transparent' }}>{item.title}</div>
               <p
                 className="toggle"
                 style={{
@@ -45,7 +72,8 @@ export default function Accordion({ items }) {
                   lineHeight: 1,
                   transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)',
                   transformOrigin: '50% 50%',
-                  transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)'
+                  transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
+                  WebkitTapHighlightColor: 'transparent'
                 }}
               >
                 +

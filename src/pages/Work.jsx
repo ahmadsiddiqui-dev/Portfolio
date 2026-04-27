@@ -25,7 +25,7 @@ export default function Work() {
             <div className="drop-wrap"><p className="drop-text point" style={{ width: '50px' }}>01/</p></div>
           </div>
           <div className="fornumprop">
-            <div className="text mbltext" style={{ paddingTop: '275px', paddingBottom: '5px' }}>
+            <div className="text mbltext qline qline-w1" style={{ paddingTop: '275px', paddingBottom: '5px' }}>
               <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>C</span><span>T</span><span>S</span>
             </div>
             <div className="drop-wrap hideme"><p className="drop-text formbl01">01</p></div>
@@ -52,7 +52,7 @@ export default function Work() {
             <div className="divd1 divd1mbl" style={{ paddingLeft: '140px', flexDirection: 'column', paddingTop: '30px', textTransform: 'uppercase' }}>
               <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px' }}>A personal portfolio website</p></div>
               <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.08s' }}>designed and developed using </p></div>
-              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>HTML, CSS, and JavaScript.</p></div>
+              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>React, GSAP, Lenis, and Three.js.</p></div>
             </div>
           </div>
 
@@ -60,7 +60,7 @@ export default function Work() {
             <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
             <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
               <TLink to="/projectpage">
-                <p style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
+                <p className="see-more-btn" style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
                   See<br /> more
                 </p>
               </TLink>

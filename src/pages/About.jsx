@@ -1,21 +1,72 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import Accordion from '../components/Accordion.jsx';
 import HeadingSlider from '../components/HeadingSlider.jsx';
 import TLink from '../components/TLink.jsx';
-import Hobby3DModel from '../components/Hobby3DModel.jsx';
+import Hobby3DBoundary from '../components/Hobby3DBoundary.jsx';
 import useRevealAnimations from '../hooks/useRevealAnimations.js';
 
+// Lazy-load the 3D model component so the About page can render and
+// paint before three.js + @react-three/drei + GLB loaders are downloaded
+// and parsed. On mobile this is what makes the page show up immediately
+// instead of staying blank while the WebGL stack initialises.
+const Hobby3DModel = lazy(() => import('../components/Hobby3DModel.jsx'));
+
+// Fallback image rendered if WebGL / three.js / GLB load fails (iOS Safari
+// can fail in any of those steps). Keeps the page from going blank. Uses
+// smaller images (gymtry.jpg 1.3 MB / music.jpg 126 KB) — gym2.png at
+// 6.7 MB was too heavy and caused iPhone to show nothing while loading.
+// Static image fallback (rendered when WebGL is unavailable, or when the
+// 3D model errors out). gymtry.jpg + music.jpg are both already loaded
+// elsewhere on the site, so they're typically warm in cache by the time
+// the user reaches About.
+function HobbyFallback({ activeType }) {
+  const src = activeType === 'dumbbell'
+    ? `${import.meta.env.BASE_URL}gymtry.jpg`
+    : `${import.meta.env.BASE_URL}music.jpg`;
+  return (
+    <img
+      src={src}
+      alt={activeType}
+      loading="eager"
+      style={{
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        backgroundColor: '#d8d8d0'
+      }}
+    />
+  );
+}
+
 const UNDERLINE = { textDecoration: 'underline', textDecorationThickness: '1px', textUnderlineOffset: '10px' };
+
+// Some environments (iOS Safari with Lockdown Mode, very old browsers,
+// virtualised setups, etc.) silently fail to provide a WebGL context.
+// Feature-detect at module load: if WebGL isn't actually available, skip
+// the 3D model entirely and render the static image instead. This is a
+// truer test than UA sniffing — Chrome on iPhone supports WebGL even
+// when Safari is locked down.
+const SUPPORTS_WEBGL = (() => {
+  if (typeof document === 'undefined') return false;
+  try {
+    const c = document.createElement('canvas');
+    return !!(
+      c.getContext('webgl2') ||
+      c.getContext('webgl') ||
+      c.getContext('experimental-webgl')
+    );
+  } catch {
+    return false;
+  }
+})();
 
 export default function About() {
   const rootRef = useRef(null);
   useRevealAnimations(rootRef);
   const [activeTab, setActiveTab] = useState(0);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-  );
 
   useEffect(() => {
     sessionStorage.setItem('fromPage', 'about');
@@ -24,13 +75,6 @@ export default function About() {
     return () => {
       document.body.style.backgroundColor = prevBg;
     };
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
-    const onChange = (e) => setIsMobile(e.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
   }, []);
 
   return (
@@ -207,15 +251,12 @@ export default function About() {
           width: 100%;
           height: 100%;
           opacity: 0;
-          transform: scale(0.8);
-          transform-origin: center center;
-          transition: transform 0.8s ease-in-out, opacity 0s;
+          transition: opacity 0.4s ease;
           pointer-events: none;
           touch-action: none;
         }
         .about-page-scope .imageaboutab .hobby-3d.active {
           opacity: 1;
-          transform: scale(1);
           pointer-events: auto;
           z-index: 5;
         }
@@ -226,8 +267,17 @@ export default function About() {
         }
         @media (max-width: 768px) {
           .about-page-scope .imageaboutab {
-            height: 400px !important;
+            height: 280px !important;
             max-width: 100% !important;
+            margin-top: 30px !important;
+            margin-bottom: 0 !important;
+          }
+          /* Mobile: let vertical scroll pass through the canvas so the page
+           * is scrollable when the model is on screen. OrbitControls still
+           * handles horizontal swipe for rotation. */
+          .about-page-scope .imageaboutab .hobby-3d,
+          .about-page-scope .imageaboutab .hobby-3d canvas {
+            touch-action: pan-y !important;
           }
         }
         .about-page-scope .imageaboutab .hobby-3d canvas {
@@ -242,7 +292,7 @@ export default function About() {
         }
         @media (max-width: 768px) {
           .about-page-scope .imageaboutab .hobby-3d {
-            height: 400px;
+            height: 280px;
           }
         }
         .about-page-scope footer,
@@ -312,17 +362,17 @@ export default function About() {
         </div>
         <div className="mblaboutpage2" style={{ paddingTop: '365px', gap: 0 }}>
           <div>
-            <div className="text" style={{ padding: 0 }}>
+            <div className="text qline qline-1" style={{ padding: 0 }}>
               <span>P</span><span>A</span><span>S</span><span>S</span><span>I</span><span>O</span><span>N</span><span>A</span>
               <span className="emargin">T</span>
-              <span style={{ animationDelay: '0.72s' }}>E</span>
+              <span>E</span>
             </div>
-            <div className="text" style={{ padding: 0 }}>
+            <div className="text qline qline-2" style={{ padding: 0 }}>
               <span>C</span><span>R</span><span>E</span><span>A</span>
               <span className="emargin">T</span>
               <span>I</span><span>V</span><span>E</span>
             </div>
-            <div className="text" style={{ padding: 0, marginBottom: '20px' }}>
+            <div className="text qline qline-3" style={{ padding: 0, marginBottom: '20px' }}>
               <span>D</span><span>E</span><span>V</span><span>E</span><span>L</span>
               <span className="emargin">O</span>
               <span>P</span><span>E</span><span>R</span>
@@ -331,12 +381,12 @@ export default function About() {
               <img src={`${import.meta.env.BASE_URL}about-cover.jpg`} alt="" className="imganimation" />
               <div className="imganimations"></div>
             </div>
-            <div className="text" style={{ padding: 0, paddingTop: '20px' }}>
+            <div className="text qline qline-4" style={{ padding: 0, paddingTop: '20px' }}>
               <span>B</span><span>A</span><span>S</span><span>E</span><span>D</span>
               <span style={{ color: '#e5e5dd' }}>-</span>
               <span>I</span><span>N</span>
             </div>
-            <div className="text" style={{ padding: 0 }}>
+            <div className="text qline qline-5" style={{ padding: 0 }}>
               <span>R</span><span>A</span><span>M</span><span>P</span><span>U</span><span>R</span>
             </div>
           </div>
@@ -371,7 +421,7 @@ export default function About() {
         <div className="div9" style={{ paddingLeft: '20px', paddingBottom: '78px' }}>
           <div className="drop-wrap"><p className="drop-text point" style={{ paddingRight: '15px' }}>02/</p></div>
         </div>
-        <div className="text" style={{ padding: '7px 0px 0px 25px' }}>
+        <div className="text qline qline-6" style={{ padding: '7px 0px 0px 25px' }}>
           <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>E</span><span>S</span>
         </div>
       </div>
@@ -430,25 +480,19 @@ export default function About() {
           </div>
         </div>
         <div className="imageaboutab">
-          {isMobile ? (
-            <>
-              <img src={`${import.meta.env.BASE_URL}gym2.png`} className={'gymheight' + (activeTab === 0 ? ' active' : '')} data-idx="0" alt="gym" style={{ height: '700px' }} />
-              <img src={`${import.meta.env.BASE_URL}music.jpg`} className={activeTab === 1 ? 'active' : ''} data-idx="1" alt="music" />
-              <img src={`${import.meta.env.BASE_URL}music.jpg`} className={activeTab === 2 ? 'active' : ''} data-idx="2" alt="travelling" />
-            </>
-          ) : (
-            <>
-              <div data-lenis-prevent className={'hobby-3d' + (activeTab === 0 ? ' active' : '')}>
-                <Hobby3DModel type="dumbbell" />
-              </div>
-              <div data-lenis-prevent className={'hobby-3d' + (activeTab === 1 ? ' active' : '')}>
-                <Hobby3DModel type="headphones" />
-              </div>
-              <div data-lenis-prevent className={'hobby-3d' + (activeTab === 2 ? ' active' : '')}>
-                <Hobby3DModel type="headphones" />
-              </div>
-            </>
-          )}
+          <div data-lenis-prevent className="hobby-3d active">
+            {SUPPORTS_WEBGL ? (
+              <Hobby3DBoundary
+                fallback={<HobbyFallback activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />}
+              >
+                <Suspense fallback={<HobbyFallback activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />}>
+                  <Hobby3DModel activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />
+                </Suspense>
+              </Hobby3DBoundary>
+            ) : (
+              <HobbyFallback activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />
+            )}
+          </div>
         </div>
       </div>
 
@@ -482,7 +526,7 @@ export default function About() {
           <div className="divd1 divd1mbl" style={{ paddingLeft: '140px', flexDirection: 'column', paddingTop: '30px', textTransform: 'uppercase' }}>
             <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px' }}>A personal portfolio website</p></div>
             <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.08s' }}>designed and developed using </p></div>
-            <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>HTML, CSS, and JavaScript.</p></div>
+            <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>React, GSAP, Lenis, and Three.js.</p></div>
           </div>
         </div>
 
@@ -490,7 +534,7 @@ export default function About() {
           <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'cover' }} />
           <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
             <TLink to="/projectpage">
-              <p style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
+              <p className="see-more-btn" style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
                 See<br /> more
               </p>
             </TLink>

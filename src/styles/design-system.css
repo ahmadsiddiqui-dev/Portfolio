@@ -263,6 +263,22 @@ html.is-ios .design-system footer * {
     padding-bottom: 8px;
   }
 
+  /* iOS: drop the global 0.01em letter-spacing on the slider headings and
+   * match Android's tighter -0.03ch so GYM/MUSIC/TRAVELLING render flush
+   * (the qoreeb reveal makes the inter-letter gap more visible than the
+   * old slideUp did). Also tighten line-height to 0.9 (= Android) and
+   * remove the iOS-only TRAVELLING line-height/padding-bottom bump so the
+   * three words stack flush on iPhone instead of having a vertical gap. */
+  html.is-ios .design-system.about-page-scope .head-item,
+  html.is-ios .design-system.about-page-scope .head-item span {
+    letter-spacing: -0.03ch !important;
+    line-height: 0.9 !important;
+  }
+  html.is-ios .design-system.about-page-scope .head-item[data-idx="2"] {
+    line-height: 0.9 !important;
+    padding-bottom: 20px !important;
+  }
+
   /* About + iOS only: bump line-height on the email block + project name so
    * stacked .textemail lines feel less cramped on iPhone. Android stays at
    * the shared 1.1 value. */
@@ -289,6 +305,59 @@ html.is-ios .design-system footer * {
   }
   #content #ass > div:nth-of-type(2) h1.as {
     margin-top: -10px !important;
+  }
+  /* Android-only: pull SIDDIQUI further up so AHMAD/SIDDIQUI sit tighter
+   * (iOS keeps the -10px since iOS line metrics already render closer). */
+  html:not(.is-ios) #content #ass > div:nth-of-type(2) h1.as {
+    margin-top: -20px !important;
+  }
+  /* iOS-only: AHMAD/SIDDIQUI on Home gets a slightly looser line-height
+   * (the 0.85 above clips iOS letter ascenders/descenders). */
+  html.is-ios #content h1.as {
+    line-height: 0.95 !important;
+  }
+  /* iOS-only: add breathing room below SIDDIQUI (second h1 in #ass) so
+   * its descenders don't crowd the next section on iPhone. */
+  html.is-ios #content #ass > div:nth-of-type(2) h1.as {
+    padding-bottom: 15px !important;
+  }
+  /* iOS-only: drop overflow/contain clipping on the per-letter spans so Q's
+   * descender in SIDDIQUI doesn't get cut off. Blur containment is fine to
+   * relax here since the wave is short and adjacent letters animate close
+   * together. */
+  html.is-ios .design-system h1.as.as-reveal .aslet {
+    overflow: visible !important;
+    contain: none !important;
+  }
+  /* Down-arrow next to SIDDIQUI on Home mobile — same font as paragraphs
+   * (JetBrains Mono) so the ↓ glyph renders straight, not tilted like
+   * Korium's variant. Same Qoreeb blur reveal as AHMAD/SIDDIQUI letters,
+   * fires at the tail of SIDDIQUI's wave so it appears with the line. */
+  .design-system .arrow-down {
+    font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+    display: inline-block;
+    opacity: 0;
+    filter: blur(70px);
+    animation: qoreebZoomBlur 1.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation-play-state: paused;
+    animation-delay: 0.4s;
+  }
+  .design-system .arrow-down.appear {
+    animation-play-state: running;
+  }
+  /* Android-only: JetBrains Mono's baseline sits lower than Korium's, so
+   * pull the arrow up so it visually aligns with SIDDIQUI on Android. */
+  html:not(.is-ios) .design-system .arrow-down {
+    margin-top: -10px !important;
+    transform: translateY(-10px) !important;
+    line-height: 1 !important;
+  }
+
+  /* AHMAD/SIDDIQUI on mobile: use the same 85px size as the email block and
+   * project name. Other properties (weight, line-height, letter-spacing)
+   * stay as set above. */
+  .design-system h1.as {
+    font-size: 85px !important;
   }
 }
 
@@ -444,8 +513,14 @@ html.is-ios .design-system footer * {
    * Zero the inline marginTop/paddingTop on the surrounding .text.textpadi
    * lines so the 25px on the image alone defines the spacing. */
   html.is-ios .design-system .homeobbyimage {
-    margin-top: 25px !important;
-    margin-bottom: 10px !important;
+    margin-top: 35px !important;
+    margin-bottom: 5px !important;
+  }
+  /* iOS About page: same adjustment on the first image (about-cover.jpg)
+   * — bigger top gap from DEVELOPER, no bottom gap before BASED-IN. */
+  html.is-ios .design-system.about-page-scope .text1.mblfirst {
+    margin-top: 35px !important;
+    margin-bottom: 0 !important;
   }
   html.is-ios .design-system .text.textpadi {
     margin-top: 0 !important;
@@ -546,6 +621,252 @@ html.is-ios .design-system footer * {
   }
 }
 
+/* AHMAD / SIDDIQUI (Home, h1.as.as-reveal) — same Qoreeb blur reveal as
+ * CREATIVE/DEVELOPER, viewport-triggered. Wave order:
+ *   wave 1 line 1 "hA": H(2), A(4)
+ *   wave 1 line 2 "IIUI": I(2), I(5), U(7), I(8)
+ *   wave 2 line 1 remainder: A(1), M(3), D(5)
+ *   wave 2 line 2 remainder: S(1), D(3), D(4), Q(6) */
+.design-system h1.as.as-reveal {
+  overflow: hidden !important;
+}
+.design-system h1.as.as-reveal .aslet {
+  font-family: "T1 Korium", "Big Shoulders Display", "Anton", "PP Neue Montreal", sans-serif !important;
+  font-weight: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  display: inline-block;
+  overflow: hidden;
+  contain: paint;
+  opacity: 0;
+  filter: blur(70px);
+  animation: qoreebZoomBlur 1.6s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+  animation-play-state: paused !important;
+}
+.design-system h1.as.as-reveal .aslet.appear {
+  animation-play-state: running !important;
+}
+
+/* Wave 1 — AHMAD: H(2), A(4) */
+.design-system h1.as-ahmad .aslet:nth-child(2) { animation-delay: 0s !important; }
+.design-system h1.as-ahmad .aslet:nth-child(4) { animation-delay: 0.03s !important; }
+/* Wave 2 — AHMAD remainder: A(1), M(3), D(5) */
+.design-system h1.as-ahmad .aslet:nth-child(1) { animation-delay: 0.22s !important; }
+.design-system h1.as-ahmad .aslet:nth-child(3) { animation-delay: 0.25s !important; }
+.design-system h1.as-ahmad .aslet:nth-child(5) { animation-delay: 0.28s !important; }
+
+/* Wave 1 — SIDDIQUI: I(2), I(5), U(7), I(8) */
+.design-system h1.as-siddiqui .aslet:nth-child(2) { animation-delay: 0.1s !important; }
+.design-system h1.as-siddiqui .aslet:nth-child(5) { animation-delay: 0.13s !important; }
+.design-system h1.as-siddiqui .aslet:nth-child(7) { animation-delay: 0.16s !important; }
+.design-system h1.as-siddiqui .aslet:nth-child(8) { animation-delay: 0.19s !important; }
+/* Wave 2 — SIDDIQUI remainder: S(1), D(3), D(4), Q(6) */
+.design-system h1.as-siddiqui .aslet:nth-child(1) { animation-delay: 0.31s !important; }
+.design-system h1.as-siddiqui .aslet:nth-child(3) { animation-delay: 0.34s !important; }
+.design-system h1.as-siddiqui .aslet:nth-child(4) { animation-delay: 0.37s !important; }
+.design-system h1.as-siddiqui .aslet:nth-child(6) { animation-delay: 0.4s !important; }
+
+
+/* About page heading (PASSIONATE / CREATIVE / DEVELOPER / BASED-IN / RAMPUR)
+ * — same Qoreeb blur reveal as CREATIVE/DEVELOPER on Home. Per-line wave
+ * order spec:
+ *   Top group (qline-1..3, fires together when group enters viewport):
+ *     Wave 1: line 1 AINAT  + line 2 CEAIV + line 3 EVOPE  (parallel)
+ *     Wave 2: line 1 remainder + line 3 remainder           (parallel)
+ *     Wave 3: line 2 remainder
+ *   Bottom group (qline-4..5, fires together when group enters viewport):
+ *     Wave 1: line 4 BSEN + line 5 APU  (parallel)
+ *     Wave 2: line 5 remainder
+ *     Wave 3: line 4 remainder
+ * Font-size, font-family, weight all stay as set elsewhere — only the
+ * animation/delays/blur/opacity are added.
+ */
+.about-page-scope .qline,
+.design-system .qline {
+  overflow: hidden !important;
+}
+.about-page-scope .qline span,
+.design-system .qline span {
+  display: inline-block;
+  overflow: hidden;
+  contain: paint;
+  opacity: 0;
+  filter: blur(70px);
+  animation: qoreebZoomBlur 1.6s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+  animation-play-state: paused !important;
+  transform: none !important;
+}
+.about-page-scope .qline span.appear,
+.design-system .qline span.appear {
+  animation-play-state: running !important;
+}
+
+/* Wave 1 — PASSIONATE (line 1): A(2), I(5), N(7), A(8), T(9) */
+.about-page-scope .qline-1 span:nth-child(2) { animation-delay: 0s !important; }
+.about-page-scope .qline-1 span:nth-child(5) { animation-delay: 0.03s !important; }
+.about-page-scope .qline-1 span:nth-child(7) { animation-delay: 0.06s !important; }
+.about-page-scope .qline-1 span:nth-child(8) { animation-delay: 0.09s !important; }
+.about-page-scope .qline-1 span:nth-child(9) { animation-delay: 0.12s !important; }
+/* Wave 2 — PASSIONATE remainder: P(1), S(3), S(4), O(6), E(10) */
+.about-page-scope .qline-1 span:nth-child(1) { animation-delay: 0.22s !important; }
+.about-page-scope .qline-1 span:nth-child(3) { animation-delay: 0.25s !important; }
+.about-page-scope .qline-1 span:nth-child(4) { animation-delay: 0.28s !important; }
+.about-page-scope .qline-1 span:nth-child(6) { animation-delay: 0.31s !important; }
+.about-page-scope .qline-1 span:nth-child(10) { animation-delay: 0.34s !important; }
+
+/* Wave 1 — CREATIVE (line 2): C(1), E(3), A(4), I(6), V(7) */
+.about-page-scope .qline-2 span:nth-child(1) { animation-delay: 0s !important; }
+.about-page-scope .qline-2 span:nth-child(3) { animation-delay: 0.03s !important; }
+.about-page-scope .qline-2 span:nth-child(4) { animation-delay: 0.06s !important; }
+.about-page-scope .qline-2 span:nth-child(6) { animation-delay: 0.09s !important; }
+.about-page-scope .qline-2 span:nth-child(7) { animation-delay: 0.12s !important; }
+/* Wave 3 — CREATIVE remainder: R(2), T(5), E(8) — fires after wave 2 */
+.about-page-scope .qline-2 span:nth-child(2) { animation-delay: 0.44s !important; }
+.about-page-scope .qline-2 span:nth-child(5) { animation-delay: 0.47s !important; }
+.about-page-scope .qline-2 span:nth-child(8) { animation-delay: 0.50s !important; }
+
+/* Wave 1 — DEVELOPER (line 3): E(2), V(3), O(6), P(7), E(8) */
+.about-page-scope .qline-3 span:nth-child(2) { animation-delay: 0s !important; }
+.about-page-scope .qline-3 span:nth-child(3) { animation-delay: 0.03s !important; }
+.about-page-scope .qline-3 span:nth-child(6) { animation-delay: 0.06s !important; }
+.about-page-scope .qline-3 span:nth-child(7) { animation-delay: 0.09s !important; }
+.about-page-scope .qline-3 span:nth-child(8) { animation-delay: 0.12s !important; }
+/* Wave 2 — DEVELOPER remainder: D(1), E(4), L(5), R(9) */
+.about-page-scope .qline-3 span:nth-child(1) { animation-delay: 0.22s !important; }
+.about-page-scope .qline-3 span:nth-child(4) { animation-delay: 0.25s !important; }
+.about-page-scope .qline-3 span:nth-child(5) { animation-delay: 0.28s !important; }
+.about-page-scope .qline-3 span:nth-child(9) { animation-delay: 0.31s !important; }
+
+/* Wave 1 — BASED-IN (line 4, 8 spans incl. invisible "-" at pos 6):
+ * B(1), S(3), E(4), N(8) */
+.about-page-scope .qline-4 span:nth-child(1) { animation-delay: 0s !important; }
+.about-page-scope .qline-4 span:nth-child(3) { animation-delay: 0.03s !important; }
+.about-page-scope .qline-4 span:nth-child(4) { animation-delay: 0.06s !important; }
+.about-page-scope .qline-4 span:nth-child(8) { animation-delay: 0.09s !important; }
+/* Wave 3 — BASED-IN remainder: A(2), D(5), -(6), I(7) — fires after wave 2 */
+.about-page-scope .qline-4 span:nth-child(2) { animation-delay: 0.44s !important; }
+.about-page-scope .qline-4 span:nth-child(5) { animation-delay: 0.47s !important; }
+.about-page-scope .qline-4 span:nth-child(6) { animation-delay: 0.50s !important; }
+.about-page-scope .qline-4 span:nth-child(7) { animation-delay: 0.53s !important; }
+
+/* Wave 1 — RAMPUR (line 5): A(2), P(4), U(5) */
+.about-page-scope .qline-5 span:nth-child(2) { animation-delay: 0s !important; }
+.about-page-scope .qline-5 span:nth-child(4) { animation-delay: 0.03s !important; }
+.about-page-scope .qline-5 span:nth-child(5) { animation-delay: 0.06s !important; }
+/* Wave 2 — RAMPUR remainder: R(1), M(3), R(6) */
+.about-page-scope .qline-5 span:nth-child(1) { animation-delay: 0.22s !important; }
+.about-page-scope .qline-5 span:nth-child(3) { animation-delay: 0.25s !important; }
+.about-page-scope .qline-5 span:nth-child(6) { animation-delay: 0.28s !important; }
+
+/* SERVICES (section 2 heading, line 6) — wave order:
+ *   wave 1 "Srce": S(1), R(3), C(6), E(7)
+ *   wave 2 "ei":   E(2), I(5)
+ *   wave 3 "vs":   V(4), S(8)  */
+.about-page-scope .qline-6 span:nth-child(1) { animation-delay: 0s !important; }
+.about-page-scope .qline-6 span:nth-child(3) { animation-delay: 0.03s !important; }
+.about-page-scope .qline-6 span:nth-child(6) { animation-delay: 0.06s !important; }
+.about-page-scope .qline-6 span:nth-child(7) { animation-delay: 0.09s !important; }
+.about-page-scope .qline-6 span:nth-child(2) { animation-delay: 0.22s !important; }
+.about-page-scope .qline-6 span:nth-child(5) { animation-delay: 0.25s !important; }
+.about-page-scope .qline-6 span:nth-child(4) { animation-delay: 0.44s !important; }
+.about-page-scope .qline-6 span:nth-child(8) { animation-delay: 0.47s !important; }
+
+/* Home page section 03 — GYM, TRAVELLING, MUSIC: same Qoreeb wave order as
+ * the About slider.
+ *   GYM (qline-home-gym, 4 spans incl. trailing ","):
+ *     wave 1 "GM":    G(1), M(3)
+ *     wave 2 remainder: Y(2), ","(4)
+ *   MUSIC (qline-home-music, 6 spans incl. trailing "."):
+ *     wave 1 "UIC":   U(2), I(4), C(5)
+ *     wave 3 remainder: M(1), S(3), "."(6)
+ *   TRAVELLING (qline-home-travelling, 11 spans incl. trailing ","):
+ *     wave 1 "TAELING": T(1), A(3), E(5), L(6), I(8), N(9), G(10)
+ *     wave 4 remainder: R(2), V(4), L(7), ","(11) */
+.design-system .qline-home-gym span:nth-child(1) { animation-delay: 0s !important; }
+.design-system .qline-home-gym span:nth-child(3) { animation-delay: 0.03s !important; }
+.design-system .qline-home-gym span:nth-child(2) { animation-delay: 0.22s !important; }
+.design-system .qline-home-gym span:nth-child(4) { animation-delay: 0.25s !important; }
+
+.design-system .qline-home-music span:nth-child(2) { animation-delay: 0s !important; }
+.design-system .qline-home-music span:nth-child(4) { animation-delay: 0.03s !important; }
+.design-system .qline-home-music span:nth-child(5) { animation-delay: 0.06s !important; }
+.design-system .qline-home-music span:nth-child(1) { animation-delay: 0.44s !important; }
+.design-system .qline-home-music span:nth-child(3) { animation-delay: 0.47s !important; }
+.design-system .qline-home-music span:nth-child(6) { animation-delay: 0.50s !important; }
+
+.design-system .qline-home-travelling span:nth-child(1)  { animation-delay: 0s !important; }
+.design-system .qline-home-travelling span:nth-child(3)  { animation-delay: 0.03s !important; }
+.design-system .qline-home-travelling span:nth-child(5)  { animation-delay: 0.06s !important; }
+.design-system .qline-home-travelling span:nth-child(6)  { animation-delay: 0.09s !important; }
+.design-system .qline-home-travelling span:nth-child(8)  { animation-delay: 0.12s !important; }
+.design-system .qline-home-travelling span:nth-child(9)  { animation-delay: 0.15s !important; }
+.design-system .qline-home-travelling span:nth-child(10) { animation-delay: 0.18s !important; }
+.design-system .qline-home-travelling span:nth-child(2)  { animation-delay: 0.66s !important; }
+.design-system .qline-home-travelling span:nth-child(4)  { animation-delay: 0.69s !important; }
+.design-system .qline-home-travelling span:nth-child(7)  { animation-delay: 0.72s !important; }
+.design-system .qline-home-travelling span:nth-child(11) { animation-delay: 0.75s !important; }
+
+/* Work page — PROJECTS (qline-w1, 8 letters: P R O J E C T S):
+ *   Wave 1 "POECS": P(1), O(3), E(5), C(6), S(8)
+ *   Wave 2 "RJ":    R(2), J(4)
+ *   Wave 3 remainder: T(7) */
+.design-system .qline-w1 span:nth-child(1) { animation-delay: 0s !important; }
+.design-system .qline-w1 span:nth-child(3) { animation-delay: 0.03s !important; }
+.design-system .qline-w1 span:nth-child(5) { animation-delay: 0.06s !important; }
+.design-system .qline-w1 span:nth-child(6) { animation-delay: 0.09s !important; }
+.design-system .qline-w1 span:nth-child(8) { animation-delay: 0.12s !important; }
+.design-system .qline-w1 span:nth-child(2) { animation-delay: 0.22s !important; }
+.design-system .qline-w1 span:nth-child(4) { animation-delay: 0.25s !important; }
+.design-system .qline-w1 span:nth-child(7) { animation-delay: 0.44s !important; }
+
+/* About section 3 — GYM / MUSIC / TRAVELLING heading slider gets the
+ * Qoreeb blur reveal in place of the original slideUp. HeadingSlider adds
+ * the `.animate` class on viewport entry, which we reuse to play the
+ * animation. Wave order (per word — applies to every repeat in the slider
+ * track via [data-idx]):
+ *   Wave 1 line 1 GYM "GM"        → G(1), M(3)
+ *   Wave 1 line 2 MUSIC "UIC"     → U(2), I(4), C(5)
+ *   Wave 1 line 3 TRAVELLING "TAELING" → T(1), A(3), E(5), L(6), I(8), N(9), G(10)
+ *   Wave 2 line 1 remainder       → Y(2)
+ *   Wave 3 line 2 remainder       → M(1), S(3)
+ *   Wave 4 line 3 remainder       → R(2), V(4), L(7) */
+.about-page-scope .head-item span {
+  display: inline-block;
+  vertical-align: baseline;
+  transform: none !important;
+  opacity: 0;
+  filter: blur(70px);
+  animation: qoreebZoomBlur 1.6s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+  animation-play-state: paused !important;
+}
+.about-page-scope .head-item.animate span {
+  animation-play-state: running !important;
+}
+
+/* GYM (data-idx="0", 3 letters): G(1), Y(2), M(3) */
+.about-page-scope .head-item[data-idx="0"] span:nth-child(1) { animation-delay: 0s !important; }
+.about-page-scope .head-item[data-idx="0"] span:nth-child(3) { animation-delay: 0.03s !important; }
+.about-page-scope .head-item[data-idx="0"] span:nth-child(2) { animation-delay: 0.22s !important; }
+
+/* MUSIC (data-idx="1", 5 letters): M(1), U(2), S(3), I(4), C(5) */
+.about-page-scope .head-item[data-idx="1"] span:nth-child(2) { animation-delay: 0s !important; }
+.about-page-scope .head-item[data-idx="1"] span:nth-child(4) { animation-delay: 0.03s !important; }
+.about-page-scope .head-item[data-idx="1"] span:nth-child(5) { animation-delay: 0.06s !important; }
+.about-page-scope .head-item[data-idx="1"] span:nth-child(1) { animation-delay: 0.44s !important; }
+.about-page-scope .head-item[data-idx="1"] span:nth-child(3) { animation-delay: 0.47s !important; }
+
+/* TRAVELLING (data-idx="2", 10 letters): T(1) R(2) A(3) V(4) E(5) L(6) L(7) I(8) N(9) G(10) */
+.about-page-scope .head-item[data-idx="2"] span:nth-child(1)  { animation-delay: 0s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(3)  { animation-delay: 0.03s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(5)  { animation-delay: 0.06s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(6)  { animation-delay: 0.09s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(8)  { animation-delay: 0.12s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(9)  { animation-delay: 0.15s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(10) { animation-delay: 0.18s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(2)  { animation-delay: 0.66s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(4)  { animation-delay: 0.69s !important; }
+.about-page-scope .head-item[data-idx="2"] span:nth-child(7)  { animation-delay: 0.72s !important; }
 
 
 /* ========== big display headings ====================================== */
@@ -557,6 +878,23 @@ html.is-ios .design-system footer * {
   font-weight: 400 !important;
   letter-spacing: 0 !important;
   line-height: 0.98 !important;
+}
+
+/* Desktop: thinner Korium (weight 200) so the big headings have a lighter
+ * stroke than the default Regular. Mobile already uses 200 elsewhere.
+ * `body` prefix bumps specificity so this beats About's inline-style
+ * `.about-page-scope .text { font-weight: 400 !important }`. */
+@media (min-width: 769px) {
+  body .design-system .text,
+  body .design-system .text span,
+  body .design-system .textemail,
+  body .design-system .textemail .spanemail,
+  body .design-system h1.as,
+  body .design-system h1.as .aslet,
+  body .design-system .head-item,
+  body .design-system .head-item span {
+    font-weight: 200 !important;
+  }
 }
 
 .design-system .text,
@@ -628,17 +966,23 @@ html.is-ios .design-system footer * {
 }
 
 /* ========== header logo + nav ========================================= */
+/* T1 Korium ships weights 200–600 only, so font-weight: 100 silently
+ * falls back to 200 (the lightest available). To go thinner we shave a
+ * sub-pixel off each glyph's stroke with a negative -webkit-text-stroke. */
 .design-system #nav {
   font-family: "T1 Korium", "Big Shoulders Display", "PP Neue Montreal", sans-serif !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.02em !important;
+  font-weight: 200 !important;
+  letter-spacing: -0.02em !important;
   text-transform: uppercase !important;
+  -webkit-text-stroke: -0.4px currentColor !important;
 }
 
 @media (max-width: 768px) {
-  /* Mobile: header AHMAD SIDDIQUI matches h1.as body weight 200 (thin). */
+  /* Mobile: header AHMAD SIDDIQUI — thinnest weight available (100),
+   * looser letter-spacing for breathing room on narrower screens. */
   .design-system #nav {
-    font-weight: 200 !important;
+    font-weight: 100 !important;
+    letter-spacing: 0.02em !important;
   }
 }
 
@@ -646,7 +990,7 @@ html.is-ios .design-system footer * {
   .design-system #nav {
     font-size: 32px !important;
     font-weight: 200 !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.03em !important;
   }
 }
 
@@ -778,4 +1122,293 @@ html.is-ios .design-system footer * {
   line-height: 1.2 !important;
   border-bottom: 1px solid #000;
   padding-bottom: 4px;
+}
+
+/* "See more" pill button on the project image (Home / About / Work) —
+ * matches the body-text font (JetBrains Mono) instead of inheriting the
+ * page default. */
+.design-system .see-more-btn {
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.03ch;
+}
+
+/* Home desktop — make .letstart a centering flex column so CREATIVE +
+ * DEVELOPER row and the image both center against the viewport. Drop the
+ * inline 40px padding-left so flex centering can do its job; preserve the
+ * inline 140px padding-top via padding-block. The mobile-only children
+ * inside .letstart are display:none on desktop (laptophide) so they don't
+ * affect the layout. */
+@media (min-width: 769px) {
+  .design-system .letstart {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 200px !important;
+  }
+  /* Zero padding-left on the row tree so the global `* { padding-left:
+   * 20px }` in css.css doesn't drift things right. */
+  .design-system .creative-dev-row,
+  .design-system .creative-dev-row > .text,
+  .design-system .creative-dev-row > .text > span {
+    padding-left: 0 !important;
+  }
+  .design-system .creative-dev-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+    width: auto !important;
+    margin: 0 0 0 -40px !important;
+  }
+  .design-system .creative-dev-row > .text {
+    width: auto !important;
+    flex: 0 0 auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .design-system .letstart > .creative-dev-row .text,
+  .design-system .letstart > .creative-dev-row .text span {
+    font-size: 18vw !important;
+  }
+  /* Image inside the flex column auto-centers via align-items; just
+   * neutralise its inline padding/margin if any. */
+  .design-system .letstart > .text1.memain {
+    margin: 0 !important;
+  }
+}
+
+/* Home desktop "me" section — three columns:
+ *   left  : I SUPPORT DESIGNERS / AND AGENCIES WITH / CREATIVE DEVELOPMENT
+ *   centre: profile photo (finalmehome.jpg)
+ *   right : AHMAD / SIDDIQUI
+ * Mirrors the mobile vertical stack laid out horizontally. The .me-text
+ * and .me-ahmad columns carry .hideme so they only show on desktop; the
+ * image is always visible. */
+@media (min-width: 769px) {
+  .design-system .me-section {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: 80px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 10px auto 40px !important;
+    padding: 0 40px;
+  }
+  .design-system .me-text {
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+  }
+  .design-system .me-text .me-text-line {
+    font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+    font-weight: 200 !important;
+    font-size: 18px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.03ch !important;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    color: #000;
+  }
+  /* Image — render at natural aspect ratio (no `object-fit: cover` zoom). */
+  .design-system .me-section > .text1.memain {
+    flex: 0 0 auto;
+    width: 320px !important;
+    height: 330px !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+  }
+  .design-system .me-section .imganimationhome {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+  /* Keep the slide-in cover (.imganimationss) so the photo gets the same
+   * reveal as on mobile when the section enters the viewport. Override
+   * its inline height so it fills the desktop container's 330px height. */
+  .design-system .me-section .imganimationss {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  /* Right column — AHMAD / SIDDIQUI sits at bottom-right next to the
+   * photo (matches the reference where the right-side label hugs the
+   * photo's lower edge). Smaller font so it doesn't overpower the image. */
+  .design-system .me-ahmad {
+    align-self: end;
+    justify-self: start;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .design-system .me-ahmad h1.as {
+    font-size: 4vw !important;
+    line-height: 0.95 !important;
+    text-align: left !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* Pull AHMAD/SIDDIQUI closer to the photo without affecting the
+   * text→photo gap on the other side. (Section gap is 80; -65 leaves ~15
+   * effective spacing between photo and AHMAD.) */
+  .design-system .me-ahmad {
+    margin-left: -65px !important;
+  }
+  /* The old .div3.arrowdiv (arrow + sup + AHMAD SIDDIQUI) is replaced by
+   * .me-section on desktop; hide it so AHMAD doesn't render twice. */
+  .design-system .div3.arrowdiv {
+    display: none !important;
+  }
+}
+/* Home desktop — reduce the large 350px padding-top on .containermain
+ * (the "01/ Passionate about software…" section) so it sits closer to
+ * the .me-section above. */
+@media (min-width: 769px) {
+  .design-system .containermain {
+    padding-top: 120px !important;
+  }
+}
+
+/* Header — desktop only: lighter weight on the side text and nav links
+ * (Software Engineer / Based in Rampur, plus Home/Work/About/Contact).
+ * The logo (#nav "Ahmad Siddiqui") is excluded — keeps its existing
+ * weight from the dedicated #nav rules above. */
+@media (min-width: 769px) {
+  .design-system .navbw,
+  .design-system .navbw p,
+  .design-system .menu,
+  .design-system .menu a,
+  .design-system .menu div {
+    font-weight: 200 !important;
+  }
+  .design-system .navbw p {
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap;
+  }
+  /* Align logo / nav text / menu on a single horizontal line at top: 30.
+   * .navbw uses smaller JetBrains Mono and renders visually higher than
+   * the Korium logo at the same `top` value, so nudge it down a few px to
+   * visually match. */
+  .design-system #nav,
+  .design-system .menu {
+    top: 30px !important;
+    padding-top: 0 !important;
+  }
+  .design-system .navbw {
+    top: 38px !important;
+    padding-top: 0 !important;
+  }
+  .design-system .navbw {
+    position: absolute !important;
+  }
+}
+
+/* Header nav links — bracketed text [Home] [Work] [About] [Contact].
+ * No underline (was added on the active link), no comma, fade-on-hover. */
+.design-system .nav-link {
+  text-decoration: none !important;
+  transition: opacity 0.25s ease;
+  opacity: 1;
+  display: inline-block;
+  font-size: 18px !important;
+  font-weight: 200 !important;
+  letter-spacing: 0 !important;
+}
+.design-system .nav-link:hover,
+.design-system .nav-link:focus {
+  opacity: 0.5;
+}
+/* Active link sits at slightly reduced opacity so it reads as the
+ * "current" page without using the old underline. */
+.design-system .nav-link.active {
+  opacity: 0.6;
+}
+
+/* Hide nav links on mobile — burger [MENU] replaces them. The `.hideme`
+ * class on the JSX is overridden by `.design-system .nav-link`'s
+ * `display: inline-block` due to higher specificity, so re-hide here. */
+@media (max-width: 768px) {
+  .design-system .nav-link {
+    display: none !important;
+  }
+}
+
+/* Copyright pinned to the right edge of .letstart so it lines up with
+ * the menu links (which sit at right: 55px from the viewport). Positioned
+ * absolute relative to .letstart (full viewport width) and pushed to the
+ * bottom of the section so it sits in the same horizontal column as the
+ * menu but lower on the page. */
+.design-system .section-copyright {
+  position: absolute;
+  bottom: 10px;
+  right: 55px;
+}
+.design-system .section-copyright-line {
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-size: 18px !important;
+  font-weight: 200 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #000;
+}
+@media (max-width: 768px) {
+  .design-system .section-copyright {
+    display: none;
+  }
+}
+
+/* Bottom-left "Want to work together?" + email — mirrors the copyright
+ * on the right. Same JetBrains Mono / 18px / weight 200 / uppercase. */
+.design-system .section-contact {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.design-system .section-contact-label,
+.design-system .section-contact-email {
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace !important;
+  font-size: 18px !important;
+  font-weight: 200 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #000;
+  text-decoration: none;
+}
+.design-system .section-contact-email {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: opacity 0.25s ease;
+}
+.design-system .section-contact-email:hover {
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  .design-system .section-contact {
+    display: none;
+  }
 }

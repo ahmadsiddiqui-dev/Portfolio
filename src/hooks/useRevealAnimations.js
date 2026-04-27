@@ -9,12 +9,13 @@ export default function useRevealAnimations(rootRef, enabled = true) {
     if (!enabled) return;
     const root = rootRef?.current ?? document;
 
-    // Fire CREATIVE / DEVELOPER blur reveal immediately on mount so it
-    // plays first, before any other animations on the page.
-    const letstartSpans = (rootRef?.current ?? document).querySelectorAll(
-      '.letstart .text span'
+    // Fire CREATIVE / DEVELOPER blur reveal (Home) and PROJECTS blur reveal
+    // (Work) immediately on mount so they play first, before any other
+    // animations on the page.
+    const leadSpans = (rootRef?.current ?? document).querySelectorAll(
+      '.letstart .text span, .qline-w1 span'
     );
-    letstartSpans.forEach((s) => s.classList.add('appear'));
+    leadSpans.forEach((s) => s.classList.add('appear'));
 
     // All other reveals hold back until ~50% through the 1.6s blur (≈800ms)
     // so the blur leads and the rest cascades in behind it.
@@ -44,14 +45,62 @@ export default function useRevealAnimations(rootRef, enabled = true) {
         });
 
         // .text span letter cascade — excludes .letstart .text span (already
-        // triggered above) so CREATIVE/DEVELOPER isn't double-triggered.
+        // triggered above) and About .qline spans (handled as group below)
+        // so the qoreeb wave order isn't disturbed by per-span triggers.
         gsap.utils.toArray('.text span').forEach((span) => {
           if (span.closest('.letstart')) return;
+          if (span.closest('.qline')) return;
           ScrollTrigger.create({
             trigger: span,
             start: 'top bottom',
             once: true,
             onEnter: () => span.classList.add('appear')
+          });
+        });
+
+        // About heading qoreeb reveal — fire all spans in qline-1..3 together
+        // when qline-1 enters viewport (top group), and qline-4..5 together
+        // when qline-4 enters (bottom group). Per-letter wave order comes
+        // from animation-delay in design-system.css.
+        const fireGroup = (triggerEl, lineSelectors) => {
+          if (!triggerEl) return;
+          ScrollTrigger.create({
+            trigger: triggerEl,
+            start: 'top bottom',
+            once: true,
+            onEnter: () => {
+              lineSelectors.forEach((sel) => {
+                root.querySelectorAll(`${sel} span`).forEach((s) =>
+                  s.classList.add('appear')
+                );
+              });
+            }
+          });
+        };
+        fireGroup(root.querySelector('.qline-1'), ['.qline-1', '.qline-2', '.qline-3']);
+        fireGroup(root.querySelector('.qline-4'), ['.qline-4', '.qline-5']);
+        fireGroup(root.querySelector('.qline-6'), ['.qline-6']);
+        fireGroup(root.querySelector('.qline-home-gym'), ['.qline-home-gym']);
+        fireGroup(root.querySelector('.qline-home-travelling'), ['.qline-home-travelling']);
+        fireGroup(root.querySelector('.qline-home-music'), ['.qline-home-music']);
+
+        // AHMAD / SIDDIQUI Qoreeb blur reveal — fire all letters across both
+        // h1.as.as-reveal in the same #ass container together so the wave
+        // order (line 1 → line 2 → line 1 remainder → line 2 remainder)
+        // plays as one sequence per the staggered animation-delays in CSS.
+        // Trigger fires when the container's top reaches 85% from the top
+        // of the viewport — i.e., the user has actually scrolled it well
+        // into view (not just the first pixel peeking from below).
+        gsap.utils.toArray('#ass, .me-ahmad').forEach((container) => {
+          ScrollTrigger.create({
+            trigger: container,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+              container
+                .querySelectorAll('h1.as-reveal .aslet, .arrow-down')
+                .forEach((s) => s.classList.add('appear'));
+            }
           });
         });
 

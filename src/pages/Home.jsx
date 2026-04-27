@@ -22,7 +22,31 @@ export default function Home() {
       // Preloader hid body overflow and content was covered — remeasure so
       // ScrollTriggers fire at the right positions now that content is visible.
       const t = setTimeout(() => ScrollTrigger.refresh(), 50);
-      return () => clearTimeout(t);
+      // Header slide-in re-trigger: the SlideInDown animation on #nav /
+      // .navbw / .menu starts at page load with delay 0.7s, but on Home
+      // the preloader hides everything until `ready` flips true, by which
+      // point the animation has already finished. Hide them IMMEDIATELY
+      // when content becomes visible, then 2s later (after CREATIVE /
+      // DEVELOPER blur reveal ends) restart the slide-in animation.
+      const headerEls = document.querySelectorAll('header #nav, header .navbw, header .menu');
+      headerEls.forEach((el) => {
+        el.style.animation = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-80px)';
+      });
+      const headerTimer = setTimeout(() => {
+        headerEls.forEach((el) => {
+          el.style.opacity = '';
+          el.style.transform = '';
+          // Force reflow so removing+re-applying actually restarts.
+          void el.offsetWidth;
+          el.style.animation = '';
+        });
+      }, 1000);
+      return () => {
+        clearTimeout(t);
+        clearTimeout(headerTimer);
+      };
     }
   }, [ready]);
 
@@ -50,15 +74,17 @@ export default function Home() {
         <Header current="home" animated extraStyle={{ paddingLeft: '20px' }} />
 
         <div className="letstart" style={{ padding: '140px 0px 0px 40px', color: 'black' }}>
-          <div className="text" style={{ margin: '10px 0px 10px 0px', marginLeft: '-8px' }}>
-            <span>C</span><span>R</span><span>E</span><span>A</span>
-            <span className="emargin" >T</span>
-            <span>I</span><span>V</span><span>E</span>
-          </div>
-          <div className="text homedevel" style={{ margin: '10px 0px 20px 0px', marginLeft: '-8px' }}>
-            <span>D</span><span>E</span><span>V</span><span>E</span><span>L</span>
-            <span className="emargin" >O</span>
-            <span>P</span><span>E</span><span>R</span>
+          <div className="creative-dev-row">
+            <div className="text" style={{ margin: '10px 0px 10px 0px', marginLeft: '-8px' }}>
+              <span>C</span><span>R</span><span>E</span><span>A</span>
+              <span className="emargin" >T</span>
+              <span>I</span><span>V</span><span>E</span>
+            </div>
+            <div className="text homedevel" style={{ margin: '10px 0px 20px 0px', marginLeft: '-8px' }}>
+              <span>D</span><span>E</span><span>V</span><span>E</span><span>L</span>
+              <span className="emargin" >O</span>
+              <span>P</span><span>E</span><span>R</span>
+            </div>
           </div>
           <div
             className="divd1 divd1mbl laptophide"
@@ -80,21 +106,48 @@ export default function Home() {
               <p className="drop-text divd1mbl" style={{ fontSize: '20px', animationDelay: '0.16s' }}>CREATIVE DEVELOPMENT</p>
             </div>
           </div>
-          <div className="text1 memain" style={{ width: '565px' }}>
-            <img src={`${import.meta.env.BASE_URL}finalmehome.jpg`} alt="" className="imganimationhome memain laptophide" />
-            <img src={`${import.meta.env.BASE_URL}newme.jpg`} alt="" className="imganimationhome memain hideme" />
-            <div className="imganimationss" style={{ height: '250px' }}></div>
+          <div className="me-section">
+            <div className="me-text hideme">
+              <div className="drop-wrap"><p className="drop-text me-text-line">I SUPPORT DESIGNERS</p></div>
+              <div className="drop-wrap"><p className="drop-text me-text-line" style={{ animationDelay: '0.08s' }}>AND AGENCIES WITH</p></div>
+              <div className="drop-wrap"><p className="drop-text me-text-line" style={{ animationDelay: '0.16s' }}>CREATIVE DEVELOPMENT</p></div>
+            </div>
+            <div className="text1 memain" style={{ width: '565px' }}>
+              <img src={`${import.meta.env.BASE_URL}finalmehome.jpg`} alt="" className="imganimationhome memain" />
+              <div className="imganimationss" style={{ height: '250px' }}></div>
+            </div>
+            <div className="me-ahmad hideme">
+              <h1 className="as as-reveal as-ahmad">
+                <span className="aslet">A</span><span className="aslet">H</span><span className="aslet">M</span><span className="aslet">A</span><span className="aslet">D</span>
+              </h1>
+              <h1 className="as as-reveal as-siddiqui">
+                <span className="aslet">S</span><span className="aslet">I</span><span className="aslet">D</span><span className="aslet">D</span><span className="aslet">I</span><span className="aslet">Q</span><span className="aslet">U</span><span className="aslet">I</span>
+              </h1>
+            </div>
+          </div>
+          <div className="section-copyright hideme">
+            <div className="drop-wrap"><p className="drop-text section-copyright-line">[©Ahmad2026]</p></div>
+          </div>
+          <div className="section-contact hideme">
+            <div className="drop-wrap"><p className="drop-text section-contact-label">Want to work together</p></div>
+            <div className="drop-wrap"><a className="drop-text section-contact-email" href="mailto:ahmadsiddiqui909@gmail.com" style={{ animationDelay: '0.08s' }}>[hello@ahmadjavaidsiddiqui.com]</a></div>
           </div>
 
-          <div className="laptophide" style={{ display: 'flex', flexDirection: 'row', marginBottom: '180px' }}>
-            <div className="laptophide" id="ass">
+          <div className="laptophide" style={{ display: 'flex', flexDirection: 'row', marginBottom: '180px', width: '100%' }}>
+            <div className="laptophide" id="ass" style={{ width: '100%' }}>
               <div className="ass laptophide">
-                <h1 className="as">AHMAD</h1>
+                <h1 className="as as-reveal as-ahmad">
+                  <span className="aslet">A</span><span className="aslet">H</span><span className="aslet">M</span><span className="aslet">A</span><span className="aslet">D</span>
+                </h1>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'row', padding: 0 }}>
-                <div><h1 className="as laptophide">SIDDIQUI</h1></div>
+              <div style={{ display: 'flex', flexDirection: 'row', padding: 0, width: '100%', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <div>
-                  <h1 className="laptophide" style={{ paddingLeft: '35px', fontSize: '60px', marginTop: '-10px', fontWeight: 500 }}>↓</h1>
+                  <h1 className="as as-reveal as-siddiqui laptophide">
+                    <span className="aslet">S</span><span className="aslet">I</span><span className="aslet">D</span><span className="aslet">D</span><span className="aslet">I</span><span className="aslet">Q</span><span className="aslet">U</span><span className="aslet">I</span>
+                  </h1>
+                </div>
+                <div style={{ paddingRight: '20px' }}>
+                  <h1 className="laptophide arrow-down" style={{ fontSize: '80px', lineHeight: 1, marginTop: '-10px', fontWeight: 300 }}>↓</h1>
                 </div>
               </div>
             </div>
@@ -109,8 +162,16 @@ export default function Home() {
             <p className="sup">I SUPPORT DESIGNERS<br /> AND AGENCIES WITH<br /> CREATIVE DEVELOPMENT</p>
           </div>
           <div id="ass">
-            <div className="ass"><h1 className="as">AHMAD</h1></div>
-            <div><h1 className="as">SIDDIQUI</h1></div>
+            <div className="ass">
+              <h1 className="as as-reveal as-ahmad">
+                <span className="aslet">A</span><span className="aslet">H</span><span className="aslet">M</span><span className="aslet">A</span><span className="aslet">D</span>
+              </h1>
+            </div>
+            <div>
+              <h1 className="as as-reveal as-siddiqui">
+                <span className="aslet">S</span><span className="aslet">I</span><span className="aslet">D</span><span className="aslet">D</span><span className="aslet">I</span><span className="aslet">Q</span><span className="aslet">U</span><span className="aslet">I</span>
+              </h1>
+            </div>
           </div>
         </div>
 
@@ -223,7 +284,7 @@ export default function Home() {
             <div className="divd1 divd1mbl" style={{ paddingLeft: '140px', flexDirection: 'column', paddingTop: '30px', textTransform: 'uppercase' }}>
               <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px' }}>A personal portfolio website</p></div>
               <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.08s' }}>designed and developed using </p></div>
-              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>HTML, CSS, and JavaScript.</p></div>
+              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>React, GSAP, Lenis, and Three.js.</p></div>
             </div>
           </div>
 
@@ -231,7 +292,7 @@ export default function Home() {
             <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
             <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
               <TLink to="/projectpage">
-                <p style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
+                <p className="see-more-btn" style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
                   See<br /> more
                 </p>
               </TLink>
@@ -250,19 +311,19 @@ export default function Home() {
             </div>
           </div>
           <div className="veryem">
-            <div className="text textpadi" style={{ display: 'flex', marginTop: '5px', paddingBottom: '10px', marginLeft: '150px', marginBottom: '10px' }}>
+            <div className="text textpadi qline qline-home-gym" style={{ display: 'flex', marginTop: '5px', paddingBottom: '10px', marginLeft: '150px', marginBottom: '10px' }}>
               <span>G</span><span>Y</span><span>M</span><span>,</span>
             </div>
             <div className="text1 homeobbyimage" style={{ height: '300px', width: '600px', left: 152 }}>
               <img src={`${import.meta.env.BASE_URL}gymtry.jpg`} alt="" className="imganimation homeobbyimage2" />
               <div className="imganimations"></div>
             </div>
-            <div className="text textpadi" style={{ display: 'flex', paddingBottom: '10px', marginTop: '20px', paddingLeft: '150px' }}>
+            <div className="text textpadi qline qline-home-travelling" style={{ display: 'flex', paddingBottom: '10px', marginTop: '20px', paddingLeft: '150px' }}>
               <span>T</span><span>R</span><span>A</span><span>V</span><span>E</span><span>L</span><span>L</span><span>I</span><span>N</span>
-              <span style={{ animationDelay: '1s' }}>G</span>
-              <span style={{ animationDelay: '1.1s' }}>,</span>
+              <span>G</span>
+              <span>,</span>
             </div>
-            <div className="text" style={{ display: 'flex', margin: '15px', marginLeft: '150px' }}>
+            <div className="text qline qline-home-music" style={{ display: 'flex', margin: '15px', marginLeft: '150px' }}>
               <span>M</span><span>U</span><span>S</span><span>I</span><span>C</span><span>.</span>
             </div>
           </div>

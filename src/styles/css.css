@@ -107,6 +107,26 @@ html.is-ios body {
   border-bottom-left-radius: 0px;
 }
 
+/* Mobile: hide all scrollbars (page + horizontal scroll containers).
+ * The visible bar adds visual noise on phones; users still scroll natively
+ * via touch. WebKit + Firefox + IE all covered. */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar,
+  .projectpage::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    display: none !important;
+  }
+  html,
+  body,
+  .projectpage,
+  .image-scroll-wrapper {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/old Edge */
+  }
+}
+
 header {
   width: 100%;
   height: 30px;
@@ -932,16 +952,24 @@ footer.in-view {
   position: fixed;
   width: 70px;
   height: 70px;
+  padding: 0;
+  margin: 0;
   background-color: white;
   border-radius: 50%;
   pointer-events: none;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03ch;
   color: black;
   text-transform: uppercase;
   opacity: 0;
+  z-index: 99999;
   transition: opacity 0.3s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1205,10 +1233,10 @@ footer.in-view {
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  padding-top: 125px;
+  padding-top: 150px;
   padding-left: 710px;
   padding-right: 60px;
-  height: 630px;
+  height: 730px;
   width: auto;
   z-index: 1;
 }
@@ -1216,6 +1244,23 @@ footer.in-view {
 .maindiv333 {
   display: flex;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Desktop horizontal scroll gallery: give each image a fixed display
+ * height with auto width so they keep their aspect ratio AND the row
+ * total width exceeds viewport width, which is what triggers the
+ * pinned horizontal scroll in useRevealAnimations.js. */
+.image-scroll-wrapper .maindiv333 img,
+.image-scroll-wrapper img.imganimationsss {
+  height: 730px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.image-scroll-wrapper .maindiv333 + .maindiv333 {
+  gap: 60px;
 }
 
 @keyframes imgappear {
@@ -1238,6 +1283,7 @@ footer.in-view {
   background: transparent;
   color: white;
   border: none;
+  font-family: "JetBrains Mono", "PP Neue Montreal Book", "PP Neue Montreal", monospace;
   font-size: 25px;
   cursor: pointer;
   font-weight: 500;
@@ -1392,6 +1438,16 @@ p {
 
 a, button{
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Accordion (About → Services) — kill Android Chrome's blue tap overlay
+ * on the +/title row. Scoped to the accordion subtree only. */
+.accordion .accordion-header,
+.accordion .accordion-header *,
+.accordion .accordion-item,
+.accordion .accordion-item * {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -webkit-touch-callout: none !important;
 }
 
 
