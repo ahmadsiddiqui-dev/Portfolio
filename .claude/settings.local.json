@@ -71,7 +71,8 @@
       "Bash(cp public/models/headphones.glb /tmp/headphones.glb)",
       "Bash(npx -y @gltf-transform/cli@latest meshopt /tmp/dumble.glb public/models/dumble.glb)",
       "Bash(npx -y @gltf-transform/cli@latest meshopt /tmp/headphones.glb public/models/headphones.glb)",
-      "Bash(sort -k5 -h)"
+      "Bash(sort -k5 -h)",
+      "Bash(awk -F: '$1+0>=400 && $1+0<=520')"
     ]
   }
 }
