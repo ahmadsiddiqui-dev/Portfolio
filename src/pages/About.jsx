@@ -78,6 +78,16 @@ export default function About() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!SUPPORTS_WEBGL) return;
+    const base = import.meta.env.BASE_URL;
+    const ctrl = new AbortController();
+    ['dumble.glb', 'headphones.glb', 'travel.glb'].forEach((name) => {
+      fetch(`${base}models/${name}`, { signal: ctrl.signal }).catch(() => {});
+    });
+    return () => ctrl.abort();
+  }, []);
+
   return (
     <div ref={rootRef} className="about-page-scope design-system">
       <style>{`

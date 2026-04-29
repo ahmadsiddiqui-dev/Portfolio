@@ -140,11 +140,15 @@ export default function Hobby3DModel({ activeType }) {
           rotation={[0, 0, 0]}
           visible={renderedType === 'dumbbell'}
         />
+      </Suspense>
+      <Suspense fallback={null}>
         <GLBModel
           path={HEADPHONES_PATH}
           rotation={[0, Math.PI / 2, 0]}
           visible={renderedType === 'headphones'}
         />
+      </Suspense>
+      <Suspense fallback={null}>
         <group position={[0, isMobile ? 0.2 : 0.3, 0]}>
           <GLBModel
             path={TRAVEL_PATH}
