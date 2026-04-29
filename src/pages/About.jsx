@@ -67,6 +67,7 @@ export default function About() {
   const rootRef = useRef(null);
   useRevealAnimations(rootRef);
   const [activeTab, setActiveTab] = useState(0);
+  const hobbyType = activeTab === 0 ? 'dumbbell' : activeTab === 1 ? 'headphones' : 'travel';
 
   useEffect(() => {
     sessionStorage.setItem('fromPage', 'about');
@@ -483,14 +484,14 @@ export default function About() {
           <div data-lenis-prevent className="hobby-3d active">
             {SUPPORTS_WEBGL ? (
               <Hobby3DBoundary
-                fallback={<HobbyFallback activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />}
+                fallback={<HobbyFallback activeType={hobbyType} />}
               >
-                <Suspense fallback={<HobbyFallback activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />}>
-                  <Hobby3DModel activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />
+                <Suspense fallback={<HobbyFallback activeType={hobbyType} />}>
+                  <Hobby3DModel activeType={hobbyType} />
                 </Suspense>
               </Hobby3DBoundary>
             ) : (
-              <HobbyFallback activeType={activeTab === 0 ? 'dumbbell' : 'headphones'} />
+              <HobbyFallback activeType={hobbyType} />
             )}
           </div>
         </div>

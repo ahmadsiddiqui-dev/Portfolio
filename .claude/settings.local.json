@@ -72,7 +72,12 @@
       "Bash(npx -y @gltf-transform/cli@latest meshopt /tmp/dumble.glb public/models/dumble.glb)",
       "Bash(npx -y @gltf-transform/cli@latest meshopt /tmp/headphones.glb public/models/headphones.glb)",
       "Bash(sort -k5 -h)",
-      "Bash(awk -F: '$1+0>=400 && $1+0<=520')"
+      "Bash(awk -F: '$1+0>=400 && $1+0<=520')",
+      "WebSearch",
+      "WebFetch(domain:sketchfab.com)",
+      "WebFetch(domain:poly.pizza)",
+      "Bash(npx --yes @gltf-transform/cli@latest optimize public/models/travel.glb public/models/travel-opt.glb --texture-size 1024 --texture-compress webp --compress meshopt)",
+      "Bash(npx --yes @gltf-transform/cli@latest optimize /Users/rnf-user/Documents/myproject/Portfolio/public/models/travel.glb /Users/rnf-user/Documents/myproject/Portfolio/public/models/travel-opt.glb --simplify false --texture-size 2048 --texture-compress webp --compress meshopt)"
     ]
   }
 }

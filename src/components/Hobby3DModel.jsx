@@ -50,6 +50,7 @@ function GLBModel({ path, rotation = [0, 0, 0], fit = 1.7, visible = true }) {
 const BASE = import.meta.env.BASE_URL;
 const DUMBBELL_PATH = `${BASE}models/dumble.glb`;
 const HEADPHONES_PATH = `${BASE}models/headphones.glb`;
+const TRAVEL_PATH = `${BASE}models/travel.glb`;
 
 // Single Canvas instance — both models live in the scene, only the active
 // one is `visible`. This keeps the page to ONE WebGL context (iOS Safari
@@ -63,6 +64,16 @@ export default function Hobby3DModel({ activeType }) {
   // is a clean fade-out / fade-in crossfade like the text section's.
   const [renderedType, setRenderedType] = useState(activeType);
   const [opacity, setOpacity] = useState(1);
+
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const onChange = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
   // Reset OrbitControls to its initial position every time the tab
   // changes — coming back to a model should always show it from the
@@ -91,6 +102,7 @@ export default function Hobby3DModel({ activeType }) {
   useEffect(() => {
     useGLTF.preload(DUMBBELL_PATH);
     useGLTF.preload(HEADPHONES_PATH);
+    useGLTF.preload(TRAVEL_PATH);
   }, []);
 
   return (
@@ -133,12 +145,21 @@ export default function Hobby3DModel({ activeType }) {
           rotation={[0, Math.PI / 2, 0]}
           visible={renderedType === 'headphones'}
         />
+        <group position={[0, isMobile ? 0.2 : 0.3, 0]}>
+          <GLBModel
+            path={TRAVEL_PATH}
+            rotation={[0, -Math.PI * 0.6, 0]}
+            fit={isMobile ? 2.8 : 2.3}
+            visible={renderedType === 'travel'}
+          />
+        </group>
       </Suspense>
       <OrbitControls
         ref={controlsRef}
         enablePan={false}
         enableZoom={false}
         rotateSpeed={0.9}
+        maxPolarAngle={Math.PI / 2}
         enableDamping
         dampingFactor={0.08}
       />
