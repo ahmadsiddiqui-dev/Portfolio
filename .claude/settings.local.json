@@ -91,7 +91,16 @@
       "Bash(git commit -m ' *)",
       "Bash(curl -sI https://ahmadjavaidsiddiqui.com)",
       "Bash(openssl s_client -servername ahmadjavaidsiddiqui.com -connect ahmadjavaidsiddiqui.com:443)",
-      "Bash(openssl x509 *)"
+      "Bash(openssl x509 *)",
+      "Bash(lsof -ti:5173)",
+      "Bash(command -v magick)",
+      "Bash(command -v convert)",
+      "Bash(command -v ffmpeg)",
+      "Bash(command -v cwebp)",
+      "Bash(sips --help)",
+      "Bash(sips -s format jpeg -s formatOptions 50 new1project.jpg --out new1project-android.jpg)",
+      "Bash(sips -s format jpeg -s formatOptions 50 new2project.jpg --out new2project-android.jpg)",
+      "Bash(sips *)"
     ]
   }
 }

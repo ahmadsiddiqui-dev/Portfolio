@@ -14,6 +14,7 @@ export const projects = [
       'transcripts, summaries, and study tools.'
     ],
     coverImage: 'new1project.jpg',
+    coverImageAndroid: 'new1project-android.jpg',
     role: 'Design & Development',
     year: '2026',
     liveUrl: '',
@@ -81,6 +82,7 @@ export const projects = [
       'React, GSAP, Lenis, and Three.js.'
     ],
     coverImage: 'new2project.jpg',
+    coverImageAndroid: 'new2project-android.jpg',
     role: 'Design & Development',
     year: '2025',
     liveUrl: 'https://ahmadjavaidsiddiqui.com',

@@ -203,40 +203,49 @@ export default function useRevealAnimations(rootRef, enabled = true) {
           });
         });
 
-        // Re-refresh once every <img> has loaded so scrollWidth is final.
-        const imgs = (rootRef?.current ?? document).querySelectorAll('img');
-        let pending = imgs.length;
-        if (pending) {
-          imgs.forEach((img) => {
-            if (img.complete) {
-              if (--pending === 0) ScrollTrigger.refresh();
-            } else {
-              img.addEventListener('load', () => {
-                if (--pending === 0) ScrollTrigger.refresh();
-              }, { once: true });
-              img.addEventListener('error', () => {
-                if (--pending === 0) ScrollTrigger.refresh();
-              }, { once: true });
-            }
+        // Refresh ScrollTrigger as each <img> finishes decoding so per-image
+        // parallax measurements recalculate immediately (with
+        // invalidateOnRefresh on the .img-container tween, the y range
+        // updates too). Refresh is debounced to one rAF so a burst of
+        // load events doesn't trigger N refreshes.
+        let refreshScheduled = false;
+        const scheduleRefresh = () => {
+          if (refreshScheduled) return;
+          refreshScheduled = true;
+          requestAnimationFrame(() => {
+            refreshScheduled = false;
+            ScrollTrigger.refresh();
           });
-        }
+        };
+        const imgs = (rootRef?.current ?? document).querySelectorAll('img');
+        imgs.forEach((img) => {
+          if (img.complete) {
+            scheduleRefresh();
+          } else {
+            img.addEventListener('load', scheduleRefresh, { once: true });
+            img.addEventListener('error', scheduleRefresh, { once: true });
+          }
+        });
 
         // Scroll-linked parallax on .img-container .portimage.
         gsap.utils.toArray('.img-container').forEach((section) => {
+          if (section.classList.contains('no-parallax')) return;
           const img = section.querySelector('.portimage');
           if (!img) return;
           const isMobile = window.matchMedia('(max-width: 768px)').matches;
           gsap.fromTo(
             img,
-            { y: 0 },
+            { y: 0, force3D: true },
             {
               y: isMobile ? -160 : -80,
               ease: 'none',
+              force3D: true,
               scrollTrigger: {
                 trigger: section,
                 start: 'top bottom',
                 end: 'bottom top',
-                scrub: 1
+                scrub: true,
+                invalidateOnRefresh: true
               }
             }
           );

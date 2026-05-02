@@ -5,6 +5,7 @@ import Footer from '../components/Footer.jsx';
 import Preloader from '../components/Preloader.jsx';
 import TLink from '../components/TLink.jsx';
 import useRevealAnimations from '../hooks/useRevealAnimations.js';
+import { androidImage } from '../utils/androidImage.js';
 
 // Module-level flag: resets on full page reload (so preloader plays on refresh),
 // persists across SPA route changes (so going Work → Home doesn't replay it).
@@ -275,7 +276,7 @@ export default function Home() {
           </div>
 
           <div className="img-container notee-cover" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-            <img src={`${import.meta.env.BASE_URL}new1project.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
+            <img src={`${import.meta.env.BASE_URL}${androidImage('new1project.jpg', 'new1project-android.jpg')}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
             <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
               <TLink to="/projectpage/notee-ai">
                 <p className="see-more-btn" style={{ fontSize: '18px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '130px', height: '130px', borderRadius: '50%', paddingTop: 45 }}>
@@ -320,7 +321,7 @@ export default function Home() {
           </div>
 
           <div className="img-container" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-            <img src={`${import.meta.env.BASE_URL}new2project.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
+            <img src={`${import.meta.env.BASE_URL}${androidImage('new2project.jpg', 'new2project-android.jpg')}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
             <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
               <TLink to="/projectpage/portfolio">
                 <p className="see-more-btn" style={{ fontSize: '18px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '130px', height: '130px', borderRadius: '50%', paddingTop: 45 }}>

@@ -4,6 +4,7 @@ import Footer from '../components/Footer.jsx';
 import TLink from '../components/TLink.jsx';
 import useRevealAnimations from '../hooks/useRevealAnimations.js';
 import { projects } from '../data/projects.js';
+import { androidImage } from '../utils/androidImage.js';
 
 const pad2 = (n) => String(n).padStart(2, '0');
 
@@ -82,10 +83,10 @@ export default function Work() {
               {project.coverImageMobile ? (
                 <picture>
                   <source media="(max-width: 768px)" srcSet={`${import.meta.env.BASE_URL}${project.coverImageMobile}`} />
-                  <img src={`${import.meta.env.BASE_URL}${project.coverImage}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
+                  <img src={`${import.meta.env.BASE_URL}${androidImage(project.coverImage, project.coverImageAndroid || project.coverImage)}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
                 </picture>
               ) : (
-                <img src={`${import.meta.env.BASE_URL}${project.coverImage}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
+                <img src={`${import.meta.env.BASE_URL}${androidImage(project.coverImage, project.coverImageAndroid || project.coverImage)}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
               )}
               <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                 <TLink to={`/projectpage/${project.slug}`}>
