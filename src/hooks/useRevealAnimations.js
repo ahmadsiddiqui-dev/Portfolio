@@ -21,31 +21,6 @@ export default function useRevealAnimations(rootRef, enabled = true) {
     // so the blur leads and the rest cascades in behind it.
     const REVEAL_GATE_MS = 800;
 
-    // Scroll-linked parallax on .img-container .portimage runs immediately
-    // (outside the 800ms reveal gate) so the image is locked to scroll
-    // progress on first paint — no visible jump when the gate timer fires.
-    const parallaxCtx = gsap.context(() => {
-      gsap.utils.toArray('.img-container').forEach((section) => {
-        const img = section.querySelector('.portimage');
-        if (!img) return;
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-        gsap.fromTo(
-          img,
-          { y: 0 },
-          {
-            y: isMobile ? -160 : -80,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1
-            }
-          }
-        );
-      });
-    }, root);
-
     let ctx;
     const gateTimer = setTimeout(() => {
       ctx = gsap.context(() => {
@@ -246,6 +221,26 @@ export default function useRevealAnimations(rootRef, enabled = true) {
           });
         }
 
+        // Scroll-linked parallax on .img-container .portimage.
+        gsap.utils.toArray('.img-container').forEach((section) => {
+          const img = section.querySelector('.portimage');
+          if (!img) return;
+          const isMobile = window.matchMedia('(max-width: 768px)').matches;
+          gsap.fromTo(
+            img,
+            { y: 0 },
+            {
+              y: isMobile ? -160 : -80,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+              }
+            }
+          );
+        });
       }, root);
 
       // Refresh after the gate opens so onEnter runs for elements already
@@ -260,7 +255,6 @@ export default function useRevealAnimations(rootRef, enabled = true) {
       clearTimeout(gateTimer);
       window.removeEventListener('load', refreshOnLoad);
       ctx?.revert();
-      parallaxCtx?.revert();
     };
   }, [rootRef, enabled]);
 }

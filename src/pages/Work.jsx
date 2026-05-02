@@ -79,7 +79,14 @@ export default function Work() {
             </div>
 
             <div className={`img-container${project.slug === 'notee-ai' ? ' notee-cover' : ''}`} style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-              <img src={`${import.meta.env.BASE_URL}${project.coverImage}`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
+              {project.coverImageMobile ? (
+                <picture>
+                  <source media="(max-width: 768px)" srcSet={`${import.meta.env.BASE_URL}${project.coverImageMobile}`} />
+                  <img src={`${import.meta.env.BASE_URL}${project.coverImage}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
+                </picture>
+              ) : (
+                <img src={`${import.meta.env.BASE_URL}${project.coverImage}`} alt="" className="portimage" style={{ objectFit: 'fill' }} decoding="async" />
+              )}
               <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                 <TLink to={`/projectpage/${project.slug}`}>
                   <p className="see-more-btn" style={{ fontSize: '18px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '130px', height: '130px', borderRadius: '50%', paddingTop: 45 }}>

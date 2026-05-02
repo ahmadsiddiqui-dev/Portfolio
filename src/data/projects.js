@@ -13,7 +13,7 @@ export const projects = [
       'app that turns recordings into ',
       'transcripts, summaries, and study tools.'
     ],
-    coverImage: 'proj1img.jpg',
+    coverImage: 'new1project.jpg',
     role: 'Design & Development',
     year: '2026',
     liveUrl: '',
@@ -80,7 +80,7 @@ export const projects = [
       'designed and developed using ',
       'React, GSAP, Lenis, and Three.js.'
     ],
-    coverImage: 'projectimg.jpg',
+    coverImage: 'new2project.jpg',
     role: 'Design & Development',
     year: '2025',
     liveUrl: 'https://ahmadjavaidsiddiqui.com',

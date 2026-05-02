@@ -539,7 +539,7 @@ export default function About() {
         </div>
 
         <div className="img-container notee-cover" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-          <img src={`${import.meta.env.BASE_URL}proj1img.jpg`} alt="" className="portimage" style={{ objectFit: 'cover' }} />
+          <img src={`${import.meta.env.BASE_URL}new1project.jpg`} alt="" className="portimage" style={{ objectFit: 'cover' }} decoding="async" />
           <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
             <TLink to="/projectpage/notee-ai">
               <p className="see-more-btn" style={{ fontSize: '18px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '130px', height: '130px', borderRadius: '50%', paddingTop: 45 }}>
@@ -570,7 +570,7 @@ export default function About() {
         </div>
 
         <div className="img-container" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-          <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'cover' }} />
+          <img src={`${import.meta.env.BASE_URL}new2project.jpg`} alt="" className="portimage" style={{ objectFit: 'cover' }} decoding="async" />
           <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
             <TLink to="/projectpage/portfolio">
               <p className="see-more-btn" style={{ fontSize: '18px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '130px', height: '130px', borderRadius: '50%', paddingTop: 45 }}>
