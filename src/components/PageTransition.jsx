@@ -11,10 +11,12 @@ const PAGE_BG = {
   '/work': '#e5e5dd',
   '/about': '#e5e5dd',
   '/contact': '#e5e5dd',
-  '/projectpage': '#464c47',
   '/mobilemenu': '#464c47'
 };
-const colorForPath = (path) => PAGE_BG[path] ?? '#e1dfdd';
+const colorForPath = (path) => {
+  if (path.startsWith('/projectpage')) return '#464c47';
+  return PAGE_BG[path] ?? '#e1dfdd';
+};
 
 // Laptop / desktop view = wider than the tablet breakpoint used in padcss.css
 // (`@media (max-width: 1166px)`). On laptop the exit overlay is forced black

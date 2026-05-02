@@ -1400,6 +1400,9 @@ footer.in-view {
 
 .portimage {
   display: block;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 p {

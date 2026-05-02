@@ -3,6 +3,9 @@ import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import TLink from '../components/TLink.jsx';
 import useRevealAnimations from '../hooks/useRevealAnimations.js';
+import { projects } from '../data/projects.js';
+
+const pad2 = (n) => String(n).padStart(2, '0');
 
 export default function Work() {
   const rootRef = useRef(null);
@@ -14,6 +17,8 @@ export default function Work() {
     document.body.style.backgroundColor = '#e5e5dd';
     return () => { document.body.style.backgroundColor = prev; };
   }, []);
+
+  const ctaNumber = '02';
 
   return (
     <div className="design-system" ref={rootRef}>
@@ -28,48 +33,66 @@ export default function Work() {
             <div className="text mbltext qline qline-w1" style={{ paddingTop: '275px', paddingBottom: '5px' }}>
               <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>C</span><span>T</span><span>S</span>
             </div>
-            <div className="drop-wrap hideme"><p className="drop-text formbl01">01</p></div>
-            <div className="drop-wrap laptophide"><p className="drop-text formbl02">01</p></div>
+            <div className="drop-wrap hideme"><p className="drop-text formbl01">{pad2(projects.length)}</p></div>
+            <div className="drop-wrap laptophide"><p className="drop-text formbl02">{pad2(projects.length)}</p></div>
           </div>
         </div>
-        <br /><br />
 
-        <div className="mblportfolioname" style={{ display: 'flex', flexDirection: 'row', padding: 0, paddingBottom: '200px', paddingLeft: '20px' }}>
-          <div className="left" style={{ flex: 1, position: 'sticky' }}>
-            <div className="div10" style={{ paddingBottom: '20px', paddingTop: '50px' }}>
-              <TLink to="/projectpage">
-                <div className="textemail" style={{ display: 'flex', fontSize: '125px', fontWeight: 500 }}>
-                  {['a','h','m','a','d'].map((c, i) => (<span key={i} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>))}
-                </div>
-                <div className="textemail" style={{ display: 'flex', fontSize: '125px', fontWeight: 500 }}>
-                  {['s','i','d','d','i','q','u','i'].map((c, i) => (<span key={i} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>))}
-                </div>
-              </TLink>
+        <div className="projects-intro" style={{ paddingLeft: '300px', paddingTop: '60px', paddingBottom: '40px', maxWidth: '900px', textTransform: 'uppercase' }}>
+          {[
+            'A focused selection of products',
+            'I’ve designed and shipped — from',
+            'AI-driven mobile apps to interactive',
+            'web experiences.',
+          ].map((line, i) => (
+            <div key={i} className="drop-wrap">
+              <p className="drop-text" style={{ fontSize: '16px', lineHeight: 1.4, animationDelay: `${i * 0.08}s` }}>{line}</p>
             </div>
-            <div className="divd1 divd2mbl" style={{ fontSize: '40px', paddingLeft: '140px', paddingTop: '15px' }}>
-              <div className="drop-wrap"><p className="drop-text">PORTFOLIO &#169;2026</p></div>
-            </div>
-            <div className="divd1 divd1mbl" style={{ paddingLeft: '140px', flexDirection: 'column', paddingTop: '30px', textTransform: 'uppercase' }}>
-              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px' }}>A personal portfolio website</p></div>
-              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.08s' }}>designed and developed using </p></div>
-              <div className="drop-wrap"><p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: '0.16s' }}>React, GSAP, Lenis, and Three.js.</p></div>
-            </div>
-          </div>
-
-          <div className="img-container" style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
-            <img src={`${import.meta.env.BASE_URL}projectimg.jpg`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
-            <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: 157, left: 98 }}>
-              <TLink to="/projectpage">
-                <p className="see-more-btn" style={{ fontSize: '22px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '150px', height: '150px', borderRadius: '50%', paddingTop: 50 }}>
-                  See<br /> more
-                </p>
-              </TLink>
-            </div>
-          </div>
+          ))}
         </div>
+
+        {projects.map((project) => (
+          <div
+            key={project.slug}
+            className="mblportfolioname"
+            style={{ display: 'flex', flexDirection: 'row', padding: 0, paddingBottom: '80px', paddingLeft: '20px' }}
+          >
+            <div className="left" style={{ flex: 1, position: 'sticky' }}>
+              <div className="div10" style={{ paddingBottom: '20px', paddingTop: '50px' }}>
+                <TLink to={`/projectpage/${project.slug}`}>
+                  {project.nameLines.map((line, i) => (
+                    <div key={i} className="textemail" style={{ display: 'flex', fontSize: '125px', fontWeight: 500 }}>
+                      {line.split('').map((c, j) => (
+                        <span key={j} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>
+                      ))}
+                    </div>
+                  ))}
+                </TLink>
+              </div>
+              <div className="divd1 divd1mbl" style={{ paddingLeft: '15px', flexDirection: 'column', paddingTop: '30px', textTransform: 'uppercase' }}>
+                {project.descriptionLines.map((line, i) => (
+                  <div key={i} className="drop-wrap">
+                    <p className="drop-text divd1mbl" style={{ fontSize: '22px', animationDelay: `${i * 0.08}s` }}>{line}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={`img-container${project.slug === 'notee-ai' ? ' notee-cover' : ''}`} style={{ flex: 2, overflow: 'hidden', marginTop: '70px', position: 'relative' }}>
+              <img src={`${import.meta.env.BASE_URL}${project.coverImage}`} alt="" className="portimage" style={{ objectFit: 'fill' }} />
+              <div className="laptophide" style={{ position: 'absolute', zIndex: 5, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                <TLink to={`/projectpage/${project.slug}`}>
+                  <p className="see-more-btn" style={{ fontSize: '18px', backgroundColor: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', width: '130px', height: '130px', borderRadius: '50%', paddingTop: 45 }}>
+                    See<br /> more
+                  </p>
+                </TLink>
+              </div>
+            </div>
+          </div>
+        ))}
 
         <div className="div9 foremainmar" style={{ paddingBottom: '80px', gap: '200px' }}>
-          <div className="drop-wrap"><p className="drop-text">02/</p></div>
+          <div className="drop-wrap"><p className="drop-text">{ctaNumber}/</p></div>
           <div className="mblwanttowork" style={{ display: 'flex', flexDirection: 'column' }}>
             <div className="drop-wrap"><p className="drop-text">WANT TO WORK</p></div>
             <div className="drop-wrap"><p className="drop-text">TOGETHER?</p></div>

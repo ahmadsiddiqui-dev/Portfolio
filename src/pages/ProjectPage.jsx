@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import TLink from '../components/TLink.jsx';
 import useRevealAnimations from '../hooks/useRevealAnimations.js';
+import { findProjectBySlug, projects } from '../data/projects.js';
 
 export default function ProjectPage() {
   const rootRef = useRef(null);
   const navigate = useNavigate();
+  const { slug } = useParams();
+  const project = findProjectBySlug(slug);
   useRevealAnimations(rootRef);
 
   useEffect(() => {
@@ -22,10 +25,26 @@ export default function ProjectPage() {
     };
   }, []);
 
+  if (!project) {
+    return <Navigate to={`/projectpage/${projects[0].slug}`} replace />;
+  }
+
   const handleClose = () => {
     if (window.history.length > 1) navigate(-1);
     else navigate('/');
   };
+
+  const visitLive = (className) => (
+    project.liveUrl?.startsWith('http') ? (
+      <a href={project.liveUrl} target="_blank" rel="noreferrer" className={className} style={{ color: 'white' }}>
+        <p className="drop-text2">Visit live link</p>
+      </a>
+    ) : (
+      <TLink to={project.liveUrl || '/'} className={className} style={{ color: 'white' }}>
+        <p className="drop-text2">Visit live link</p>
+      </TLink>
+    )
+  );
 
   return (
     <div ref={rootRef} className="design-system">
@@ -35,12 +54,10 @@ export default function ProjectPage() {
 
         <div className="divpop">
           <div className="drop-wrap"><p className="drop-text2 fontproject">Case study</p></div>
-          <div className="drop-wrap">
-            <TLink to="/" className="visitclass hideme" style={{ color: 'white' }}>
-              <p className="drop-text2">Visit live link</p>
-            </TLink>
-          </div>
-          <div className="drop-wrap"><p className="drop-text2 fontproject">Portfolio&#169;2026</p></div>
+          {project.liveUrl && (
+            <div className="drop-wrap">{visitLive('visitclass hideme')}</div>
+          )}
+          <div className="drop-wrap"><p className="drop-text2 fontproject">{project.label}</p></div>
         </div>
 
         <div className="mainpopdiv">
@@ -48,84 +65,73 @@ export default function ProjectPage() {
             <div style={{ padding: 0, fontWeight: 500 }}>
               <div className="mainpopdiv3 hideme">
                 <div className="divd1 projectdivda" style={{ paddingLeft: '1px', flexDirection: 'column', paddingTop: '120px' }}>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0 }}>The site features interactive sections such as </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.05s' }}>project galleries, animated page transitions, </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.10s' }}>and tab-based 3D model interactions on the </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.15s' }}>About page. React powers the component logic </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.20s' }}>and routing, while GSAP and ScrollTrigger </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.25s' }}>drive the blur-reveal letter cascades, parallax </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.30s' }}>effects, and image covers throughout. Lenis </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.35s' }}>handles the buttery smooth scrolling, and </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.40s' }}>Three.js renders the interactive 3D models. </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.45s' }}>The result feels fluid and modern across </p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.50s' }}>mobile, tablet, and desktop.</p></div>
+                  {project.caseStudyDesktop.map((line, i) => (
+                    <div key={i} className="drop-wrap">
+                      <p className="drop-text projectinfotext" style={{ fontSize: project.caseStudyDesktopFontSize || '30px', paddingLeft: 0, animationDelay: `${i * 0.05}s` }}>{line}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="mainpopdiv3 laptophide">
                 <div className="divd1 projectdivda" style={{ paddingLeft: '1px', flexDirection: 'column', paddingTop: '120px' }}>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0 }}>The site features interactive</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.05s' }}>sections such as project galleries,</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.10s' }}>animated page transitions, and</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.15s' }}>tab-based 3D model interactions</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.20s' }}>on the About page. React powers</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.25s' }}>the component logic and routing,</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.30s' }}>while GSAP and ScrollTrigger drive</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.35s' }}>blur-reveal letter cascades,</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.40s' }}>parallax effects, and image covers</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.45s' }}>throughout. Lenis handles the</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.50s' }}>smooth scrolling, and Three.js</p></div>
-                  <div className="drop-wrap"><p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: '0.55s' }}>renders the interactive 3D models.</p></div>
+                  {project.caseStudyMobile.map((line, i) => (
+                    <div key={i} className="drop-wrap">
+                      <p className="drop-text projectinfotext" style={{ fontSize: '30px', paddingLeft: 0, animationDelay: `${i * 0.05}s` }}>{line}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            <div className="drop-wrap">
-              <TLink to="/" className="visitclass2 laptophide" style={{ color: 'white' }}>
-                <p className="drop-text2">Visit live link</p>
-              </TLink>
-            </div>
+            {project.liveUrl && (
+              <div className="drop-wrap">{visitLive('visitclass2 laptophide')}</div>
+            )}
 
-            <div className="projectinfodiv hideme">
+            <div className={`projectinfodiv hideme${project.projectInfoTightTop ? ' tight-pt' : ''}${project.projectInfoWideUnderline ? ' wide-underline' : ''}`}>
               <p className="underdiv">PROJECT INFO</p>
               <div className="underdiv inforow">
                 <span>Role</span>
-                <span>Design &amp; Development</span>
+                <span>{project.role}</span>
               </div>
               <div className="underdiv inforow">
                 <span>Year</span>
-                <span>2025</span>
+                <span>{project.year}</span>
               </div>
             </div>
             <div className="projectinfodiv laptophide">
               <p className="underdiv">PROJECT INFO</p>
               <div className="underdiv inforow">
                 <span>Role</span>
-                <span>Design &amp; Development</span>
+                <span>{project.role}</span>
               </div>
               <div className="underdiv inforow">
                 <span>Year</span>
-                <span>2025</span>
+                <span>{project.year}</span>
               </div>
             </div>
           </div>
 
-          <div className="image-scroll-wrapper text1 hideme">
-            <div className="maindiv333" style={{ padding: 0 }}>
-              <img src={`${import.meta.env.BASE_URL}projectportfolio1.png`} alt="" className="imganimationsss" style={{ padding: 0 }} />
-            </div>
-            <div className="maindiv333">
-              <img src={`${import.meta.env.BASE_URL}projectportfolio2.png`} alt="" />
-              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}projectportfolio3.png`} alt="" /></div>
-              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}projectportfolio4.png`} alt="" /></div>
-              <div className="maindiv333"><img src={`${import.meta.env.BASE_URL}projectportfolio5.png`} alt="" /></div>
-            </div>
+          <div
+            className="image-scroll-wrapper text1 hideme"
+            style={project.imagesDesktopPaddingLeft ? { paddingLeft: project.imagesDesktopPaddingLeft } : undefined}
+          >
+            {project.images.map((src, i) => (
+              <div key={src} className="maindiv333" style={i === 0 ? { padding: 0 } : undefined}>
+                <img
+                  src={`${import.meta.env.BASE_URL}${src}`}
+                  alt=""
+                  className={i === 0 ? 'imganimationsss' : undefined}
+                  style={i === 0 ? { padding: 0 } : undefined}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="laptophide projectphotos">
-          {['projectportfolio1','projectportfolio2','projectportfolio3','projectportfolio4','projectportfolio5'].map((n) => (
-            <div key={n} className="photodiv">
-              <img className="imgproj" src={`${import.meta.env.BASE_URL}${n}.png`} alt="" />
+          {project.images.map((src) => (
+            <div key={src} className="photodiv">
+              <img className="imgproj" src={`${import.meta.env.BASE_URL}${src}`} alt="" />
             </div>
           ))}
         </div>

@@ -103,10 +103,42 @@
   .design-system #popup-content .projectinfodiv {
     padding-top: 80px !important;
   }
+  /* Per-project opt-in tighter top padding for the PROJECT INFO block. */
+  .design-system #popup-content .projectinfodiv.tight-pt {
+    padding-top: 30px !important;
+  }
+  /* Per-project opt-in wider PROJECT INFO underline (extends the .underdiv
+   * width so the animated underline pseudo-element runs further across). */
+  .design-system #popup-content .projectinfodiv.wide-underline .underdiv {
+    width: 900px;
+  }
   /* Same for the main info paragraph block on desktop — bump its top
    * padding above the inline 120px so it sits a little lower. */
   .design-system #popup-content .projectdivda {
     padding-top: 150px !important;
+  }
+  /* Desktop Work-page cover image: zoom-in framing. The natural image
+   * was rendering too short; box it to a fixed height and let the image
+   * fill it with object-fit: cover so the subject feels more present. */
+  .design-system .mblportfolioname .img-container {
+    height: 700px !important;
+    flex: 1.4 !important;
+    margin-left: 100px !important;
+    margin-right: 40px !important;
+  }
+  .design-system .mblportfolioname .img-container .portimage {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 110% !important;
+    padding-left: 0 !important;
+    object-fit: cover !important;
+  }
+  /* Per-project opt-in: 20px inset frame around the cover image (Notee AI). */
+  .design-system .mblportfolioname .img-container.notee-cover .portimage {
+    padding: 20px !important;
+    box-sizing: border-box !important;
   }
 }
 

@@ -83,7 +83,15 @@
       "Bash(git push *)",
       "Bash(git fetch *)",
       "Bash(git pull *)",
-      "Bash(npx --yes @gltf-transform/cli@latest optimize /tmp/travel-original-4k.glb /Users/rnf-user/Documents/myproject/Portfolio/public/models/travel-1k.glb --simplify false --texture-size 1024 --texture-compress webp --compress meshopt)"
+      "Bash(npx --yes @gltf-transform/cli@latest optimize /tmp/travel-original-4k.glb /Users/rnf-user/Documents/myproject/Portfolio/public/models/travel-1k.glb --simplify false --texture-size 1024 --texture-compress webp --compress meshopt)",
+      "Bash(dig ahmadjavaidsiddiqui.com +short)",
+      "Bash(dig www.ahmadjavaidsiddiqui.com +short)",
+      "Bash(dig @1.1.1.1 ahmadjavaidsiddiqui.com +short)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(curl -sI https://ahmadjavaidsiddiqui.com)",
+      "Bash(openssl s_client -servername ahmadjavaidsiddiqui.com -connect ahmadjavaidsiddiqui.com:443)",
+      "Bash(openssl x509 *)"
     ]
   }
 }
