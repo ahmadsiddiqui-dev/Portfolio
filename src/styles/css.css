@@ -1,58 +1,58 @@
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("/Portfolio/pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-medium.woff") format("woff");
+  src: url("/pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-medium.woff") format("woff");
   font-display: swap;
 }
 @font-face {
   font-family: "PP Neue Montreal Book";
-  src: url("/Portfolio/pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-book.woff") format("woff");
+  src: url("/pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-book.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "PP Neue Montreal Thin";
-  src: url("/Portfolio/pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-thin.woff") format("woff");
+  src: url("/pp-neue-montreal-cufonfonts-webfont/ppneuemontreal-thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "T1 Korium";
-  src: url("/Portfolio/fonts/T1Korium-2Kg.woff2") format("woff2"),
-       url("/Portfolio/fonts/T1Korium-2Kg.ttf") format("truetype");
+  src: url("/fonts/T1Korium-2Kg.woff2") format("woff2"),
+       url("/fonts/T1Korium-2Kg.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "T1 Korium";
-  src: url("/Portfolio/fonts/T1Korium-3Kg.woff2") format("woff2"),
-       url("/Portfolio/fonts/T1Korium-3Kg.ttf") format("truetype");
+  src: url("/fonts/T1Korium-3Kg.woff2") format("woff2"),
+       url("/fonts/T1Korium-3Kg.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "T1 Korium";
-  src: url("/Portfolio/fonts/T1Korium-4Kg.woff2") format("woff2"),
-       url("/Portfolio/fonts/T1Korium-4Kg.ttf") format("truetype");
+  src: url("/fonts/T1Korium-4Kg.woff2") format("woff2"),
+       url("/fonts/T1Korium-4Kg.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "T1 Korium";
-  src: url("/Portfolio/fonts/T1Korium-5Kg.woff2") format("woff2"),
-       url("/Portfolio/fonts/T1Korium-5Kg.ttf") format("truetype");
+  src: url("/fonts/T1Korium-5Kg.woff2") format("woff2"),
+       url("/fonts/T1Korium-5Kg.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "T1 Korium";
-  src: url("/Portfolio/fonts/T1Korium-6Kg.woff2") format("woff2"),
-       url("/Portfolio/fonts/T1Korium-6Kg.ttf") format("truetype");
+  src: url("/fonts/T1Korium-6Kg.woff2") format("woff2"),
+       url("/fonts/T1Korium-6Kg.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;

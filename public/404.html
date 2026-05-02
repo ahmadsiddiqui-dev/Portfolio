@@ -4,13 +4,10 @@
     <meta charset="UTF-8" />
     <title>Ahmad Siddiqui | Portfolio</title>
     <script>
-      // SPA fallback for GitHub Pages. Rewrite the 404 URL into a query-
-      // string encoding of the original path, then redirect to index.html.
-      // index.html reads this and feeds it back to React Router via
-      // history.replaceState so direct links like /Portfolio/about work.
-      // Adapted from https://github.com/rafgraph/spa-github-pages
+      // SPA fallback for GitHub Pages. Adapted from
+      // https://github.com/rafgraph/spa-github-pages
       (function () {
-        var pathSegmentsToKeep = 1; // 1 because repo is served at /Portfolio/
+        var pathSegmentsToKeep = 0;
         var l = window.location;
         l.replace(
           l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +

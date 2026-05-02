@@ -17,9 +17,6 @@ const isIOS =
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 if (isIOS) document.documentElement.classList.add('is-ios');
 
-// basename must match Vite's `base` in vite.config.js. On GitHub Pages the
-// site is served at /Portfolio/, so React Router needs that prefix to match
-// routes correctly.
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter basename={import.meta.env.BASE_URL}>
     <App />
