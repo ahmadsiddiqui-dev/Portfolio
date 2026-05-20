@@ -525,10 +525,10 @@ export default function About() {
           <div className="div10" style={{ paddingBottom: '20px', paddingTop: '50px' }}>
             <TLink to="/projectpage/notee-ai">
               <div className="textemail" style={{ display: 'flex', fontSize: '125px', fontWeight: 500 }}>
-                {['n', 'o', 't', 'e', 'e'].map((c, i) => (<span key={i} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>))}
+                {['T', 'a', 'l', 'k', 'i', 'e'].map((c, i) => (<span key={i} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>))}
               </div>
               <div className="textemail" style={{ display: 'flex', fontSize: '125px', fontWeight: 500 }}>
-                {['A', 'I', '-', 'A', 'P', 'P'].map((c, i) => (<span key={i} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>))}
+                {['N', 'o', 't', 'e', 's', ' ', 'A', 'I'].map((c, i) => (<span key={i} className="spanemail" style={{ lineHeight: 1, ...(c === ' ' ? { width: '0.15em' } : {}) }}>{c}</span>))}
               </div>
             </TLink>
           </div>

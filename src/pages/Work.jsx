@@ -64,7 +64,7 @@ export default function Work() {
                   {project.nameLines.map((line, i) => (
                     <div key={i} className="textemail" style={{ display: 'flex', fontSize: '125px', fontWeight: 500 }}>
                       {line.split('').map((c, j) => (
-                        <span key={j} className="spanemail" style={{ lineHeight: 1 }}>{c}</span>
+                        <span key={j} className="spanemail" style={{ lineHeight: 1, ...(c === ' ' ? { width: '0.15em' } : {}) }}>{c}</span>
                       ))}
                     </div>
                   ))}

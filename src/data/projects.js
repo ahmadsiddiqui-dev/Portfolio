@@ -6,8 +6,8 @@
 export const projects = [
   {
     slug: 'notee-ai',
-    nameLines: ['notee', 'AI-APP'],
-    label: 'NOTEE AI ©2026',
+    nameLines: ['Talkie', 'Notes AI'],
+    label: 'TALKIE NOTES AI ©2026',
     descriptionLines: [
       'An AI-powered voice note-taking',
       'app that turns recordings into ',
@@ -62,14 +62,84 @@ export const projects = [
       'and synced to AWS S3.'
     ],
     images: [
-      'notee1.PNG',
-      'notee2.PNG',
-      'notee3.PNG',
-      'notee4.PNG',
-      'notee5.PNG',
-      'notee6.PNG',
-      'notee7.PNG',
-      'notee8.PNG'
+      'notee1.jpeg',
+      'notee2.jpeg',
+      'notee3.jpeg',
+      'notee4.jpeg',
+      'notee5.jpeg',
+      'notee6.jpeg',
+      'notee7.jpeg',
+      'notee8.jpeg',
+      'notee9.jpeg',
+      'notee10.jpeg',
+      'notee11.jpeg',
+      'notee12.jpeg'
+    ]
+  },
+  {
+    slug: 'capgeno-ai',
+    nameLines: ['Capgeno', 'AI'],
+    label: 'CAPGENO AI ©2026',
+    descriptionLines: [
+      'An AI-powered caption generator',
+      'app that turns any photo into ',
+      'ready-to-post captions and hashtags.'
+    ],
+    coverImage: 'capgenocover.jpg',
+    role: 'Design & Development',
+    year: '2026',
+    liveUrl: '',
+    caseStudyDesktopFontSize: '22px',
+    imagesDesktopPaddingLeft: '1000px',
+    projectInfoTightTop: true,
+    projectInfoWideUnderline: true,
+    caseStudyDesktop: [
+      'Capgeno AI is a mobile caption generator that turns any ',
+      'photo into ready-to-post captions in seconds. Upload an ',
+      'image, choose a mood — funny, professional, poetic, ',
+      'romantic, or motivational — and the app returns polished ',
+      'captions tailored to the moment, complete with relevant ',
+      'hashtags and expressive emojis. A length control lets ',
+      'users dial captions from short and punchy to long and ',
+      'descriptive, while multi-language support generates ',
+      'captions in the user’s preferred language. Finished ',
+      'captions can be shared directly to social apps or copied ',
+      'in a single tap. Built with React Native for a single, ',
+      'fast codebase across iOS and Android, the app pairs an ',
+      'LLM (Claude / GPT-class) with on-device image understanding, ',
+      'and ships with full dark-theme support for day or night.'
+    ],
+    caseStudyMobile: [
+      'Capgeno AI is a mobile caption',
+      'generator that turns any photo into',
+      'ready-to-post captions in seconds.',
+      'Upload an image, choose a mood —',
+      'funny, professional, poetic, romantic,',
+      'or motivational — and the app returns',
+      'polished captions tailored to the',
+      'moment, complete with relevant',
+      'hashtags and expressive emojis. A',
+      'length control lets users dial captions',
+      'from short and punchy to long and',
+      'descriptive, while multi-language',
+      'support generates captions in the',
+      'user’s preferred language. Finished',
+      'captions can be shared directly to',
+      'social apps or copied in a single tap.',
+      'Built with React Native for a single,',
+      'fast codebase across iOS and Android,',
+      'the app pairs an LLM (Claude / GPT-',
+      'class) with on-device image',
+      'understanding, and ships with full',
+      'dark-theme support.'
+    ],
+    images: [
+      'capgeno1.jpeg',
+      'capgeno2.jpeg',
+      'capgeno3.jpeg',
+      'capgeno4.jpeg',
+      'capgeno5.jpeg',
+      'capgeno6.jpeg'
     ]
   },
   {
