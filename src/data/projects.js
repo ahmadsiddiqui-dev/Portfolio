@@ -23,7 +23,7 @@ export const projects = [
     projectInfoTightTop: true,
     projectInfoWideUnderline: true,
     caseStudyDesktop: [
-      'Notee AI is an iOS voice intelligence app that captures meetings, ',
+      'TalkieNotes AI is an iOS voice intelligence app that captures meetings, ',
       'interviews, and lectures with a single tap and converts them into ',
       'accurate, speaker-labeled transcripts with automatically generated ',
       'summaries. It also ingests uploaded audio files and YouTube URLs, ',
